@@ -70,6 +70,12 @@ class HomeController{
         return $app['twig']->render('partenaires.html.twig');
     }
 
+     //page Nos Partenaires
+     public function homePageReservation(Application $app){
+        
+            return $app['twig']->render('reservation.html.twig');
+    }
+
      //page Contact
     public function homePageContact(Application $app){
 
@@ -200,7 +206,7 @@ class HomeController{
 
             $app['session']->getFlashBag()->add('success', 'Hello ' .  $user->getUsername());
             // Redirect to admin home page
-            return $app->redirect($app['url_generator']->generate('homepage'));
+            return $app->redirect($app['url_generator']->generate('accueil'));
         }
         return $app['twig']->render('user_register.html.twig', array(
             'title' => 'Sign in',
