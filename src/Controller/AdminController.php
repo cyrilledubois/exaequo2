@@ -12,8 +12,8 @@ class AdminController{
 
     //page d'accueil du back office
     public function indexAction(Application $app){
-        $articles = $app['dao.article']->findAll();
-        $users = $app['dao.user']->findAll();
+        // $articles = $app['dao.article']->findAll();
+        // $users = $app['dao.user']->findAll();
         return $app['twig']->render('admin/index.admin.html.twig', array(
                                         'articles'=>$articles,
                                         'users' =>$users
