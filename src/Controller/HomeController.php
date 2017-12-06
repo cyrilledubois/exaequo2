@@ -70,6 +70,12 @@ class HomeController{
         return $app['twig']->render('partenaires.html.twig');
     }
 
+     //page Nos Partenaires
+     public function homePageReservation(Application $app){
+        
+            return $app['twig']->render('reservation.html.twig');
+    }
+
      //page Contact
     public function homePageContact(Application $app){
 
