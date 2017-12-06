@@ -73,4 +73,6 @@ class Planing{
     public function setCours_int($cours_int){        
         $this->cours_int = $cours_int;         
         }
+
+    
 }
