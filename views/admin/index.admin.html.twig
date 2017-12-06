@@ -2,38 +2,164 @@
 		{% block title %}Admin{% endblock %}
 
 		{% block content %}
-            <h2>bonjour {{ app.user.username }}</h2>
+           <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Administration Exaecho</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#calendar">Gestion calendrier</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#resa">Reservations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#membres">Liste des membres</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#upload">Uploads</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!--HEADER-->
+    <header class="bg-primary text-white">
+      <div class="container text-center">
+        <h1>Bienvenue dans votre interface d'administration</h1>
+        <p class="lead"></p>
+      </div>
+    </header>
+
+    <!--SECTION GESTION CALENDAR-->
+      <div id="calendar" class="container-fluid" class="bg-light">
+        <div class="col-lg-12">
+            <h2>Gestion du calendrier</h2>
+            <p class="lead">Modification, ajout, suppression.</p>
             <div class="row">
-                <div class="col-md-8">
-                    <a href="{{ path('addArticleAdmin') }}">
-                        <button class="btn btn-info">
-                            Ajouter un article
-                        </button>
-                    </a>
-                    {% for flashMessage in app.session.flashbag.get('success') %}
-                        {# affichage du message de réussite #}
-                        <div class="alert alert-success">
-                            {{ flashMessage }}
-                        </div>
-                    {% endfor %}
-                    <ul>
-                    {% for article in articles %}
-                        <li>{{ article.title}} - <a href="{{ path('updateArticleAdmin', {id: article.id})}}">modifier</a> | <a href="{{ path('deleteArticleAdmin', {id: article.id})}}">supprimer</a></li>
-                    {% endfor %}
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <a href="{{ path('addUserAdmin') }}">
-                        <button class="btn btn-info">
-                            Ajouter un utilisateur
-                        </button>
-                    </a>
-                    <h2>Liste des utilisateur</h2>
-                    {% for user in users %}
-                    <li>{{ user.username}} - <a href="{{ path('updateUserAdmin', {id: user.id})}}">modifier</a> | <a href="{{ path('deleteUserAdmin', {id: user.id})}}">supprimer</a></li>
-                    {% endfor %}
-                </div>
+              <div class="col-lg-1">
+                <h3>jours</h3>
+                <select class="form-control">
+                  <option>Lundi</option>
+                  <option>Mardi</option>
+                  <option>Mercredi</option>
+                  <option>Jeudi</option>
+                  <option>Vendredi</option>
+                  <option>Samedi</option>
+                </select>
+              </div>
+
+              <div class="col-lg-1">
+                <h3>heure</h3>
+                  <select class="form-control">
+                    <?php
+                      for($i=1; $i<=60; $i++){
+                    ?>
+                      <option><?php echo $i; ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+              </div>
+
+              <div class="col-lg-1">
+                <h3>minutes</h3>
+                  <select class="form-control">
+                    <?php
+                      for($i=1; $i<=60; $i++){
+                    ?>
+                      <option><?php echo $i; ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+              </div>
+
+              <div class="col-lg-1">
+                <h3>discipline</h3>
+                  <select class="form-control">
+                    <?php
+                      for($i=1; $i<=60; $i++){
+                    ?>
+                      <option><?php echo $i; ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+              </div>
+                
+            <div class="col-lg-8">
+              <table class="table table-inverse">
+                <?php
+                  for($i=10; $i<=21; $i++){
+                ?>
+                <thead>
+                  <tr>
+                    <th>Heure</th>
+                    <th>Cours</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><?php echo $i ?></th>
+                    <td>Disciplines</td>
+                    <td>Nombres</td>
+                  </tr>
+                  <?php
+                  }
+                  ?>
+                </tbody>
+              </table>
             </div>
+          </div>
+        </div>
+      </div>
+
+    <!--SECTION LISTE RESERVATIONS-->
+   
+      <div id="resa" class="col-lg-12">
+        <div class="container-fluid">
+          <div class="row">
+            <div id="inscrit" class="col-lg-8">
+              <h2>Liste inscrit planing</h2>
+              <p class="lead">Liste des inscrits au differents cours du jour</p>
+            </div>
+            <div id="essai" class="col-lg-4">
+              <h2>Liste des personnes en essais</h2>
+              <p class="lead">Liste users pour essais reserver</p>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+
+
+    <!--SECTION UPLOAD-->
+    <section id="upload">
+        <div class="container">
+          <div class="row">
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+              <p>Fichier PDF du nouveau planning:</p><br/><br/>
+              <input type="file" name="fileToUpload" id="fileToUpload">
+              <input type="submit" value="Envoyer" name="submit">
+            </form>
+          </div>
+        </div>
+      </section>
+       
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      </div>
+    </footer>
 		{% endblock %}
 
 		

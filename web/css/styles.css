@@ -1,3 +1,36 @@
+/*MODIF TEAM WF3*/
+
+/*START PAGE DE RESERVATION*/
+#reserv{
+  
+}
+
+.col-md-1 bg-primary text-white{
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+#filtre{
+  background: rgb(75, 11, 49);
+  text-align: center;
+  color: white;
+  padding-bottom: 5rem;
+}
+
+#pagination{
+  text-align: center;
+}
+
+#planning{
+  text-align: center;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+/*END PAGE DE RESERV*/
+
+
+
+
 /* Less files*/
 body {
   font-size: 17px;
@@ -9,6 +42,7 @@ header {
   margin-bottom: 40px;
   position: relative;
 }
+
 :focus {outline:none;}
 .home-wrapper {
   display: block;
