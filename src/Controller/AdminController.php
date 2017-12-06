@@ -9,71 +9,74 @@ use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 
 class AdminController{
-
+    
+// MODIF 06/12 14h
     //page d'accueil du back office
     public function indexAction(Application $app){
-        $articles = $app['dao.article']->findAll();
+        $planning = $app['dao.planning']->findAll();
+        $cours = $app['dao.cours']->findAll();
         $users = $app['dao.user']->findAll();
         return $app['twig']->render('admin/index.admin.html.twig', array(
-                                        'articles'=>$articles,
+                                        'planning'=>$planning,
+                                        'cours'=>$cours,                                        
                                         'users' =>$users
                                     ));
     }
-
-    //suppression d'article
-    //page de suppression d'article
-    public function deleteArticleAction(Application $app, $id){
-        $article = $app['dao.article']->delete($id);
+    //suppression de cours
+    //page de suppression de cours
+    public function deleteCoursAction(Application $app, $id){
+        $cours = $app['dao.cours']->delete($id);
         //on crée un message de réussite dans la session
-        $app['session']->getFlashBag()->add('success', 'Article bien supprimé');
+        $app['session']->getFlashBag()->add('success', 'Cours bien supprimé');
         //on redirige vers la page d'accueil
         return $app->redirect($app['url_generator']->generate('homeAdmin'));
     }
 
-    //modification d'article
-    public function updateArticleAction(Application $app, Request $request, $id){
-        //on récupère les infos de l'article
-        $article = $app['dao.article']->find($id);
-        //on crée le formulaire et on lui passe l'article en paramètre
-        //il va utiliser $article pour pré remplir les champs
-        $articleForm = $app['form.factory']->create(ArticleType::class, $article);
+ 	// Update periode du planning 
+     public function updatePeriodPlanning(Application $app, Request $request, $id){
+		//on récupère les infos de la periode 
+				$period = $app['dao.planning']->find($id);
+				
+		//on crée le planning et on lui passe la periode en paramètre
+        //il va utiliser $planning pour pré remplir les champs
+		$planning = $app['form.factory']->create(PlanningType::class, $period);		
+		
+		$planning->handleRequest($request);
 
-        $articleForm->handleRequest($request);
-
-        if($articleForm->isSubmitted() && $articleForm->isValid()){
+		if($planning->isSubmitted() && $planning->isValid()){
             //si le formulaire a été soumis
             //on update avec les données envoyées par l'utilisateur
-            $app['dao.article']->update($id, array(
-                'title'=>$article->getTitle(),
-                'content'=>$article->getContent(),
-                'author'=>$article->getAuthor()->getId()
+            $app['dao.planning']->update($id, array(
+                'cours'=>$planning->getCours(),
+                'duree_cours'=>$planning->getContent(),
+                'author'=>$planning->getAuthor()->getId()
             ));
         }
-
-        return $app['twig']->render('admin/admin.ajout.article.html.twig', array(
-                'articleForm' => $articleForm->createView(),
+	}
+        return $app['twig']->render('admin/admin.ajout.planning.html.twig', array(
+                'planningForm' => $planningForm->createView(),
                 'title' => 'modif'
         ));
 
     }
 
-    public function addArticleAction(Application $app, Request $request){
-        $article = new Article();
+    public function addCoursAction(Application $app, Request $request){
+        $cours = new Cours();
 
-        $articleForm = $app['form.factory']->create(ArticleType::class, $article);
+        $coursForm = $app['form.factory']->create(CoursType::class, $cours);
 
-        $articleForm->handleRequest($request);
+        $coursForm->handleRequest($request);
 
-        if($articleForm->isSubmitted() AND $articleForm->isValid()){
-            $app['dao.article']->insert(array(
-                'title'=>$article->getTitle(),
-                'content'=>$article->getContent(),
+        if($coursForm->isSubmitted() AND $coursForm->isValid()){
+            $app['dao.cours']->insert(array(
+                'title'=>$cours->getTitle(),
+                'content'=>$cours->getContent(),
                 'author'=>$app['user']->getId()
             ));
         }
 
-        return $app['twig']->render('admin/admin.ajout.article.html.twig', array(
-                'articleForm' => $articleForm->createView(),
+        return $app['twig']->render('admin/admin.ajout.cours.html.twig', array(
+                'coursForm' => $coursForm->createView(),
                 'title' => 'ajout'
         ));
     }
