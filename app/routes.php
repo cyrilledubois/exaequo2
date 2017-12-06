@@ -34,6 +34,10 @@ $app->get('/tarifs', 'WF3\Controller\HomeController::homePageTarifs')
 $app->match('/partenaires', 'WF3\Controller\HomeController::homePagePartenaires')
     ->bind('partenaires');
 
+    //partenaires
+$app->match('/reservation', 'WF3\Controller\HomeController::homePageReservation')
+->bind('reservation');
+
 //contact
 $app->match('/contact', 'WF3\Controller\HomeController::homePageContact')->bind('contact');
 
