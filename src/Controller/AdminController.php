@@ -22,6 +22,7 @@ class AdminController{
                                         'users' =>$users
                                     ));
     }
+    
     //suppression de cours
     //page de suppression de cours
     public function deleteCoursAction(Application $app, $id){
@@ -52,8 +53,8 @@ class AdminController{
                 'author'=>$planning->getAuthor()->getId()
             ));
         }
-	}
-        return $app['twig']->render('admin/admin.ajout.planning.html.twig', array(
+	
+        return $app['twig']->render('admin/index.admin.html.twig', array(
                 'planningForm' => $planningForm->createView(),
                 'title' => 'modif'
         ));
