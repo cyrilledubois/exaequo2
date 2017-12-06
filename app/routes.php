@@ -39,6 +39,7 @@ $app->get('/tarifs', 'WF3\Controller\HomeController::homePageTarifs')
 $app->match('/partenaires', 'WF3\Controller\HomeController::homePagePartenaires')
 ->bind('partenaires');
 
+
 //reservation
 $app->match('/reservation', 'WF3\Controller\HomeController::homePageReservation')
 ->bind('reservation');
@@ -58,3 +59,5 @@ $app->match('/connexion', 'WF3\Controller\HomeController::loginAction')
 //inscription
 $app->match('/inscription', 'WF3\Controller\HomeController::signInAction')
 ->bind('inscription');
+
+
