@@ -39,11 +39,8 @@ $app->get('/tarifs', 'WF3\Controller\HomeController::homePageTarifs')
 $app->match('/partenaires', 'WF3\Controller\HomeController::homePagePartenaires')
 ->bind('partenaires');
 
-<<<<<<< HEAD
+
 //reservation
-=======
-//partenaires
->>>>>>> a4fab27be88d7c463701d748f2f1cac6525e6fe4
 $app->match('/reservation', 'WF3\Controller\HomeController::homePageReservation')
 ->bind('reservation');
 
@@ -51,14 +48,14 @@ $app->match('/reservation', 'WF3\Controller\HomeController::homePageReservation'
 $app->match('/contact', 'WF3\Controller\HomeController::homePageContact')
 ->bind('contact');
 
-<<<<<<< HEAD
+
 //Back ADMIN 
 $app->match('/administration', 'WF3\Controller\AdminController::indexAction')
 ->bind('admin');
-=======
+
 //connexion
 $app->match('/connexion', 'WF3\Controller\HomeController::loginAction')->bind('connexion');
 
 //inscription
 $app->match('/inscription', 'WF3\Controller\HomeController::signInAction')->bind('inscription');
->>>>>>> a4fab27be88d7c463701d748f2f1cac6525e6fe4
+
