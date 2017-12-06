@@ -1,0 +1,39 @@
+	{% extends "layout.html.twig" %}
+		{% block title %}Admin{% endblock %}
+
+		{% block content %}
+            <h2>bonjour {{ app.user.username }}</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <a href="{{ path('addArticleAdmin') }}">
+                        <button class="btn btn-info">
+                            Ajouter un article
+                        </button>
+                    </a>
+                    {% for flashMessage in app.session.flashbag.get('success') %}
+                        {# affichage du message de réussite #}
+                        <div class="alert alert-success">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                    <ul>
+                    {% for article in articles %}
+                        <li>{{ article.title}} - <a href="{{ path('updateArticleAdmin', {id: article.id})}}">modifier</a> | <a href="{{ path('deleteArticleAdmin', {id: article.id})}}">supprimer</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ path('addUserAdmin') }}">
+                        <button class="btn btn-info">
+                            Ajouter un utilisateur
+                        </button>
+                    </a>
+                    <h2>Liste des utilisateur</h2>
+                    {% for user in users %}
+                    <li>{{ user.username}} - <a href="{{ path('updateUserAdmin', {id: user.id})}}">modifier</a> | <a href="{{ path('deleteUserAdmin', {id: user.id})}}">supprimer</a></li>
+                    {% endfor %}
+                </div>
+            </div>
+		{% endblock %}
+
+		
