@@ -40,3 +40,6 @@ $app->match('/reservation', 'WF3\Controller\HomeController::homePageReservation'
 
 //contact
 $app->match('/contact', 'WF3\Controller\HomeController::homePageContact')->bind('contact');
+
+//connexion
+$app->match('/connexion', 'WF3\Controller\HomeController::signInAction')->bind('connexion');
