@@ -206,7 +206,7 @@ class HomeController{
 
             $app['session']->getFlashBag()->add('success', 'Hello ' .  $user->getUsername());
             // Redirect to admin home page
-            return $app->redirect($app['url_generator']->generate('homepage'));
+            return $app->redirect($app['url_generator']->generate('accueil'));
         }
         return $app['twig']->render('user_register.html.twig', array(
             'title' => 'Sign in',
