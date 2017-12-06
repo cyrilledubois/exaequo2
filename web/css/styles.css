@@ -1,0 +1,590 @@
+/* Less files*/
+body {
+  font-size: 17px;
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+header {
+ /* background: url('web_Fotolia_65860174_XL_BANNER.jpg') no-repeat top center;*/
+  background-size: cover;
+  margin-bottom: 40px;
+  position: relative;
+}
+:focus {outline:none;}
+.home-wrapper {
+  display: block;
+  position: relative;
+  min-height: 200px;
+  height: 100%;
+  width: 100%;
+}
+
+.logo-video-wrapper {
+  position:relative;
+  z-index: 100;
+  width:100%;
+  height:100%;
+}
+
+.logo-wrapper {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}
+
+/*Fix IOS*/
+video::-webkit-media-controls-start-playback-button {
+  /*-webkit-transform: translate(0%, 200%);*/
+  display:none;
+}
+
+#replay{
+  margin-top:20%;
+  cursor : pointer;
+  text-align: center;
+}
+
+#video {
+  width: 100%    !important;
+  height: 600px   !important;
+  max-height:600px;
+  object-fit: fill;
+}
+
+#video_img{
+  width:100%;
+  max-height:700px;
+  object-fit: fill;
+  display: none;
+}
+
+#video_replay{
+  float:left;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-10%);
+  transform: translateX(-50%) translateY(-10%);
+  max-width: 100%;
+  max-height: 100%;
+  cursor : pointer;
+  display: none;
+}
+
+#logo {
+  max-width:300px;
+  height:auto;
+}
+
+@media (min-width: 500px and max-width: 700px) {
+	#logo {
+	  max-width:350px;
+	  height:auto;
+	}
+}
+
+@media (min-width: 700px and max-width: 900px) {
+	#logo {
+	  max-width:450px;
+	  height:auto;
+	}
+}
+
+@media (min-width: 1000px) {
+	#logo {
+	  max-width:500px;
+	  height:auto;
+	}
+}
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  width: auto;
+}
+
+
+.navbar-brand {
+  height: 80px;
+}
+
+ .nav >li >a {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+ .navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
+  color: #fff;
+  background-color: rgb(75, 11, 49);
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: rgb(75, 11, 49);
+  font-weight: 600;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #000;
+}
+
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #000;
+}
+
+.navbar-custom {
+  color: #FFFFFF;
+  background-color: #FFFFFF;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
+  color: #fff;
+  background-color: rgb(112, 16, 73);
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 600;
+  line-height: 2.42857143;
+  color: #333;
+  white-space: nowrap;
+  font-size:18px;
+}
+.navbar-toggle {
+  background-color: rgb(75, 11, 49);
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+
+.dropdown:active {
+  background:rgb(75, 11, 49); 
+  color:#fff;
+}
+
+.cours{
+  color:#fff;
+  z-index: -1;
+  background: url('../images/logo-fili-blanc.png') no-repeat center center #40a2c0;
+  height: 100%;
+  width: 100%;
+  margin-top:30px;
+  border-radius: 10px; 
+}
+
+.nom-cours{
+  font-weight: bold;
+  font-size:17px;
+}
+
+.desc-cours{
+  font-size:16px;
+}
+
+.zoom:hover{
+    z-index: 2;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1.05);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1.05);   
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1.05);
+    transition: all 200ms ease-in;
+    transform: scale(1.05);
+}
+
+		/* Testimonials */
+.testimonials blockquote {
+    background: #f8f8f8 none repeat scroll 0 0;
+    border: medium none;
+    color: #666;
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 15px;
+    position: relative;
+	text-align: justify;
+}
+.testimonials blockquote::before {
+    width: 0; 
+    height: 0;
+	right: 0;
+	bottom: 0;
+	content: " "; 
+	display: block; 
+	position: absolute;
+    border-bottom: 20px solid #fff;    
+	border-right: 0 solid transparent;
+	border-left: 15px solid transparent;
+	border-left-style: inset; /*FF fixes*/
+	border-bottom-style: inset; /*FF fixes*/
+}
+.testimonials blockquote::after {
+    width: 0;
+    height: 0;
+    right: 0;
+    bottom: 0;
+    content: " ";
+    display: block;
+    position: absolute;
+    border-style: solid;
+    border-width: 20px 20px 0 0;
+    border-color: #4B0B31 transparent transparent transparent;
+}
+.testimonials .carousel-info img {
+    border: 1px solid #f5f5f5;
+    height: 75px;
+    padding: 3px;
+}
+.testimonials .carousel-info {
+    overflow: hidden;
+}
+.testimonials .carousel-info img {
+    margin-right: 15px;
+}
+.testimonials .carousel-info span {
+    display: block;
+}
+.testimonials span.testimonials-name {
+    color: #4B0B31;
+    font-size: 18px;
+    font-weight: 300;
+    margin: 23px 0 0px;
+	font-weight: bold;
+}
+.testimonials span.testimonials-post {
+    color: #656565;
+    font-size: 12px;
+}
+
+.img-full-width{
+  width: 100%;
+  display: block;
+}
+
+/**#tarif .bloc-tarif .prix {
+  font-size: 16px;
+}**/
+
+/*__________________________________*/
+
+#pres {
+  margin: 40px 0;
+}
+#pres .row {
+  margin: 40px 0;
+}
+#pres .row h2 {
+  margin-top: 0;
+  font-size: 35px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+#pres .row h2:before {
+  content: '';
+  display: inline-block;
+  width: 50px;
+  height: 38px;
+  margin-right: 10px;
+  position: relative;
+  top: 9px;
+}
+#pres .ligne1 img {
+  border-top: 40px #40a2c0 solid;
+}
+#pres .ligne1 h2 {
+  color: #40a2c0;
+}
+#pres .ligne1 h2:before {
+  background: url('../images/logo-azur.png') no-repeat;
+  background-size: 40px 30px;
+}
+#pres .ligne2 img {
+  border-top: 40px #036cad solid;
+}
+#pres .ligne2 h2 {
+  color: #036cad;
+}
+#pres .ligne2 h2:before {
+  background: url('../images/logo-bleu.png') no-repeat;
+  background-size: 40px 30px;
+}
+#pres .ligne3 img {
+  border-top: 40px #c83c33 solid;
+}
+#pres .ligne3 h2 {
+  color: #c83c33;
+}
+#pres .ligne3 h2:before {
+  background: url('../images/logo-rouge.png') no-repeat;
+  background-size: 40px 30px;
+}
+#pres .ligne4 img {
+  border-top: 40px #00af4e solid;
+}
+#pres .ligne4 h2 {
+  color: #00af4e;
+}
+#pres .ligne4 h2:before {
+  background: url('../images/logo-vert.png') no-repeat;
+  background-size: 40px 30px;
+}
+#tarif {
+  position: relative;
+  margin: 40px 0;
+  padding: 40px 0;
+}
+#tarif:before {
+  z-index: -1;
+  content: "";
+  background: url('../images/logo-fili-blanc.png') no-repeat center center #490731;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+#tarif h1 {
+  color: white;
+  margin: 60px 0;
+}
+ul.tarif-description{
+  padding-left:20px;
+  padding-right:20px;
+  padding-top:20px;
+}
+ul.tarif-description li {
+ clear: both;
+}
+ul.tarif-description li span:first-child {
+	float: left;
+	padding: 0 .4em 0 0;
+	margin: 0;
+}
+ul.tarif-description li span + span {
+	float: right;
+	padding: 0 0 0 .4em;
+	margin: 0;
+}
+ul.tarif-description li:after {
+	content: "";
+	display: block;
+}
+#tarif img {
+
+}
+
+.bloc-tarif .background-orange
+{
+  background-color:rgb(192,70,61);
+}
+
+.bloc-tarif .background-light-blue
+{
+  background-color:rgb(59,162,192);
+}
+
+.bloc-tarif .background-blue
+{
+  background-color:rgb(103,106,161);
+}
+
+.bloc-tarif .background-purple
+{
+  background-color:rgb(104,77,138);
+}
+
+.bloc-tarif .background-light-purple
+{
+  background-color:rgb(93,34,72);
+}
+
+.bloc-tarif .background-green
+{
+  background-color:rgb(59,152,136);
+}
+
+.bloc-tarif .background-yellow
+{
+  background-color:rgb(227,212,66);
+}
+
+.li-orange{
+  color:rgb(192,70,61);
+}
+
+.li-light-blue{
+  color:rgb(59,162,192);
+}
+
+.li-blue{
+  color:rgb(103,106,161);
+}
+
+.li-purple{
+  color:rgb(104,77,138);
+}
+
+.li-green{
+  color:rgb(59,152,136);
+}
+
+.li-yellow{
+  color:rgb(227,212,66);
+}
+
+.bloc-tarif .header {
+  padding-top:20px;
+  color:white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#tarif .bloc-tarif {
+  text-align: center;
+  background-color: white;
+  min-height: 265px;
+  border-top: none;
+  margin-bottom: 30px;
+  border-radius: 15px;
+}
+#tarif .bloc-tarif h2 {
+  margin-top: 0px;
+  margin-bottom: 30px;
+  color:white;
+}
+#tarif .bloc-tarif h2:after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+}
+#tarif .bloc-tarif small {
+  font-size: 11px;
+  font-style: italic;
+  line-height: 13px;
+  display: inline-block;
+}
+#tarif .bloc-tarif .prix {
+  font-size: 16px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#tarif .bloc-tarif .prix .color {
+  color: #490731;
+  font-weight: bold;
+}
+
+.prix-euros{
+  font-size: 3.0em;
+  color:white;
+  padding:10px;
+}
+
+.subtextprix {
+  color: #fff;
+  margin-top:30px;
+  text-align: center;
+}
+#partenaires {
+  margin: 40px 0 80px;
+}
+#team {
+  margin: 40px 0;
+}
+#team h1 {
+  margin-bottom: 40px;
+}
+#team .row .thumbnail {
+  min-height: 430px !important;
+}
+#team .row .thumbnail h2 {
+  font-size: 16px;
+}
+#contact {
+  margin: 40px 0;
+  background: url('../images/logo-fili.png') no-repeat center right;
+}
+#contact .row {
+  max-width: 70%;
+  margin: 0 auto;
+}
+#contact .row .col-sm-6 {
+  margin: 0 -15px;
+}
+#contact .row .col-sm-6 .fb {
+  color: #415D9E;
+}
+#contact .row .col-sm-6 .tw {
+  color: #0083B6;
+}
+#contact .row .coordonnees {
+  text-align: right;
+}
+#contact #FORMULAIRE_PROPULSITE input,
+#contact #FORMULAIRE_PROPULSITE textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+#contact #FORMULAIRE_PROPULSITE textarea {
+  height: auto;
+  max-width: 100%;
+  overflow: auto;
+}
+#map {
+  margin: 40px 0 0 0;
+}
+footer {
+  background: #202020;
+  padding: 20px 0;
+  font-size: 12px;
+  color: white;
+}
+footer a {
+  color: white;
+  cursor: pointer;
+}
+@media screen and (max-width: 1200px) {
+  .bloc-tarif {
+    min-height: 215px !important;
+  }
+  .bloc-tarif h2 {
+    font-size: 26px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .bloc-tarif {
+    min-height: 155px !important;
+  }
+  .bloc-tarif h2 {
+    font-size: 30px;
+  }
+}
+h1,
+h2,
+h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+h1 {
+  font-size: 45px;
+}

@@ -36,3 +36,6 @@ $app->match('/partenaires', 'WF3\Controller\HomeController::homePagePartenaires'
 
 //contact
 $app->match('/contact', 'WF3\Controller\HomeController::homePageContact')->bind('contact');
+
+//connexion
+$app->match('/connexion', 'WF3\Controller\HomeController::signInAction')->bind('connexion');
