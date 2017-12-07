@@ -21,12 +21,12 @@
 {{ form_start(userForm, { 'attr': {'class': 'form-horizontal'} }) }}
 
     <div class="form-group"> <!- NOM ->
-        {{ form_label(userForm.username, null, { 'label_attr':  {
+        {{ form_label(userForm.first_name, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-4">
-            {{ form_errors(userForm.username) }}
-            {{ form_widget(userForm.username, { 'attr':  {
+            {{ form_errors(userForm.first_name) }}
+            {{ form_widget(userForm.first_name, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
