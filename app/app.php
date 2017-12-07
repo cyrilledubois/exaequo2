@@ -40,7 +40,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         'ROLE_ADMIN' => array('ROLE_USER')
     ),
     'security.access_rules' => array(
-        array('^/admin', 'ROLE_ADMIN')
+        array('^/admin1', 'ROLE_ADMIN')
     )
 ));
 
@@ -74,8 +74,8 @@ $app['swiftmailer.options'] = array(
 );
 
 
-$app['dao.article'] = function($app){
-	$articleDAO = new WF3\DAO\ArticleDAO($app['db'], 'articles', 'WF3\Domain\Article');
+$app['dao.planning'] = function($app){
+	$articleDAO = new WF3\DAO\ArticleDAO($app['db'], 'planning', 'WF3\Domain\Article');
     //on injecte dans $articleDAO une instance de la classe UserDAO : injection de dépendance
     //elle est faite une seule fois, ici
     $articleDAO->setUserDAO($app['dao.user']);
