@@ -1,15 +1,17 @@
 /*MODIF TEAM WF3*/
 
+#essai{
+  background: #33cdc7;
+}
+
+#inscrit{
+  background: #009b95;
+}
+
+
+
+
 /*START PAGE DE RESERVATION*/
-#reserv{
-  
-}
-
-.col-md-1 bg-primary text-white{
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
 #filtre{
   background: rgb(75, 11, 49);
   text-align: center;
@@ -27,8 +29,6 @@
   padding-bottom: 5rem;
 }
 /*END PAGE DE RESERV*/
-
-
 
 
 /* Less files*/
@@ -135,11 +135,11 @@ video::-webkit-media-controls-start-playback-button {
 .navbar-brand {
   padding: 0px;
 }
+
 .navbar-brand>img {
   height: 100%;
   width: auto;
 }
-
 
 .navbar-brand {
   height: 80px;
@@ -149,6 +149,7 @@ video::-webkit-media-controls-start-playback-button {
   padding-top: 30px;
   padding-bottom: 30px;
 }
+
  .navbar-toggle {
   padding: 10px;
   margin: 25px 15px 25px 0;
@@ -190,7 +191,7 @@ video::-webkit-media-controls-start-playback-button {
   line-height: 2.42857143;
   color: #333;
   white-space: nowrap;
-  font-size:18px;
+  font-size:1,6rem;
 }
 .navbar-toggle {
   background-color: rgb(75, 11, 49);
