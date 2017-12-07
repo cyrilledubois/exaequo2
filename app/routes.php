@@ -3,7 +3,8 @@
 //silex va parcourir les routes de haut en bas et s'arrête à la première qui correspond
 
 //page d'accueil
-$app->get('/', 'WF3\Controller\HomeController::homePageAction')->bind('accueil');
+$app->get('/', 'WF3\Controller\HomeController::homePageAction')
+->bind('accueil');
 //bind permet de nommer une route
 //on peut alors appeler cette route dans une vue twig pour générer l'url correspondante
 
