@@ -79,4 +79,6 @@ class Planing{
         if(!empty($idCours) AND is_int($idCours)){        
         $this->idCours = $idCours;         
         }
+
+    
 }
