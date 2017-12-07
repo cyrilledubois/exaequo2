@@ -43,17 +43,17 @@ class PlanningDAO extends DAO{
 	}
 
 	//Modifier le planning
-	public function modifPlanning($idPlanning){
+	public function modifPlanning($idPlanning, $data){
 		$result = $this->bdd->prepare('UPDATE planning 
 		SET date_cours = :date_cours, duree = :duree, intensite = :intensite, place_max = :placeMax, decouverteMax = :decouverteMax, cours_id = :coursId 
 		WHERE idPlanning = :idPlanning')
-		$result->bindValue(':date_cours', $date_cours);
-		$result->bindValue(':duree', $duree);
-		$result->bindValue(':intensite', $intensite);
-		$result->bindValue(':placeMax', $placeMax);
-		$result->bindValue(':decouverteMax', $decouverteMax);
-		$result->bindValue(':coursId', $coursId);
-		$result->bindValue(':idPlanning', $idPlanning);
+		$result->bindValue(':date_cours', $data['date_cours']);
+		$result->bindValue(':duree', $data['duree']);
+		$result->bindValue(':intensite', $data['intensite']);
+		$result->bindValue(':placeMax', $data['placeMax']);
+		$result->bindValue(':decouverteMax', $data['decouverteMax']);
+		$result->bindValue(':coursId', $data['coursId']);
+		$result->bindValue(':idPlanning', $data['idPlanning']);
 		$result->execute();
 	} 
 
