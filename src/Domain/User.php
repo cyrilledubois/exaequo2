@@ -40,21 +40,21 @@ class User implements UserInterface
 
     private $role;
 
-    private $prenom;
+    private $first_name;
 
-    private $sexe;
+    private $sex;
 
-    private $dateDeNaissance;
+    private $date_de_naissance;
 
-    private $adresse;
+    private $adress;
 
-    private $codePostal;
+    private $cp;
 
-    private $ville;
+    private $town;
 
     private $profession;
 
-    private $groupeClient;
+    private $groupe_client;
 
 
     public function getId() {
@@ -145,62 +145,62 @@ class User implements UserInterface
     }
 
     //prenom
-     public function getPrenom() {
-        return $this->prenom;
+     public function getFirstname() {
+        return $this->first_name;
     }
 
-    public function setPrenom($prenom) {
-        $this->prenom = $prenom;
+    public function setFirstname($first_name) {
+        $this->$first_name = $first_name;
         return $this;
     }
 
     //sexe
-     public function getSexe() {
-        return $this->sexe;
+     public function getSex() {
+        return $this->sex;
     }
 
-    public function setSexe($sexe) {
-        $this->sexe = $sexe;
+    public function setSex($sex) {
+        $this->sex = $sex;
         return $this;
     }
 
     //dateDeNaissance
      public function getDateDeNaissance() {
-        return $this->dateDeNaissance;
+        return $this->date_de_naissance;
     }
 
-    public function setDateDeNaissance($dateDeNaissance) {
-        $this->dateDeNaissance = $dateDeNaissance;
+    public function setDateDeNaissance($date_de_naissance) {
+        $this->date_de_naissance = $date_de_naissance;
         return $this;
     }
 
     //adresse
-     public function getAdresse() {
-        return $this->adresse;
+     public function getAdress() {
+        return $this->adress;
     }
 
-    public function setAdresse($adresse) {
-        $this->adresse = $adresse;
+    public function setAdress($adress) {
+        $this->adress = $adress;
         return $this;
     }
 
     //codePostal
-     public function getCodePostal() {
-        return $this->codePostal;
+     public function getCp() {
+        return $this->cp;
     }
 
-    public function setCodePostal($codePostal) {
-        $this->codePostal = $codePostal;
+    public function setCp($cp) {
+        $this->cp = $cp;
         return $this;
     }
 
     //ville
-     public function getVille() {
-        return $this->ville;
+     public function getTown() {
+        return $this->town;
     }
 
-    public function setVille($ville) {
-        $this->ville = $ville;
+    public function setTown($town) {
+        $this->town = $town;
         return $this;
     }
 
@@ -216,11 +216,11 @@ class User implements UserInterface
 
     //groupeClient
      public function getGroupeClient() {
-        return $this->groupeClient;
+        return $this->groupe_client;
     }
 
-    public function setGroupeClient($groupeClient) {
-        $this->groupeClient = $groupeClient;
+    public function setGroupeClient($groupe_client) {
+        $this->groupe_client = $groupe_client;
         return $this;
     }
 
