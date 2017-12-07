@@ -17,14 +17,14 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, array('label' => 'Nom'))
-            ->add('prenom', TextType::class, array('label' => 'Prénom'))
-            ->add('sexe', TextType::class, array('label' => 'Sexe'))
-            ->add('dateDeNaissance', TextType::class, array('label' => 'Date de naissance'))
-            ->add('adresse', TextType::class, array('label' => 'Adresse'))
-            ->add('codePostal', TextType::class, array('label' => 'Code Postal'))
-            ->add('ville', TextType::class, array('label' => 'Ville'))
+            ->add('first_name', TextType::class, array('label' => 'Prénom'))
+            ->add('sex', TextType::class, array('label' => 'Sexe'))
+            ->add('date_de_naissance', TextType::class, array('label' => 'Date de naissance'))
+            ->add('adress', TextType::class, array('label' => 'Adresse'))
+            ->add('cp', TextType::class, array('label' => 'Code Postal'))
+            ->add('town', TextType::class, array('label' => 'Ville'))
             ->add('profession', TextType::class, array('label' => 'Profession'))
-            ->add('groupeClient', TextType::class, array('label' => 'Groupe Client'))
+            ->add('groupe_client', TextType::class, array('label' => 'Groupe Client'))
             ->add('email', TextType::class, array(
                 'attr' => array(
                     'placeholder' => 'Votre email',
