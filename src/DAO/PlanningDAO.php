@@ -47,13 +47,13 @@ class PlanningDAO extends DAO{
 		$result = $this->bdd->prepare('UPDATE planning 
 		SET date_cours = :date_cours, duree = :duree, intensite = :intensite, place_max = :placeMax, decouverteMax = :decouverteMax, cours_id = :coursId 
 		WHERE idPlanning = :idPlanning')
-		$result->bindValue(':date_cours', $date_cours, \PDO::PARAM_INT);
-		$result->bindValue(':duree', $duree, \PDO::PARAM_INT);
-		$result->bindValue(':intensite', $intensite, \PDO::PARAM_INT);
-		$result->bindValue(':placeMax', $placeMax, \PDO::PARAM_INT);
-		$result->bindValue(':decouverteMax', $decouverteMax, \PDO::PARAM_INT);
-		$result->bindValue(':coursId', $coursId, \PDO::PARAM_INT);
-		$result->bindValue(':idPlanning', $idPlanning, \PDO::PARAM_INT);
+		$result->bindValue(':date_cours', $date_cours);
+		$result->bindValue(':duree', $duree);
+		$result->bindValue(':intensite', $intensite);
+		$result->bindValue(':placeMax', $placeMax);
+		$result->bindValue(':decouverteMax', $decouverteMax);
+		$result->bindValue(':coursId', $coursId);
+		$result->bindValue(':idPlanning', $idPlanning);
 		$result->execute();
 	} 
 
