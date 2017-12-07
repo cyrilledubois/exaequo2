@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class HomeController{
 
     public function homePageReserv(Application $app){
-        $planning = $app['dao.planning']->getInfoPlanning($date_jour);
+        $planning = $app['dao.planning']->getInfoPlanning(date());
         return $app['twig']->render('reservation.html.twig', array(
             'planning'=>$planning
         ));
