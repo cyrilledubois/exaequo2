@@ -42,20 +42,7 @@ class PlanningDAO extends DAO{
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
 	}
 
-	//Modifier le planning
-	public function modifPlanning($idPlanning){
-		$result = $this->bdd->prepare('UPDATE planning 
-		SET date_cours = :date_cours, duree = :duree, intensite = :intensite, place_max = :placeMax, decouverteMax = :decouverteMax, cours_id = :coursId 
-		WHERE idPlanning = :idPlanning')
-		$result->bindValue(':date_cours', $date_cours);
-		$result->bindValue(':duree', $duree);
-		$result->bindValue(':intensite', $intensite);
-		$result->bindValue(':placeMax', $placeMax);
-		$result->bindValue(':decouverteMax', $decouverteMax);
-		$result->bindValue(':coursId', $coursId);
-		$result->bindValue(':idPlanning', $idPlanning);
-		$result->execute();
-	} 
+
 
 
 
