@@ -15,8 +15,8 @@ class AdminController{
     public function getInfoPlanning(Application $app){
         $planning = $app['dao.planning']->getInfoPlanning($date_jour);
             foreach($planning as $planning){
-            $dateJ =  $planning->getDate_cours()->format('Y-m-d');
-            $planning['date_cours'] = $dateJ;
+            $heureC =  $planning->getDate_cours()->format('H:i');
+            $planning['date_cours'] = $heureC;
         }
        
         return $app['twig']->render('admin/index.admin.html.twig', array(
