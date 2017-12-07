@@ -44,21 +44,6 @@ class PlanningDAO extends DAO{
 
 	/*
 	//Modifier le planning
-<<<<<<< HEAD
-	// public function modifPlanning($idPlanning, $data){
-	// 	$result = $this->bdd->prepare('UPDATE planning 
-	// 	SET date_cours = :date_cours, duree = :duree, intensite = :intensite, place_max = :placeMax, decouverteMax = :decouverteMax, cours_id = :coursId 
-	// 	WHERE idPlanning = :idPlanning')
-	// 	$result->bindValue(':date_cours', $data['date_cours']);
-	// 	$result->bindValue(':duree', $data['duree']);
-	// 	$result->bindValue(':intensite', $data['intensite']);
-	// 	$result->bindValue(':placeMax', $data['placeMax']);
-	// 	$result->bindValue(':decouverteMax', $data['decouverteMax']);
-	// 	$result->bindValue(':coursId', $data['coursId']);
-	// 	$result->bindValue(':idPlanning', $data['idPlanning']);
-	// 	$result->execute();
-	// } 
-=======
 	public function modifPlanning($idPlanning, $data){
 		$result = $this->bdd->prepare('UPDATE planning 
 		SET date_cours = :date_cours, duree = :duree, intensite = :intensite, place_max = :placeMax, decouverteMax = :decouverteMax, cours_id = :coursId 
@@ -73,7 +58,6 @@ class PlanningDAO extends DAO{
 		$result->execute();
 	} 
 	*/
->>>>>>> feeb42e95185cf3435cff50e769715e7084c60a5
 
 
 
