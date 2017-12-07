@@ -9,68 +9,74 @@ class Planing{
     private $intensite;
     private $place_max;
     private $decouverte_max;
-    private $cours_int;
+    private $idCours;
     
     public function getIdPlanning(){
-        return $this->id;
+        return $this->idPlanning;
     }
     
     public function getDate_cours(){
-        return $this->title;
+        return $this->date_cours;
     }
     
     public function getDuree(){
-        return $this->content;
+        return $this->duree;
     }
     
     public function getIntensite(){
-        return $this->date_publi;
+        return $this->intensite;
     }
     
     public function getPlace_max(){
         return $this->place_max;
     }
     
-    public function getDecouverte_max($id){
-        return $this;
+    public function getDecouverte_max(){
+        return $this->decouverte_max;
     }
-    public function getCours_int(){
-        return $this;
+    public function getIdCours(){
+        return $this->idCours;
     }
     
     //setters
 
-    public function setIdPlanning($IdPlanning){
-        if(!empty($IdPlanning) AND is_string($IdPlanning)){
-            $this->IdPlanning = $IdPlanning; 
+    public function setIdPlanning($idPlanning){
+        if(!empty($idPlanning) && is_int($idPlanning)){
+            $this->idPlanning = $idPlanning; 
         }
     }
 
-    public function setdate_cours($date_cours){
-        if(!empty($date_cours) AND is_string($date_cours)){
+    public function setDate_cours($date_cours){
+        if(!empty($date_cours)){
             $this->date_cours = $date_cours; 
         }
     }
 
-    public function setduree($duree){
-        if(!empty($duree) AND is_string($duree)){
+    public function setDuree($duree){
+        if(!empty($duree) AND is_int($duree)){
             $this->duree = $duree; 
         }
     }
 
-    public function setintensite($intensite){        
+    public function setIntensite($intensite){
+        if(!empty($intensite) && is_string($intensite)){      
             $this->intensite = $intensite;         
+        }
     }
     
-    public function setPlace_max($place_max){        
+    public function setPlace_max($place_max){
+        if(!empty($place_max) AND is_int($place_max)){           
         $this->place_max = $place_max;         
     }
 
-    public function setDecouverte_max($decouverte_max){        
-    $this->decouverte_max = $decouverte_max;         
+    public function setDecouverte_max($decouverte_max){    
+        if(!empty($decouverte_max) AND is_int($decouverte_max)){       
+        $this->decouverte_max = $decouverte_max;    
+        }     
     }
 
-    public function setCours_int($cours_int){        
-        $this->cours_int = $cours_int;         
+    public function setIdCours($idCours){   
+        if(!empty($idCours) AND is_int($idCours)){        
+        $this->idCours = $idCours;         
         }
 }
