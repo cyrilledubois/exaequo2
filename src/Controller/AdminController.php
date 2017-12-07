@@ -12,6 +12,7 @@ use WF3\Domain\User;
 class AdminController{
     
 
+  
 // MODIF 06/12 14h
     //page d'accueil du back office
     public function indexAction(Application $app){

@@ -42,6 +42,7 @@ class PlanningDAO extends DAO{
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
 	}
 
+	/*
 	//Modifier le planning
 	public function modifPlanning($idPlanning, $data){
 		$result = $this->bdd->prepare('UPDATE planning 
@@ -56,6 +57,7 @@ class PlanningDAO extends DAO{
 		$result->bindValue(':idPlanning', $data['idPlanning']);
 		$result->execute();
 	} 
+	*/
 
 
 

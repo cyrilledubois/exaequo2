@@ -65,7 +65,7 @@ class DAO implements DB {
 		$rows = $result->fetchAll(\PDO::FETCH_ASSOC);
         $objectsArray =[];
         foreach($rows as $row){
-            $objectsArray[$row['id']] = $this->buildObject($row);
+        $objectsArray[$row['id']] = $this->buildObject($row);
         }
 		return $objectsArray;
 	}
@@ -85,7 +85,6 @@ class DAO implements DB {
             $row = $get->fetch(\PDO::FETCH_ASSOC);
             return $this->buildObject($row);
         }
-
         return false;
     }
     

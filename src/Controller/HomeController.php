@@ -221,15 +221,28 @@ class HomeController{
         ));
     }
 
-    
-    public function getInfoPlanning(Application $app){
-        $planning = $app['dao.planning']->getInfoPlanning($date_jour);
-            foreach($planning as $planning){
-            $heureC =  $planning->getDate_cours()->format('H:i');
-            $planning['date_cours'] = $heureC;
-        }
+    // public function totoReservation(Application $app){
+    //     //$planning = $app['dao.planning']->getInfoPlanning(2017-12-18);
+    //     $planning = $app['dao.user']->findAll();
+    //         //foreach($planning as $plannings){
+    //         // $heureC =  $planning->getDate_cours()->format('H:i');
+    //         // $planning['date_cours'] = $heureC;
+        
        
-        return $app['twig']->render('admin/index.admin.html.twig', array(
+    //     return $app['twig']->render('reservation.html.twig', array(
+    //         'planning'=>$planning
+    //     ));
+    // }
+
+    public function totoReservation(Application $app){
+        //$planning = $app['dao.planning']->getInfoPlanning(2017-12-18);
+        $planning = $app['dao.user']->findAll();
+            //foreach($planning as $plannings){
+            // $heureC =  $planning->getDate_cours()->format('H:i');
+            // $planning['date_cours'] = $heureC;
+        
+       
+        return $app['twig']->render('reservation.html.twig', array(
             'planning'=>$planning
         ));
     }

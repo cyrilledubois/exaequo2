@@ -41,7 +41,7 @@ $app->match('/partenaires', 'WF3\Controller\HomeController::homePagePartenaires'
 ->bind('partenaires');
 
 //reservation
-$app->match('/reservation', 'WF3\Controller\HomeController::homePageReservation')
+$app->match('/reservation', 'WF3\Controller\HomeController::totoReservation')
 ->bind('reservation');
 
 //contact
