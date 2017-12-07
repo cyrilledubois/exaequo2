@@ -6,10 +6,9 @@ class Planning{
     private $idPlanning;
     private $date_cours;
     private $duree;
-    private $intensite;
     private $place_max;
     private $decouverte_max;
-    private $idCours;
+    private $cours_id;
     
     public function getIdPlanning(){
         return $this->idPlanning;
@@ -23,10 +22,6 @@ class Planning{
         return $this->duree;
     }
     
-    public function getIntensite(){
-        return $this->intensite;
-    }
-    
     public function getPlace_max(){
         return $this->place_max;
     }
@@ -35,7 +30,7 @@ class Planning{
         return $this->decouverte_max;
     }
     public function getIdCours(){
-        return $this->idCours;
+        return $this->cours_id;
     }
     
     //setters
@@ -58,12 +53,6 @@ class Planning{
         }
     }
 
-    public function setIntensite($intensite){
-        if(!empty($intensite) && is_string($intensite)){      
-            $this->intensite = $intensite;         
-        }
-    }
-    
     public function setPlace_max($place_max){
         if(!empty($place_max) AND is_int($place_max)){           
         $this->place_max = $place_max;         
@@ -75,8 +64,8 @@ class Planning{
         }     
     }
 
-    public function setIdCours($idCours){   
-        if(!empty($idCours) AND is_int($idCours)){        
-        $this->idCours = $idCours;         
+    public function setIdCours($cours_id){   
+        if(!empty($cours_id) AND is_int($cours_id)){        
+        $this->cours_id = $cours_id;         
         }
 }

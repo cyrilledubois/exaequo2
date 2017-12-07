@@ -221,4 +221,17 @@ class HomeController{
         ));
     }
 
+    
+    public function getInfoPlanning(Application $app){
+        $planning = $app['dao.planning']->getInfoPlanning($date_jour);
+            foreach($planning as $planning){
+            $heureC =  $planning->getDate_cours()->format('H:i');
+            $planning['date_cours'] = $heureC;
+        }
+       
+        return $app['twig']->render('admin/index.admin.html.twig', array(
+            'planning'=>$planning
+        ));
+    }
+
 }

@@ -19,7 +19,7 @@ class PlanningDAO extends DAO{
 	}
 
 	public function getInfoPlanning($date_jour){
-        $result = $this->bdd->prepare('SELECT idPlanning, date_cours, duree, nom, intensite FROM planning INNER JOIN cours ON planning.cours_id = cours.id WHERE date_cours LIKE :date_jour');
+        $result = $this->bdd->prepare('SELECT idPlanning, date_cours, duree, nom, intensite FROM planning INNER JOIN cours ON planning.id_cours = cours.id WHERE date_cours LIKE :date_jour');
         $result->bindValue(':date_jour', '%' . $date_jour . '%');
         $result->execute();
         return $result->fetchALL(\PDO::FETCH_ASSOC);
@@ -36,7 +36,7 @@ class PlanningDAO extends DAO{
 
 	// 
 	public function selectIntensity($intensite){
-		$result = $this->bdd->prepare('SELECT * FROM planning INNER JOIN cours ON planning.cours_id = cours.id WHERE intensite = :intensite');
+		$result = $this->bdd->prepare('SELECT * FROM planning INNER JOIN cours ON planning.id_cours = cours.id WHERE intensite = :intensite');
 		$result->bindValue(':intensite', $intensite, \PDO::PARAM_INT);
 		$result->execute();
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ class PlanningDAO extends DAO{
 		$result->bindValue(':intensite', $data['intensite']);
 		$result->bindValue(':placeMax', $data['placeMax']);
 		$result->bindValue(':decouverteMax', $data['decouverteMax']);
-		$result->bindValue(':coursId', $data['coursId']);
+		$result->bindValue(':coursId', $data['id_cours']);
 		$result->bindValue(':idPlanning', $data['idPlanning']);
 		$result->execute();
 	} 
