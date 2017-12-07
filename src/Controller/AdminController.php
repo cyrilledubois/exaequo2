@@ -5,17 +5,23 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use WF3\Form\Type\ArticleType;
 use WF3\Domain\Article;
+use WF3\Domain\Planning;
 use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 
 class AdminController{
     
+
+    public function getInfoPlanning(Application $app){
+        $planning = $app['dao.planning']->getInfoPlanning($date_jour);
+        return $app['twig']->render('admin/index.admin.html.twig', array(
+            'planning'=>$planning
+        ));
+    }
 // MODIF 06/12 14h
     //page d'accueil du back office
     public function indexAction(Application $app){
-<<<<<<< HEAD
-        return $app['twig']->render('admin/index.admin.html.twig');
-=======
+      
         $planning = $app['dao.planning']->findAll();
         $cours = $app['dao.cours']->findAll();
         $users = $app['dao.user']->findAll();
@@ -159,6 +165,5 @@ class AdminController{
             'user' => $user
         ));
 
->>>>>>> 0b4877ec37814361d960e3662dea630409a0e6f2
     }
 }

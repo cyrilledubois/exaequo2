@@ -1,7 +1,7 @@
 <?php
 namespace WF3\Domain;
 
-class Planing{
+class Planning{
     //déclaration des attributs
     private $idPlanning;
     private $date_cours;
@@ -79,9 +79,4 @@ class Planing{
         if(!empty($idCours) AND is_int($idCours)){        
         $this->idCours = $idCours;         
         }
-<<<<<<< HEAD
-=======
-
-    
->>>>>>> 0b4877ec37814361d960e3662dea630409a0e6f2
 }
