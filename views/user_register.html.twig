@@ -20,7 +20,7 @@
 <div class="well">
 {{ form_start(userForm, { 'attr': {'class': 'form-horizontal'} }) }}
 
-    <div class="form-group">
+    <div class="form-group"> <!- NOM ->
         {{ form_label(userForm.username, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
@@ -32,19 +32,103 @@
         </div>
     </div>
 
-    <div class="form-group">
-        {{ form_label(userForm.username, null, { 'label_attr':  {
+    <div class="form-group"> <!- PRENOM ->
+        {{ form_label(userForm.prenom, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-4">
-            {{ form_errors(userForm.username) }}
-            {{ form_widget(userForm.username, { 'attr':  {
+            {{ form_errors(userForm.prenom) }}
+            {{ form_widget(userForm.prenom, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"> <!- SEXE ->
+        {{ form_label(userForm.sexe, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_errors(userForm.sexe) }}
+            {{ form_widget(userForm.sexe, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- DATE DE NAISSANCE->
+        {{ form_label(userForm.dateDeNaissance, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_errors(userForm.dateDeNaissance) }}
+            {{ form_widget(userForm.dateDeNaissance, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- ADRESSE ->
+        {{ form_label(userForm.adresse, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_errors(userForm.adresse) }}
+            {{ form_widget(userForm.adresse, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- CODE POSTAL ->
+        {{ form_label(userForm.codePostal, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_errors(userForm.codePostal) }}
+            {{ form_widget(userForm.codePostal, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- VILLE ->
+        {{ form_label(userForm.ville, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_errors(userForm.ville) }}
+            {{ form_widget(userForm.ville, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- PROFESSION ->
+        {{ form_label(userForm.profession, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_errors(userForm.profession) }}
+            {{ form_widget(userForm.profession, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- GROUPE CLIENT ->
+        {{ form_label(userForm.groupeClient, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_errors(userForm.groupeClient) }}
+            {{ form_widget(userForm.groupeClient, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- EMAIL->
         {{ form_label(userForm.email, null, { 'label_attr':  {
         'class': 'col-sm-5 control-label'
         }}) }}
@@ -54,7 +138,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"> <!- TELEPHONE ->
         {{ form_label(userForm.phone, null, { 'label_attr':  {
         'class': 'col-sm-5 control-label'
         }}) }}
@@ -66,7 +150,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"> <!- MOT DE PASSE ->
         {{ form_label(userForm.password.first, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
@@ -77,7 +161,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"> <!- REPETER MOT DE PASSE ->
         {{ form_label(userForm.password.second, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
@@ -88,9 +172,9 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"> <!- VALIDER ->
         <div class="col-sm-offset-5 col-sm-3">
-            <input type="submit" class="btn btn-primary" value="Save" />
+            <input type="submit" class="btn btn-primary" value="Valider" />
         </div>
     </div>
 
