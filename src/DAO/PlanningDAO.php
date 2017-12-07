@@ -17,6 +17,13 @@ class PlanningDAO extends DAO{
 		$result->execute();
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
 	}
+
+	public function getInfoPlanning($date_jour){
+        $result = $this->bdd->prepare('SELECT date_cours, duree, nom, intensite FROM planning INNER JOIN cours ON planning.cours_id = cours.id WHERE date_cours = :date_jour');
+        $result->bindValue(':date_jour', $date_jour);
+        $result->execute();
+        return $result->fetchALL(\PDO::FETCH_ASSOC);
+    }
 	
 	// Permet de chercher les cours semblable selon l'id dans le planning 
 	public function selectCours($idCours){
@@ -50,7 +57,7 @@ class PlanningDAO extends DAO{
 		$result->execute();
 	} 
 
-	
+
 
 	// Supprimer planning du "date à date"
 

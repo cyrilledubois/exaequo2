@@ -1,7 +1,7 @@
 <?php
 namespace WF3\Domain;
 
-class Planing{
+class Planning{
     //déclaration des attributs
     private $idPlanning;
     private $date_cours;
