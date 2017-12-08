@@ -17,18 +17,14 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class HomeController{
 
     public function homePageReserv(Application $app){
-
-        //$planning = $app['dao.planning']->findAll();
-        //foreach ($planning as $cours)
-        $date = '2017-12-18';
-        $planning = $app['dao.planning']->getInfoPlanning($date);
-
-        $planning = $app['dao.planning']->findAll();
-        //foreach ($planning as $cours)
-
-        //$planning = $app['dao.planning']->getInfoPlanning(date());
+        //NE PAS SUPPRIMER : 
+        //initialisation de l'affichage du planning de réservation avec la date du jour.
+        //$dateaffich = date("Y"). '-' .date("m") . '-' . date("d");
+        //Pour les tests on peut afficher le planning de réervation à une date donnée, commenter la ligne du dessus !!!
+        $dateaffich = '2017-12-19';   
+        $planning = $app['dao.planning']->getInfoPlanning($dateaffich);
         return $app['twig']->render('reservation.html.twig', array(
-            'planning'=>$planning
+            'planning'=>$planning,
         ));
     }
 

@@ -70,11 +70,19 @@
 
 		<div class="row">
 			<div class="col-md-12">
-			{#dump(planning)#}
+
+			{#dump(date)#}
 
 			{% for cours in planning %}
-			<div>
-				<h2>{{ cours.date_cours }}</h2>
+			<div class="liste_cours">
+				<p>Date du cours :{{ cours.date_cours|date('d/m/Y') }}</p>
+				<p>Heure du cours {{ cours.date_cours|date('h:i') }}</p>
+				<p>Durée : {{ cours.duree }} minutes </p>
+				<p>Cours : {{ cours.nom }}</p>
+				<p>Intensité du cours {{ cours.intensite }}</p>
+				<p>{{ cours.id }}</p>
+				{#<p><a href="{{ path('', {id: cours.id}) }}">réserver</a> | <a href="{{ path('', {id: cours.id}) }}">Supprimer</a> | <a href="{{ path('', {id: cours.id}) }}">Modifier</a> </p>#}
+
 				
 			</div>
 			{% endfor %}	
