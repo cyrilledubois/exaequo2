@@ -67,11 +67,9 @@
 
 	<!--PLANING-->
 	<div id="planning" class="container-fluid">
-	{{dump(planning)}}
-	 {% for plannings in planning %}
+
 		<div class="row">
 			<div class="col-md-12">
-<<<<<<< HEAD
 			{#dump(planning)#}
 
 			{% for cours in planning %}
@@ -80,17 +78,9 @@
 				
 			</div>
 			{% endfor %}	
-=======
-			{{dump(planning)}}
-				<div id="planning" class="col-md-1 bg-primary text-white" name="heure"> {{ plannings.username }} </div> 
-				<div id="planning" class="col-md-2 bg-secondary text-white" name="duree"> {{ plannings.email }} </div> 
-				<div id="planning" class="col-md-3 bg-success text-white" name="cours"> {{ plannings.sex }} </div> 
-				<div id="planning" class="col-md-3 bg-danger text-white" name="intensite"> {{ plannings.town }}</div> 
-				<div id="planning" class="col-md-3 bg-warning text-white"><a href="#">Reserver</a></div>
->>>>>>> 2eb9672a7a919bd5813ecfbf4409dad173a78b69
+
 			</div>
-		</div>
-		{% endfor %} 
+	
 	</div>
 
 </body>	

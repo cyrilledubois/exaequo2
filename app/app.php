@@ -87,5 +87,10 @@ $app['dao.user'] = function($app){
 	return new WF3\DAO\UserDAO($app['db'], 'users', 'WF3\Domain\User');
 };
 
+//on pourra ainsi accéder à notre classe UserDAO grâce à $app['dao.user'] 
+$app['dao.cours'] = function($app){
+    return new WF3\DAO\CoursDAO($app['db'], 'cours', 'WF3\Domain\Cours');
+};
+
 
 
