@@ -8,8 +8,9 @@ use WF3\Domain\Article;
 use WF3\Domain\Planning;
 use WF3\Form\Type\UserType;
 use WF3\Domain\User;
+use WF3\Domain\Cours;
 
-class AdminController{
+class AdminController  {
     
 
   

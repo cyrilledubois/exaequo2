@@ -33,19 +33,14 @@
 
     <!--PLANING-->
 	<div id="planning" class="container-fluid">
-	{{dump(planning)}}
-	 {% for plannings in planning %}
 		<div class="row">
 			<div class="col-md-12">
-			{{dump(planning)}}
-				<div id="planning" class="col-md-1 bg-primary text-white" name="heure"> {{ plannings.username }} </div> 
-				<div id="planning" class="col-md-2 bg-secondary text-white" name="duree"> {{ plannings.email }} </div> 
-				<div id="planning" class="col-md-3 bg-success text-white" name="cours"> {{ plannings.sex }} </div> 
-				<div id="planning" class="col-md-3 bg-danger text-white" name="intensite"> {{ plannings.town }}</div> 
-				<div id="planning" class="col-md-3 bg-warning text-white"><a href="#">Reserver</a></div>
-			</div>
+			<div id="planning" class="col-md-1 bg-primary text-white">Heure</div>
+			<div id="planning" class="col-md-2 bg-secondary text-white">Durée</div>
+			<div id="planning" class="col-md-3 bg-success text-white">Cour</div>
+			<div id="planning" class="col-md-3 bg-danger text-white">Intensité</div>
+			<div id="planning" class="col-md-3 bg-warning text-white">Reserver</div>				
 		</div>
-		{% endfor %} 
 	</div>
 
   <!--SECTION UPLOAD-->

@@ -56,19 +56,19 @@ class DAO implements DB {
 	/**
 	 * Lecture de la table
 	 */
-	// public function findAll(){ // Read
+	public function findAll(){ // Read
 
-	// 	// On effectue la requete SQL
-    //     // $this->tableName contient le nom de la table
-	// 	$result = $this->bdd->prepare('SELECT * FROM ' . $this->tableName);
-	// 	$result->execute();
-	// 	$rows = $result->fetchAll(\PDO::FETCH_ASSOC);
-    //     $objectsArray =[];
-    //     foreach($rows as $row){
-    //     $objectsArray[$row['id']] = $this->buildObject($row);
-    //     }
-	// 	return $objectsArray;
-	// }
+		// On effectue la requete SQL
+        // $this->tableName contient le nom de la table
+		$result = $this->bdd->prepare('SELECT * FROM ' . $this->tableName);
+		$result->execute();
+		$rows = $result->fetchAll(\PDO::FETCH_ASSOC);
+        $objectsArray =[];
+        foreach($rows as $row){
+        $objectsArray[$row['id']] = $this->buildObject($row);
+        }
+		return $objectsArray;
+	}
     
 
     /**

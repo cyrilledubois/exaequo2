@@ -1,7 +1,7 @@
 <?php
 namespace WF3\Domain;
 
-class Planning{
+class Cours{
     //déclaration des attributs
     private $nom;
     private $intensite;
@@ -19,7 +19,6 @@ class Planning{
     public function getId(){
         return $this->id;
     }
-    
     
     //setters
 
@@ -40,5 +39,6 @@ class Planning{
             $this->id = $id; 
         }
     }
+}
 
    
