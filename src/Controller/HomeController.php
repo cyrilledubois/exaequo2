@@ -25,10 +25,7 @@ class HomeController{
 
         $planning = $app['dao.planning']->findAll();
         //foreach ($planning as $cours)
-<<<<<<< HEAD
-=======
 
->>>>>>> 4dabb6e5af4fc23a1f82b736c9167a419350cef7
         //$planning = $app['dao.planning']->getInfoPlanning(date());
         return $app['twig']->render('reservation.html.twig', array(
             'planning'=>$planning
