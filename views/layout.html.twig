@@ -78,11 +78,20 @@
 				  <li><a href="{{ path('tarifs') }}">Nos tarifs</a></li>
 				  <li><a href="{{ path('partenaires') }}">Nos Partenaires</a></li>
 				  <li><a href="{{ path('contact') }}">Contact</a></li>
-					<li><a href="{{ path('connexion') }}">Connexion</a></li>
-					<li><a href="{{ path('reservation') }}">Réserver une session</a></li>
+					{#{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					{% if is_granted('ROLE_ADMIN') %}
+					<li><a href="{{ path('admin') }}">administration</a></li>
+					{% endif %}
+					<li><a href="{{ path('logout') }}">déconnexion</a></li>
+					{% else %}
+					<li><a href="{{ path('inscription') }}">inscription</a></li>
+					<li><a href="{{ path('login') }}">connexion</a></li>
+					{% endif %}#}
+
 					<li><a href="{{ path('admin') }}">Administration</a></li>
 				  <li><a href="{{ path('connexion') }}">Connexion</a></li>
 				  <li><a href="{{ path('inscription') }}">Inscription</a></li>
+					<li><a href="{{ path('reservation') }}">Réserver une session</a></li>
 				</ul>
 			  </div>
 			</div>

@@ -18,6 +18,7 @@ class HomeController{
 
     public function homePageReserv(Application $app){
         $planning = $app['dao.planning']->findAll();
+        //foreach ($planning as $cours)
         //$planning = $app['dao.planning']->getInfoPlanning(date());
         return $app['twig']->render('reservation.html.twig', array(
             'planning'=>$planning
@@ -237,7 +238,7 @@ class HomeController{
 
     public function totoReservation(Application $app){
         //$planning = $app['dao.planning']->getInfoPlanning(2017-12-18);
-        $planning = $app['dao.planning']->findAll();
+        $planning = $app['dao.user']->findAll();
             //foreach($planning as $plannings){
             // $heureC =  $planning->getDate_cours()->format('H:i');
             // $planning['date_cours'] = $heureC;
