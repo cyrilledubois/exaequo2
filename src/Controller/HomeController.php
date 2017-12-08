@@ -17,10 +17,15 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class HomeController{
 
     public function homePageReserv(Application $app){
+
         //$planning = $app['dao.planning']->findAll();
         //foreach ($planning as $cours)
         $date = '2017-12-18';
         $planning = $app['dao.planning']->getInfoPlanning($date);
+
+        $planning = $app['dao.planning']->findAll();
+        //foreach ($planning as $cours)
+
         //$planning = $app['dao.planning']->getInfoPlanning(date());
         return $app['twig']->render('reservation.html.twig', array(
             'planning'=>$planning

@@ -81,6 +81,10 @@ $app['dao.planning'] = function($app){
     return new WF3\DAO\PlanningDAO($app['db'], 'planning', 'WF3\Domain\Planning');
 };
 
+$app['dao.cours'] = function($app){
+    return new WF3\DAO\CoursDAO($app['db'], 'cours', 'WF3\Domain\cours');
+};
+
 //on enregistre un nouveau service :
 //on pourra ainsi accéder à notre classe UserDAO grâce à $app['dao.user'] 
 $app['dao.user'] = function($app){
