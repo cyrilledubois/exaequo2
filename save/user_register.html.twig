@@ -20,17 +20,7 @@
 <div class="well">
 {{ form_start(userForm, { 'attr': {'class': 'form-horizontal'} }) }}
 
-    <div class="form-group"> <!- SEXE ->
-        {{ form_label(userForm.sex, null, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
-        }}) }}
-        <div class="col-sm-4">
-            {{ form_errors(userForm.sex) }}
-            {{ form_widget(userForm.sex, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
-        </div>
-    </div>
+    
 
     <div class="form-group"> <!- NOM ->
         {{ form_label(userForm.username, null, { 'label_attr':  {
@@ -56,17 +46,7 @@
         </div>
     </div>
 
-    <div class="form-group"> <!- DATE DE NAISSANCE->
-            {{ form_label(userForm.datedenaissance, null, { 'label_attr':  {
-                'class': 'col-sm-5 control-label'
-            }}) }}
-            <div class="col-sm-4">
-                {{ form_errors(userForm.datedenaissance) }}
-                {{ form_widget(userForm.datedenaissance, { 'attr':  {
-                    'class': 'form-control'
-                }}) }}
-            </div>
-    </div>
+
     
 
     <div class="form-group"> <!- ADRESSE ->
@@ -118,12 +98,12 @@
     </div>
 
     <div class="form-group"> <!- GROUPE CLIENT ->
-        {{ form_label(userForm.groupeclient, null, { 'label_attr':  {
+        {{ form_label(userForm.groupe_client, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-4">
-            {{ form_errors(userForm.groupeclient) }}
-            {{ form_widget(userForm.groupeclient, { 'attr':  {
+            {{ form_errors(userForm.groupe_client) }}
+            {{ form_widget(userForm.groupe_client, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>

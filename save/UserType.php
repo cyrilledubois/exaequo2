@@ -18,20 +18,19 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sex', ChoiceType::class, array('label' => ' ',
-               'choices' => array('Mlle' => 'Mlle', 'Mme' => 'Mme', 'M.' => 'M.')))
+            //->add('sex', ChoiceType::class, array('label' => ' ',
+               //'choices' => array('Mlle' => 1, 'Mme' => 2, 'M.' => 3)))
             ->add('username', TextType::class, array('label' => 'Nom'))
-            
-
-            ->add('datedenaissance',  TextType::class, array('label' => 'Date de naissance'))
-
+            ->add('firstname', TextType::class, array('label' => 'Prénom'))
+            /*->add('date_de_naissance', BirthdayType::class, array(
+            'placeholder' => array('day' => 'Jour','month' => 'Mois','year' => 'Année')
+            ))*/
 
             ->add('adress', TextType::class, array('label' => 'Adresse'))
-            ->add('firstname', TextType::class, array('label' => 'Prénom'))
             ->add('cp', TextType::class, array('label' => 'Code Postal'))
             ->add('town', TextType::class, array('label' => 'Ville'))
             ->add('profession', TextType::class, array('label' => 'Profession'))
-            ->add('groupeclient', TextType::class, array('label' => 'Groupe Client'))
+            ->add('groupe_client', TextType::class, array('label' => 'Groupe Client'))
             ->add('email', TextType::class, array(
                 'attr' => array(
                     'placeholder' => 'Votre email',

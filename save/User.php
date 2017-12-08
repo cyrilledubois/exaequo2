@@ -44,7 +44,7 @@ class User implements UserInterface
 
     private $sex;
 
-    private $datedenaissance;
+    private $date_de_naissance;
 
     private $adress;
 
@@ -54,7 +54,7 @@ class User implements UserInterface
 
     private $profession;
 
-    private $groupeclient;
+    private $groupe_client;
 
 
     public function getId() {
@@ -150,7 +150,7 @@ class User implements UserInterface
     }
 
     public function setFirstname($firstname) {
-        $this->$firstname = $firstname;
+        $this->$first_name = $firstname;
         return $this;
     }
 
@@ -166,11 +166,11 @@ class User implements UserInterface
 
     //dateDeNaissance
      public function getDateDeNaissance() {
-        return $this->datedenaissance;
+        return $this->date_de_naissance;
     }
 
-    public function setDateDeNaissance($datedenaissance) {
-        $this->datedenaissance = $datedenaissance;
+    public function setDateDeNaissance($date_de_naissance) {
+        $this->date_de_naissance = $date_de_naissance;
         return $this;
     }
 
@@ -216,11 +216,11 @@ class User implements UserInterface
 
     //groupeClient
      public function getGroupeClient() {
-        return $this->groupeclient;
+        return $this->groupe_client;
     }
 
-    public function setGroupeClient($groupeclient) {
-        $this->groupeclient = $groupeclient;
+    public function setGroupeClient($groupe_client) {
+        $this->groupe_client = $groupe_client;
         return $this;
     }
 
