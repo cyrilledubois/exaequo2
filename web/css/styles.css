@@ -1,14 +1,26 @@
 /*MODIF TEAM WF3*/
-
-#essai{
-  background: #33cdc7;
+/*BACK ADMIN*/
+#navadmin{
+  background: black;
+  color: white;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-#inscrit{
-  background: #009b95;
+#headadmin{
+  margin-bottom: 0rem;
+}
+#uladmin{
+  list-style-type: none; 
+  text-align: center;
 }
 
-
+#uladmin>li>a{f
+  margin: 2rem;
+  padding: 2rem;
+  margin-left: 2rem;
+  color: white;
+}
 
 
 /*START PAGE DE RESERVATION*/
@@ -29,6 +41,8 @@
   padding-bottom: 5rem;
 }
 /*END PAGE DE RESERV*/
+
+
 
 
 /* Less files*/
