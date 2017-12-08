@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-#uladmin>li>a{f
+#uladmin>li>a{
   margin: 2rem;
   padding: 2rem;
   margin-left: 2rem;
@@ -153,10 +153,14 @@ video::-webkit-media-controls-start-playback-button {
 .navbar-brand>img {
   height: 100%;
   width: auto;
+
 }
 
 .navbar-brand {
   height: 80px;
+  position: absolute;
+  top: 0px;
+  left: 90px; 
 }
 
  .nav >li >a {
