@@ -20,7 +20,7 @@ class HomeController{
 
         //$planning = $app['dao.planning']->findAll();
         //foreach ($planning as $cours)
-        $date = '2017-12-18';
+        $date = 2017-12-18;
         $planning = $app['dao.planning']->getInfoPlanning($date);
 
         $planning = $app['dao.planning']->findAll();
@@ -110,11 +110,11 @@ class HomeController{
             $message = \Swift_Message::newInstance()
                         ->setSubject($data['subject'])
                         ->setFrom(array('promo5wf3@gmx.fr'))
-                        ->setTo(array('votre@mail.com'))
+                        ->setTo(array('desporout@gmail.com'))
                         ->setBody($app['twig']->render('contact.email.html.twig',
                             array('name'=>$data['name'],
-                                   'email' => $data['email'],
-                                   'message' => $data['message']
+                                'email' => $data['email'],
+                                'message' => $data['message']
                             )
                         ), 'text/html');
 
@@ -248,8 +248,6 @@ class HomeController{
             //foreach($planning as $plannings){
             // $heureC =  $planning->getDate_cours()->format('H:i');
             // $planning['date_cours'] = $heureC;
-        
-       
         return $app['twig']->render('reservation.html.twig', array(
             'planning'=>$planning
         ));
