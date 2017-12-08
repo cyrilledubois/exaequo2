@@ -19,8 +19,8 @@ class PlanningDAO extends DAO{
 	}
 
 	public function getInfoPlanning($date_jour){
-        $result = $this->bdd->prepare('SELECT date_cours, duree, nom, intensite FROM planning INNER JOIN cours ON planning.cours_id = cours.id WHERE date_cours = :date_jour');
-        $result->bindValue(':date_jour', $date_jour);
+        $result = $this->bdd->prepare('SELECT id, date_cours, duree, nom, intensite FROM planning INNER JOIN cours ON planning.id_cours = cours.id WHERE date_cours LIKE :date_jour');
+        $result->bindValue(':date_jour', '%' . $date_jour . '%');
         $result->execute();
         return $result->fetchALL(\PDO::FETCH_ASSOC);
     }
@@ -36,26 +36,28 @@ class PlanningDAO extends DAO{
 
 	// 
 	public function selectIntensity($intensite){
-		$result = $this->bdd->prepare('SELECT * FROM planning INNER JOIN cours ON planning.cours_id = cours.id WHERE intensite = :intensite');
+		$result = $this->bdd->prepare('SELECT * FROM planning INNER JOIN cours ON planning.id_cours = cours.id WHERE intensite = :intensite');
 		$result->bindValue(':intensite', $intensite, \PDO::PARAM_INT);
 		$result->execute();
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
 	}
 
+	/*
 	//Modifier le planning
-	public function modifPlanning($idPlanning){
+	public function modifPlanning($idPlanning, $data){
 		$result = $this->bdd->prepare('UPDATE planning 
 		SET date_cours = :date_cours, duree = :duree, intensite = :intensite, place_max = :placeMax, decouverteMax = :decouverteMax, cours_id = :coursId 
 		WHERE idPlanning = :idPlanning')
-		$result->bindValue(':date_cours', $date_cours, \PDO::PARAM_INT);
-		$result->bindValue(':duree', $duree, \PDO::PARAM_INT);
-		$result->bindValue(':intensite', $intensite, \PDO::PARAM_INT);
-		$result->bindValue(':placeMax', $placeMax, \PDO::PARAM_INT);
-		$result->bindValue(':decouverteMax', $decouverteMax, \PDO::PARAM_INT);
-		$result->bindValue(':coursId', $coursId, \PDO::PARAM_INT);
-		$result->bindValue(':idPlanning', $idPlanning, \PDO::PARAM_INT);
+		$result->bindValue(':date_cours', $data['date_cours']);
+		$result->bindValue(':duree', $data['duree']);
+		$result->bindValue(':intensite', $data['intensite']);
+		$result->bindValue(':placeMax', $data['placeMax']);
+		$result->bindValue(':decouverteMax', $data['decouverteMax']);
+		$result->bindValue(':coursId', $data['id_cours']);
+		$result->bindValue(':idPlanning', $data['idPlanning']);
 		$result->execute();
 	} 
+	*/
 
 
 

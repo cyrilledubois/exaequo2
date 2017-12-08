@@ -8,16 +8,12 @@ use WF3\Domain\Article;
 use WF3\Domain\Planning;
 use WF3\Form\Type\UserType;
 use WF3\Domain\User;
+use WF3\Domain\Cours;
 
-class AdminController{
+class AdminController  {
     
 
-    public function getInfoPlanning(Application $app){
-        $planning = $app['dao.planning']->getInfoPlanning($date_jour);
-        return $app['twig']->render('admin/index.admin.html.twig', array(
-            'planning'=>$planning
-        ));
-    }
+  
 // MODIF 06/12 14h
     //page d'accueil du back office
     public function indexAction(Application $app){

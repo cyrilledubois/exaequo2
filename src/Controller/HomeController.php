@@ -16,6 +16,25 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class HomeController{
 
+    public function homePageReserv(Application $app){
+
+        //$planning = $app['dao.planning']->findAll();
+        //foreach ($planning as $cours)
+        $date = '2017-12-18';
+        $planning = $app['dao.planning']->getInfoPlanning($date);
+
+        $planning = $app['dao.planning']->findAll();
+        //foreach ($planning as $cours)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4dabb6e5af4fc23a1f82b736c9167a419350cef7
+        //$planning = $app['dao.planning']->getInfoPlanning(date());
+        return $app['twig']->render('reservation.html.twig', array(
+            'planning'=>$planning
+        ));
+    }
+
 	//page d'accueil
 	public function homePageAction(Application $app){
 
@@ -211,6 +230,32 @@ class HomeController{
         return $app['twig']->render('user_register.html.twig', array(
             'title' => 'Sign in',
             'userForm' => $userForm->createView()
+        ));
+    }
+
+    // public function totoReservation(Application $app){
+    //     //$planning = $app['dao.planning']->getInfoPlanning(2017-12-18);
+    //     $planning = $app['dao.user']->findAll();
+    //         //foreach($planning as $plannings){
+    //         // $heureC =  $planning->getDate_cours()->format('H:i');
+    //         // $planning['date_cours'] = $heureC;
+        
+       
+    //     return $app['twig']->render('reservation.html.twig', array(
+    //         'planning'=>$planning
+    //     ));
+    // }
+
+    public function totoReservation(Application $app){
+        //$planning = $app['dao.planning']->getInfoPlanning(2017-12-18);
+        $planning = $app['dao.user']->findAll();
+            //foreach($planning as $plannings){
+            // $heureC =  $planning->getDate_cours()->format('H:i');
+            // $planning['date_cours'] = $heureC;
+        
+       
+        return $app['twig']->render('reservation.html.twig', array(
+            'planning'=>$planning
         ));
     }
 
