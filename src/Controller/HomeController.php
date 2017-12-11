@@ -231,28 +231,5 @@ class HomeController{
         ));
     }
 
-    // public function totoReservation(Application $app){
-    //     //$planning = $app['dao.planning']->getInfoPlanning(2017-12-18);
-    //     $planning = $app['dao.user']->findAll();
-    //         //foreach($planning as $plannings){
-    //         // $heureC =  $planning->getDate_cours()->format('H:i');
-    //         // $planning['date_cours'] = $heureC;
-        
-       
-    //     return $app['twig']->render('reservation.html.twig', array(
-    //         'planning'=>$planning
-    //     ));
-    // }
-
-    public function totoReservation(Application $app){
-        //$planning = $app['dao.planning']->getInfoPlanning(2017-12-18);
-        $planning = $app['dao.user']->findAll();
-            //foreach($planning as $plannings){
-            // $heureC =  $planning->getDate_cours()->format('H:i');
-            // $planning['date_cours'] = $heureC;
-        return $app['twig']->render('reservation.html.twig', array(
-            'planning'=>$planning
-        ));
-    }
 
 }

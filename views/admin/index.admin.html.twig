@@ -26,30 +26,55 @@
         </ul>
       </div>
     </nav>
-   
-{#<div id="planning" class="container-fluid">
+   {# <a href="{{ path('', {id: cours.id}) }}">Supprimer</a> | <a href="{{ path('', {id: cours.id}) }}">Modifier</a> </p>#}
+
+<div id="pagination" class="container-fluid">
+	<h1>Gestion calendrier</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<nav aria-label="Page navigation">
+					<ul class="pagination pagination-lg">
+							<li><a href="#">Lundi</a></li>
+							<li><a href="#">Mardi</a></li>
+							<li><a href="#">Mercredi</a></li>
+							<li><a href="#">Jeudi</a></li>
+							<li><a href="#">Vendredi</a></li>
+							<li><a href="#">Samedi</a></li>
+							<li><a href="#">Dimanche</a></li>
+							<li>
+							<a>Semaine suivante</a>
+              <a>Semaine precedente</a>
+						</li>
+					</ul>
+				</nav>	
+			</div>
+		</div>
+	</div>
+
+<div id="planning" class="container-fluid">
     <div class="row">
       <div class="col-md-6">
         {% for cours in planning %}
-        <div id="planning" class="col-md-1 bg-primary text-white">{{ cours.date_cours }}</div>
-        <div id="planning" class="col-md-2 bg-secondary text-white">{{ cours.duree }}</div>
-        <div id="planning" class="col-md-3 bg-success text-white">{{ cours.cours_id }}</div>
-        <div id="planning" class="col-md-3 bg-success text-white">{{ cours.place_max}}</div>
+        <div class="col-md-2 text-white">{{ cours.date_cours|date('h:i') }}</div>
+			  <div class="col-md-2 text-white">Cours : {{ cours.nom }}</div>
+			  {#<div class="col-md-1 text-white">Intensité du cours: {{ cours.intensite }}</div>#}
+			  <div class="col-md-2 text-white">Durée : {{ cours.duree }} minutes</div>
         {% endfor %}
       </div>
-      <div class="col-md-6">
+      {#<div class="col-md-6">
         {% for inscrit in reservation %}
-        <div id="planning" class="col-md-1 bg-primary text-white">{{ inscrit.first_name }}</div>
+        <div id="planning" class="col-md-1 bg-primary text-white">{{ inscrit.firstname }}</div>
         <div id="planning" class="col-md-2 bg-secondary text-white">{{ inscrit.username }}</div>
         <div id="planning" class="col-md-3 bg-success text-white">{{ inscrit.cours_id }}</div>
-        {% endfor %}				
-      </div>
+        {% endfor %} 	
+      </div>#}
     </div>
   </div>
 
 
   <div id="membre" class="container-fluid">
     <div class="row">
+    <div class="col-md-6">
       <table class="table">
         <thead>
           <tr>
@@ -59,27 +84,28 @@
             <th scope="col">Phone</th>
           </tr>
           </thead>
-          {% for membres in users %}
+          {% for membres in user %}
           <tbody>
             <tr>
               <th scope="row">1</th>
               <td>{{ membres.username }}</td>
-              <td>{{ membres.first_name }}</td>
+              <td>{{ membres.firstname }}</td>
               <td>{{ membres.phone }}</td>
             </tr>
           </tbody>
           {% endfor %}	
         </table>
+        </div>
       </div>
-    </div> #}
+    </div> 
 
 
 
-<section id="upload">
-  <div class="col-md-12">
+
+  <div class="col-md-6">
     <div class="container">
       <div class="row">
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+        <form id="upload"action="upload.php" method="post" enctype="multipart/form-data">
           <p>Fichier PDF du nouveau planning:</p>
           <input type="file" name="fileToUpload" id="fileToUpload">
           <input type="submit" value="Envoyer" name="submit">
@@ -87,5 +113,5 @@
       </div>
     </div>
   </div>
-</section>
+
 {% endblock %}

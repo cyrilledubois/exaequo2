@@ -45,7 +45,18 @@ class UserDAO extends DAO implements UserProviderInterface
         return 'WF3\Domain\User' === $class;
     }
 
-    
 
-    
+    // Appelle tout les users
+    public function getAllUser(){
+        $result = $this->bdd->query('SELECT * FROM user BY id ASC LIMIT 0, 25');
+    }
+
+// Requête pour utilisateur inscrit / par cours
+    public function getInfoReserv($cours_id){
+        $result = $this->bdd->prepare('SELECT users_id, cours_id FROM reservation WHERE id = :id ');
+        $result->bindValue(':id', $cours_id, \PDO::PARAM_INT);
+        $result->execute();
+		return $result->fetchALL(\PDO::FETCH_ASSOC);
+    }
+     
 }

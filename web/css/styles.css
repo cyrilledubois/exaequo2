@@ -23,11 +23,23 @@
 
 /*MODIF TEAM WF3*/
 /*BACK ADMIN*/
+
+.paypal{
+  height: 37px;
+  position: absolute;
+  top: 80px;
+  left: 195px; 
+}
+
 #navadmin{
   background: black;
   color: white;
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+
+#upload{
+  background-color: rgb(75, 11, 49);
 }
 
 #headadmin{
@@ -47,26 +59,29 @@
 
 
 /*START PAGE DE RESERVATION*/
-#filtre{
-  background: rgb(75, 11, 49);
-  text-align: center;
-  color: white;
-  padding-bottom: 5rem;
+.liste_cours{
+  border: 0.2rem solid rgb(75, 11, 49);
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+  margin-bottom: 2rem;
 }
 
 #pagination{
   text-align: center;
+  background: rgb(75, 11, 49);
 }
 
 #planning{
   text-align: center;
-  padding-top: 5rem;
+  padding-top: 1rem;
   padding-bottom: 5rem;
 }
+
+#pagination>h1{
+  color: white;
+}
+
 /*END PAGE DE RESERV*/
-
-
-
 
 /* Less files*/
 body {
@@ -201,7 +216,8 @@ video::-webkit-media-controls-start-playback-button {
   background-color: rgb(75, 11, 49);
 }
 
-.navbar-inverse .navbar-nav > li > a {
+.navbar-inverse .navbar-nav > li > a
+ {
   color: rgb(75, 11, 49);
   font-weight: 600;
 }
