@@ -24,7 +24,7 @@ class AdminController  {
         return $app['twig']->render('admin/index.admin.html.twig', array(
                                         'planning'=>$planning,
                                         'cours'=>$cours,                                        
-                                        'users' =>$users
+                                        'user' =>$users
                                     ));
     }
     

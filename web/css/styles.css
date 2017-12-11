@@ -7,6 +7,10 @@
   padding-bottom: 3rem;
 }
 
+#upload{
+  background-color: rgb(75, 11, 49);
+}
+
 #headadmin{
   margin-bottom: 0rem;
 }
@@ -24,26 +28,29 @@
 
 
 /*START PAGE DE RESERVATION*/
-#filtre{
-  background: rgb(75, 11, 49);
-  text-align: center;
-  color: white;
-  padding-bottom: 5rem;
+.liste_cours{
+  border: 0.2rem solid rgb(75, 11, 49);
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+  margin-bottom: 2rem;
 }
 
 #pagination{
   text-align: center;
+  background: rgb(75, 11, 49);
 }
 
 #planning{
   text-align: center;
-  padding-top: 5rem;
+  padding-top: 1rem;
   padding-bottom: 5rem;
 }
+
+#pagination>h1{
+  color: white;
+}
+
 /*END PAGE DE RESERV*/
-
-
-
 
 /* Less files*/
 body {
