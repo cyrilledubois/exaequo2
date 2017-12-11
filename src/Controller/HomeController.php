@@ -203,7 +203,7 @@ class HomeController{
             $user->setRole('ROLE_USER');
             $app['dao.user']->insert($user);
 
-            /*//this code automatically login new user 
+            /*//this code automatically login new user .
             $token = new UsernamePasswordToken(
                 $user, 
                 $user->getPassword(), 
