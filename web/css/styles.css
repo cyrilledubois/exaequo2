@@ -1,6 +1,24 @@
 /*MODIF TEAM WF3*/
 /*BACK ADMIN*/
 
+@media screen and (max-width: 767px) {
+  p {
+      color: red; 
+      background-color: black;
+      font-size: 1.2em;
+    }
+}
+
+.champ{
+left: 195px;
+position: absolute;
+top: 5px;
+}
+
+.form-group{
+  width: 100%;
+}
+
 .paypal{
   height: 37px;
   position: absolute;
