@@ -56,8 +56,8 @@
       <div class="col-md-6">
         {% for cours in planning %}
         <div class="col-md-2 text-white">{{ cours.date_cours|date('h:i') }}</div>
-			  <div class="col-md-2 text-white">Cours : {{ cours.nom }}</div>
-			  {#<div class="col-md-1 text-white">Intensité du cours: {{ cours.intensite }}</div>#}
+			  <div class="col-md-2 text-white">Cours : {{ cours.cours_id }}</div>
+			  <div class="col-md-1 text-white">Intensité du cours: {{ cours.intensite }}</div>
 			  <div class="col-md-2 text-white">Durée : {{ cours.duree }} minutes</div>
         {% endfor %}
       </div>
