@@ -49,13 +49,13 @@
 						<li>
 							<a>Semaine precedente</a>
 							</li>
-							<li><a href="#">Lundi</a></li>
-							<li><a href="#">Mardi</a></li>
-							<li><a href="#">Mercredi</a></li>
-							<li><a href="#">Jeudi</a></li>
-							<li><a href="#">Vendredi</a></li>
-							<li><a href="#">Samedi</a></li>
-							<li><a href="#">Dimanche</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:1}) }}">Lundi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:2}) }}">Mardi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:3}) }}">Mercredi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:4}) }}">Jeudi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:5}) }}">Vendredi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:6}) }}">Samedi</a></li>
+							<li><a>Dimanche</a></li>
 							<li>
 							<a>Semaine suivante</a>
 						</li>
@@ -71,7 +71,6 @@
 		<div class="row">
 			<div class="col-md-12">
 
-			{#dump(date)#}
 
 			{% for cours in planning %}
 			<div class="liste_cours">
@@ -80,7 +79,7 @@
 				<p>Durée : {{ cours.duree }} minutes </p>
 				<p>Cours : {{ cours.nom }}</p>
 				<p>Intensité du cours {{ cours.intensite }}</p>
-				<p>{{ cours.id }}</p>
+				<p>Numéro dans la table Planning : {{ cours.id }}</p>
 				{#<p><a href="{{ path('', {id: cours.id}) }}">réserver</a> | <a href="{{ path('', {id: cours.id}) }}">Supprimer</a> | <a href="{{ path('', {id: cours.id}) }}">Modifier</a> </p>#}
 
 				
@@ -93,3 +92,28 @@
 
 </body>	
 {% endblock %}
+{% block javascript %}
+    <script>
+        $(function(){
+            $('#pagination').click(function(event){
+                //permet d'empêcher la validation du formulaire et le chargement de la page
+                event.preventDefault();
+                //construction de l'url de la requête avec les paramètres
+                var url = "{{ path('ajaxJourCour') }}";
+                //requête ajax en POST
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: $('form').serialize(),
+                    dataType: 'html',
+                    success: function(data){
+                        $('#result').html(data);
+                    },
+                    error: function() {
+                        alert('La requête n\'a pas abouti'); 
+                    }
+                });
+            });
+        });
+    </script>      
+{% endblock%}

@@ -21,8 +21,9 @@ class PlanningDAO extends DAO{
 	public function getInfoPlanning($date_jour){
 
 
+        //$result = $this->bdd->prepare('SELECT planning.id, date_cours, duree, nom, intensite FROM planning INNER JOIN cours ON planning.cours_id = cours.id WHERE date_cours LIKE :date_jour');
         $result = $this->bdd->prepare('SELECT planning.id, date_cours, duree, nom, intensite FROM planning INNER JOIN cours ON planning.cours_id = cours.id WHERE date_cours LIKE :date_jour');
-
+        
         $result->bindValue(':date_jour', '%' . $date_jour . '%');
         $result->execute();
         return $result->fetchALL(\PDO::FETCH_ASSOC);

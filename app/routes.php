@@ -41,13 +41,12 @@ $app->match('/partenaires', 'WF3\Controller\HomeController::homePagePartenaires'
 ->bind('partenaires');
 
 //reservation
-
 $app->match('/reservation', 'WF3\Controller\HomeController::homePageReserv')
 
 ->bind('reservation');
 
 //contact
-$app->match('/contact', 'WF3\Controller\HomeController::homePageContact')
+$app->match('/contact', 'WF3\Controller\HomeController::contactAction')
 ->bind('contact');
 
 //connexion
@@ -62,4 +61,11 @@ $app->match('/inscription', 'WF3\Controller\HomeController::signInAction')
 $app->match('/administration', 'WF3\Controller\AdminController::indexAction')
 ->bind('admin');
 
+//Affichage cours du jour 
+$app->match('/ajax/jourcours/{j}', 'WF3\Controller\AjaxHomeController::coursJour')
+->bind('ajaxJourCour');
+
+//Back user 
+$app->match('/back', 'WF3\Controller\HomeController::backUser')
+->bind('back');
 
