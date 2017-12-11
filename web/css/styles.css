@@ -1,5 +1,13 @@
 /*MODIF TEAM WF3*/
 /*BACK ADMIN*/
+
+.paypal{
+  height: 37px;
+  position: absolute;
+  top: 80px;
+  left: 195px; 
+}
+
 #navadmin{
   background: black;
   color: white;
@@ -178,7 +186,8 @@ video::-webkit-media-controls-start-playback-button {
   background-color: rgb(75, 11, 49);
 }
 
-.navbar-inverse .navbar-nav > li > a {
+.navbar-inverse .navbar-nav > li > a
+ {
   color: rgb(75, 11, 49);
   font-weight: 600;
 }
