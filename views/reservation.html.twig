@@ -47,17 +47,17 @@
 				<nav aria-label="Page navigation">
 					<ul class="pagination pagination-lg">
 						<li>
-							<a class="lundi" href="">Semaine précédente</a>
+							<a class="semainemoins" >Semaine précédente</a>
 							</li>
-							<li><a class="lundi" href="">Lundi</a></li>
-							<li><a class="mardi" href="">Mardi</a></li>
-							<li><a class="mercredi" href="">Mercredi</a></li>
-							<li><a class="jeudi" href="">Jeudi</a></li>
-							<li><a class="vendreddi" href="">Vendredi</a></li>
-							<li><a class="samedi" href="">Samedi</a></li>
+							<li><a class="lundi" >Lundi</a></li>
+                            <li><a class="mardi" >Mardi</a></li>
+                            <li><a class="mercredi" >Mercredi</a></li>
+                            <li><a class="jeudi" >Jeudi</a></li>
+                            <li><a class="vendredi" >Vendredi</a></li>
+                            <li><a class="samedi">Samedi</a></li>
 							<li><a>Dimanche</a></li>
 							<li>
-							<a class="lundi" href="">Semaine suivante</a>
+							<a class="semaineplus" >Semaine suivante</a>
 						</li>
 					</ul>
 				</nav>	
@@ -69,9 +69,8 @@
 	<div id="planning" class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<div id="cours">
-				</div>
-				{% for cours in planning %}
+
+    			{% for cours in planning %}
 				<div class="liste_cours">
 			{# <div  class="col-md-1 bg-primary text-white">{{ cours.date_cours|date('d/m/Y') }}</div> #} 
 				<div class="col-md-3 text-white">{{ cours.date_cours|date('h:i') }}</div>
@@ -88,9 +87,10 @@
 </body>	
 {% endblock %}
 {% block javascript %}
+    <!-- jQuery -->
     <script>
         $(function(){
-        	$('#precedente').click(function(event){
+        	$('.semainemoins').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
                 //construction de l'url de la requête avec les paramètres
@@ -102,14 +102,14 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('#cours').html(data);
+                        $('.liste_cours').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
                     }
                 });
             });
-        	$('#lundi').click(function(event){
+        	$('.lundi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
                 //construction de l'url de la requête avec les paramètres
@@ -121,14 +121,14 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('#cours').html(data);
+                        $('.liste_cours').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
                     }
                 });
             });
-        	$('#mardi').click(function(event){
+        	$('.mardi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
                 //construction de l'url de la requête avec les paramètres
@@ -140,14 +140,14 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('#cours').html(data);
+                        $('.liste_cours').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
                     }
                 });
             });
-        	$('#mercredi').click(function(event){
+        	$('.mercredi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
                 //construction de l'url de la requête avec les paramètres
@@ -159,14 +159,14 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('#cours').html(data);
+                        $('.liste_cours').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
                     }
                 });
             });
-            $('#jeudi').click(function(event){
+            $('.jeudi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
                 //construction de l'url de la requête avec les paramètres
@@ -178,14 +178,14 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('#cours').html(data);
+                        $('.liste_cours').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
                     }
                 });
             });
-            $('#vendredi').click(function(event){
+            $('.vendredi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
                 //construction de l'url de la requête avec les paramètres
@@ -197,18 +197,18 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('#cours').html(data);
+                        $('.liste_cours').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
                     }
                 });
             });
-            $('#suivante').click(function(event){
+            $('.samedi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
                 //construction de l'url de la requête avec les paramètres
-                var url = "{{ path('ajaxJourCour', {j:+7}) }}";
+                var url = "{{ path('ajaxJourCour', {j:6}) }}";
                 //requête ajax en POST
                 $.ajax({
                     type: 'POST',
@@ -216,7 +216,26 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('#cours').html(data);
+                        $('.liste_cours').html(data);
+                    },
+                    error: function() {
+                        alert('La requête n\'a pas abouti'); 
+                    }
+                });
+            });
+            $('.semaineplus').click(function(event){
+                //permet d'empêcher la validation du formulaire et le chargement de la page
+                event.preventDefault();
+                //construction de l'url de la requête avec les paramètres
+                var url = "{{ path('ajaxJourCour', {j:7}) }}";
+                //requête ajax en POST
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: $('form').serialize(),
+                    dataType: 'html',
+                    success: function(data){
+                        $('.liste_cours').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
