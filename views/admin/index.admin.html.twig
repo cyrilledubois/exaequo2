@@ -39,7 +39,7 @@
       </div>
       <div class="col-md-6">
         {% for inscrit in reservation %}
-        <div id="planning" class="col-md-1 bg-primary text-white">{{ inscrit.first_name }}</div>
+        <div id="planning" class="col-md-1 bg-primary text-white">{{ inscrit.firstname }}</div>
         <div id="planning" class="col-md-2 bg-secondary text-white">{{ inscrit.username }}</div>
         <div id="planning" class="col-md-3 bg-success text-white">{{ inscrit.cours_id }}</div>
         {% endfor %}				
@@ -64,7 +64,7 @@
             <tr>
               <th scope="row">1</th>
               <td>{{ membres.username }}</td>
-              <td>{{ membres.first_name }}</td>
+              <td>{{ membres.firstname }}</td>
               <td>{{ membres.phone }}</td>
             </tr>
           </tbody>
