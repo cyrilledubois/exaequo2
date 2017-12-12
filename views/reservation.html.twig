@@ -5,10 +5,9 @@
 {% block content %}
 
 <body id="reserv">
-<h1>Reserver votre place</h1>
 <!--LISTE DES FILTRE-->
 
-	<div id="filtre" class="container-fluid">
+	{#<div id="filtre" class="container-fluid">
 		<div class="col-md-12">
 			<div class="row">
 				<h2>Filtrer par: </h2>
@@ -38,26 +37,27 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> #}
 
 	<!--PAGITATION JOUR + SEMAINE-->
 	<div id="pagination" class="container-fluid">
+	<h1>Reserver votre place</h1>
 		<div class="row">
 			<div class="col-md-12">
 				<nav aria-label="Page navigation">
 					<ul class="pagination pagination-lg">
 						<li>
-							<a>Semaine precedente</a>
+							<a class="lundi" href="">Semaine précédente</a>
 							</li>
-							<li><a href="#">Lundi</a></li>
-							<li><a href="#">Mardi</a></li>
-							<li><a href="#">Mercredi</a></li>
-							<li><a href="#">Jeudi</a></li>
-							<li><a href="#">Vendredi</a></li>
-							<li><a href="#">Samedi</a></li>
-							<li><a href="#">Dimanche</a></li>
+							<li><a class="lundi" href="">Lundi</a></li>
+							<li><a class="mardi" href="">Mardi</a></li>
+							<li><a class="mercredi" href="">Mercredi</a></li>
+							<li><a class="jeudi" href="">Jeudi</a></li>
+							<li><a class="vendreddi" href="">Vendredi</a></li>
+							<li><a class="samedi" href="">Samedi</a></li>
+							<li><a>Dimanche</a></li>
 							<li>
-							<a>Semaine suivante</a>
+							<a class="lundi" href="">Semaine suivante</a>
 						</li>
 					</ul>
 				</nav>	
@@ -67,29 +67,162 @@
 
 	<!--PLANING-->
 	<div id="planning" class="container-fluid">
-
 		<div class="row">
 			<div class="col-md-12">
-
-			{#dump(date)#}
-
-			{% for cours in planning %}
-			<div class="liste_cours">
-				<p>Date du cours :{{ cours.date_cours|date('d/m/Y') }}</p>
-				<p>Heure du cours {{ cours.date_cours|date('h:i') }}</p>
-				<p>Durée : {{ cours.duree }} minutes </p>
-				<p>Cours : {{ cours.nom }}</p>
-				<p>Intensité du cours {{ cours.intensite }}</p>
-				<p>{{ cours.id }}</p>
-				{#<p><a href="{{ path('', {id: cours.id}) }}">réserver</a> | <a href="{{ path('', {id: cours.id}) }}">Supprimer</a> | <a href="{{ path('', {id: cours.id}) }}">Modifier</a> </p>#}
-
-				
-			</div>
-			{% endfor %}	
-
-			</div>
-	
+				<div id="cours">
+				</div>
+				{% for cours in planning %}
+				<div class="liste_cours">
+			{# <div  class="col-md-1 bg-primary text-white">{{ cours.date_cours|date('d/m/Y') }}</div> #} 
+				<div class="col-md-3 text-white">{{ cours.date_cours|date('h:i') }}</div>
+				<div class="col-md-3 text-white">Cours : {{ cours.nom }}</div>
+				<div class="col-md-3 text-white">Intensité du cours: {{ cours.intensite }}</div>
+				<div class="col-md-3 text-white">Durée : {{ cours.duree }} minutes</div>
+			{#<div id="planning" class="col-md-3 text-white"> <a href="{{ path('', {id: cours.id}) }}">réserver</a>reserver</div>#}
+				</div>
+				{% endfor %}	
+		</div>
 	</div>
+</div>
 
 </body>	
 {% endblock %}
+{% block javascript %}
+    <script>
+        $(function(){
+        	$('#precedente').click(function(event){
+                //permet d'empêcher la validation du formulaire et le chargement de la page
+                event.preventDefault();
+                //construction de l'url de la requête avec les paramètres
+                var url = "{{ path('ajaxJourCour', {j:-7}) }}";
+                //requête ajax en POST
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: $('form').serialize(),
+                    dataType: 'html',
+                    success: function(data){
+                        $('#cours').html(data);
+                    },
+                    error: function() {
+                        alert('La requête n\'a pas abouti'); 
+                    }
+                });
+            });
+        	$('#lundi').click(function(event){
+                //permet d'empêcher la validation du formulaire et le chargement de la page
+                event.preventDefault();
+                //construction de l'url de la requête avec les paramètres
+                var url = "{{ path('ajaxJourCour', {j:1}) }}";
+                //requête ajax en POST
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: $('form').serialize(),
+                    dataType: 'html',
+                    success: function(data){
+                        $('#cours').html(data);
+                    },
+                    error: function() {
+                        alert('La requête n\'a pas abouti'); 
+                    }
+                });
+            });
+        	$('#mardi').click(function(event){
+                //permet d'empêcher la validation du formulaire et le chargement de la page
+                event.preventDefault();
+                //construction de l'url de la requête avec les paramètres
+                var url = "{{ path('ajaxJourCour', {j:2}) }}";
+                //requête ajax en POST
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: $('form').serialize(),
+                    dataType: 'html',
+                    success: function(data){
+                        $('#cours').html(data);
+                    },
+                    error: function() {
+                        alert('La requête n\'a pas abouti'); 
+                    }
+                });
+            });
+        	$('#mercredi').click(function(event){
+                //permet d'empêcher la validation du formulaire et le chargement de la page
+                event.preventDefault();
+                //construction de l'url de la requête avec les paramètres
+                var url = "{{ path('ajaxJourCour', {j:3}) }}";
+                //requête ajax en POST
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: $('form').serialize(),
+                    dataType: 'html',
+                    success: function(data){
+                        $('#cours').html(data);
+                    },
+                    error: function() {
+                        alert('La requête n\'a pas abouti'); 
+                    }
+                });
+            });
+            $('#jeudi').click(function(event){
+                //permet d'empêcher la validation du formulaire et le chargement de la page
+                event.preventDefault();
+                //construction de l'url de la requête avec les paramètres
+                var url = "{{ path('ajaxJourCour', {j:4}) }}";
+                //requête ajax en POST
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: $('form').serialize(),
+                    dataType: 'html',
+                    success: function(data){
+                        $('#cours').html(data);
+                    },
+                    error: function() {
+                        alert('La requête n\'a pas abouti'); 
+                    }
+                });
+            });
+            $('#vendredi').click(function(event){
+                //permet d'empêcher la validation du formulaire et le chargement de la page
+                event.preventDefault();
+                //construction de l'url de la requête avec les paramètres
+                var url = "{{ path('ajaxJourCour', {j:5}) }}";
+                //requête ajax en POST
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: $('form').serialize(),
+                    dataType: 'html',
+                    success: function(data){
+                        $('#cours').html(data);
+                    },
+                    error: function() {
+                        alert('La requête n\'a pas abouti'); 
+                    }
+                });
+            });
+            $('#suivante').click(function(event){
+                //permet d'empêcher la validation du formulaire et le chargement de la page
+                event.preventDefault();
+                //construction de l'url de la requête avec les paramètres
+                var url = "{{ path('ajaxJourCour', {j:+7}) }}";
+                //requête ajax en POST
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: $('form').serialize(),
+                    dataType: 'html',
+                    success: function(data){
+                        $('#cours').html(data);
+                    },
+                    error: function() {
+                        alert('La requête n\'a pas abouti'); 
+                    }
+                });
+            });
+        });
+    </script>      
+{% endblock%}

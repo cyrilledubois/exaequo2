@@ -19,15 +19,19 @@ class HomeController{
     public function homePageReserv(Application $app){
         //NE PAS SUPPRIMER : 
         //initialisation de l'affichage du planning de réservation avec la date du jour.
-        //$dateaffich = date("Y"). '-' .date("m") . '-' . date("d");
+        //$dataffich = date("Y"). '-' .date("m") . '-' . date("d");
         //Pour les tests on peut afficher le planning de réervation à une date donnée, commenter la ligne du dessus !!!
-        $dateaffich = '2017-12-19';   
-        $planning = $app['dao.planning']->getInfoPlanning($dateaffich);
+        $dateaffich = '2017-12-18';   
+        $planning = $app['dao.planning']->getInfoPlanning($dataffich);
 
         return $app['twig']->render('reservation.html.twig', array(
             'planning'=>$planning,
         ));
     }
+    // Back user
+   public function backUser(Application $app){
+       return $app['twig']->render('back.user.html.twig');
+   }
 
 	//page d'accueil
 	public function homePageAction(Application $app){
@@ -227,28 +231,5 @@ class HomeController{
         ));
     }
 
-    // public function totoReservation(Application $app){
-    //     //$planning = $app['dao.planning']->getInfoPlanning(2017-12-18);
-    //     $planning = $app['dao.user']->findAll();
-    //         //foreach($planning as $plannings){
-    //         // $heureC =  $planning->getDate_cours()->format('H:i');
-    //         // $planning['date_cours'] = $heureC;
-        
-       
-    //     return $app['twig']->render('reservation.html.twig', array(
-    //         'planning'=>$planning
-    //     ));
-    // }
-
-    public function totoReservation(Application $app){
-        //$planning = $app['dao.planning']->getInfoPlanning(2017-12-18);
-        $planning = $app['dao.user']->findAll();
-            //foreach($planning as $plannings){
-            // $heureC =  $planning->getDate_cours()->format('H:i');
-            // $planning['date_cours'] = $heureC;
-        return $app['twig']->render('reservation.html.twig', array(
-            'planning'=>$planning
-        ));
-    }
 
 }

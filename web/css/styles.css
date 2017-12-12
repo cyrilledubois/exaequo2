@@ -1,13 +1,29 @@
+/*Back user*/
+#navuser{
+ background:  rgb(73,7,49);
+ color: white;
+ padding-top: 3rem;
+ padding-bottom: 3rem;
+}
+
+#headuser{
+ margin-bottom: 0rem;
+}
+#uluser{
+ list-style-type: none;
+ text-align: center;
+}
+
+#uluser>li>a{
+ margin: 2rem;
+ padding: 2rem;
+ margin-left: 2rem;
+ color: white;
+}
+
 /*MODIF TEAM WF3*/
 /*BACK ADMIN*/
 
-@media screen and (max-width: 767px) {
-  p {
-      color: red; 
-      background-color: black;
-      font-size: 1.2em;
-    }
-}
 
 .champ{
 left: 195px;
@@ -19,10 +35,31 @@ top: 5px;
   width: 100%;
 }
 
-.paypal{
+.paypal1{
   height: 37px;
   position: absolute;
-  top: 80px;
+  top: 360px;
+  left: 195px; 
+}
+
+.paypal2{
+  height: 37px;
+  position: absolute;
+  top: 443px;
+  left: 195px; 
+}
+
+.paypal3{
+  height: 37px;
+  position: absolute;
+  top: 469px;
+  left: 195px; 
+}
+
+.paypal4{
+  height: 37px;
+  position: absolute;
+  top: 495px;
   left: 195px; 
 }
 
@@ -31,6 +68,10 @@ top: 5px;
   color: white;
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+
+#upload{
+  background-color: rgb(75, 11, 49);
 }
 
 #headadmin{
@@ -50,26 +91,29 @@ top: 5px;
 
 
 /*START PAGE DE RESERVATION*/
-#filtre{
-  background: rgb(75, 11, 49);
-  text-align: center;
-  color: white;
-  padding-bottom: 5rem;
+.liste_cours{
+  border: 0.2rem solid rgb(75, 11, 49);
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+  margin-bottom: 2rem;
 }
 
 #pagination{
   text-align: center;
+  background: rgb(75, 11, 49);
 }
 
 #planning{
   text-align: center;
-  padding-top: 5rem;
+  padding-top: 1rem;
   padding-bottom: 5rem;
 }
+
+#pagination>h1{
+  color: white;
+}
+
 /*END PAGE DE RESERV*/
-
-
-
 
 /* Less files*/
 body {
@@ -667,4 +711,11 @@ h3 {
 }
 h1 {
   font-size: 45px;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .paypal1 {
+      height: 97px;
+  }
 }

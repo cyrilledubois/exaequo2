@@ -28,8 +28,8 @@ class UserType extends AbstractType
                                             new Assert\Length(array(
                                                 'min' => 2,
                                                 'max' => 50,
-                                                'minMessage' => 'le nom ne peut comporter moins de 2 caractère',
-                                                'maxMessage' => 'le nom ne peut comporter plus de 50 caractère'
+                                                'minMessage' => 'Le nom ne peut comporter moins de 2 caractères',
+                                                'maxMessage' => 'Le nom ne peut comporter plus de 50 caractères'
                                                 ))
                                             )
             ))
@@ -41,8 +41,9 @@ class UserType extends AbstractType
                     new Assert\Length(array(
                         'min' => 8,
                         'max' => 8,
-                        'minMessage' => 'la date de naissance doit être au format jj/mm/aa',
-                        'maxMessage' => 'la date de naissance doit être au format jj/mm/aa'
+                        'exactMessage' => 'La date de naissance doit être au format jj/mm/aa.',
+                        
+
                 ))),
                 'attr' => array(
                 'placeholder' => 'jj/mm/aa'         
@@ -55,8 +56,8 @@ class UserType extends AbstractType
                                             new Assert\Length(array(
                                                 'min' => 2,
                                                 'max' => 50,
-                                                'minMessage' => 'le prénom ne peut comporter moins de 2 caractère',
-                                                'maxMessage' => 'le prénom ne peut comporter plus de 50 caractère'
+                                                'minMessage' => 'Le prénom ne peut comporter moins de 2 caractères.',
+                                                'maxMessage' => 'Le prénom ne peut comporter plus de 50 caractères.'
                                                 )))
             ))
             ///////////////////////////////////////////////
@@ -67,8 +68,8 @@ class UserType extends AbstractType
                                             new Assert\Length(array(
                                                 'min' => 2,
                                                 'max' => 255,
-                                                'minMessage' => 'L\'adresse ne peut comporter moins de 2 caractères',
-                                                'maxMessage' => 'L\adresse ne peut comporter plus de 255 caractères'
+                                                'minMessage' => 'L\'adresse ne peut comporter moins de 2 caractères.',
+                                                'maxMessage' => 'L\adresse ne peut comporter plus de 255 caractères.'
                                                 )))
             ))
             //////////////////////////////////////////////
@@ -79,8 +80,7 @@ class UserType extends AbstractType
                                         new Assert\Length(array(
                                                                 'min' => 5,
                                                                 'max' => 5,
-                                                                'minMessage' => 'Le code postal ne peut comporter moins de 5 caractères',
-                                                                    'maxMessage' => 'Le code postal ne peut comporter plus de 5 caractères'
+                                                                'exactMessage' => 'Le code postal doit comporter 5 chiffres.',
                                         )))
             ))
             ////////////////////////////////////////////////
@@ -91,8 +91,8 @@ class UserType extends AbstractType
                                             new Assert\Length(array(
                                                 'min' => 2,
                                                 'max' => 255,
-                                                'minMessage' => 'La ville ne peut comporter moins de 2 caractères',
-                                                'maxMessage' => 'Le ville ne peut comporter plus de 255 caractères'
+                                                'minMessage' => 'La ville ne peut comporter moins de 2 caractères.',
+                                                'maxMessage' => 'Le ville ne peut comporter plus de 255 caractères.'
                                                 ))
                                             )
             ))
@@ -124,8 +124,7 @@ class UserType extends AbstractType
                                         new Assert\Length(array(
                                             'min' => 10,
                                             'max' => 10,
-                                            'minMessage' => 'le numéro de téléphone, ne peut comporter moins de 10 numéros',
-                                            'maxMessage' => 'le numéro de téléphone, ne peut comporter plus de 10 numéros'
+                                            'exactMessage' => 'Le numéro de téléphone doit comporter 10 chiffres.'
                                         ))
                                     )
 
@@ -142,8 +141,8 @@ class UserType extends AbstractType
                                         new Assert\Length(array(
                                             'min' => 5,
                                             'max' => 50,
-                                            'minMessage' => 'le mdp doit faire au moins 5 caractères',
-                                            'maxMessage' => 'le mdp ne doit faire plus de 50 caractères'
+                                            'minMessage' => 'Le mot de passe doit faire au moins 5 caractères.',
+                                            'maxMessage' => 'Le mot de passe ne doit faire plus de 50 caractères.'
                                         ))
                                     )
              ))

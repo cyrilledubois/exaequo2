@@ -10,23 +10,24 @@ use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 use WF3\Domain\Cours;
 
-class AdminController  {
+class AdminController   {
     
 
-  
+    
+
 // MODIF 06/12 14h
     //page d'accueil du back office
-    public function indexAction(Application $app){
-      
-        $planning = $app['dao.planning']->findAll();
-        $cours = $app['dao.cours']->findAll();
-        $users = $app['dao.user']->findAll();
+    public function indexAction(Application $app){   
+        $planning = $app['dao.planning']->getInfoPlanning();
+        $reserv = $app['dao.user']->getInfoReserv($dataffich);
+        $users = $app['dao.user']->getAlluser($dataffich);
         return $app['twig']->render('admin/index.admin.html.twig', array(
                                         'planning'=>$planning,
-                                        'cours'=>$cours,                                        
-                                        'users' =>$users
+                                        'users'=>$users,
+                                        'reserv'=>$reserv
                                     ));
     }
+
     
     //suppression de cours
     //page de suppression de cours

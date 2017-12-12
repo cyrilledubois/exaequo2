@@ -12,7 +12,7 @@ class Cours{
         return $this->nom;
     }
     
-    public function getDate_cours(){
+    public function getIntensite(){
         return $this->intensite;
     }
     

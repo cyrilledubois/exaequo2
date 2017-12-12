@@ -26,19 +26,7 @@ class ContactType extends AbstractType
                 ),
                 'constraints' => new Assert\Email()
             ))
-            ->add('name', TextType::class, array(
-                'attr' => array(
-                    'placeholder' => 'Your name'
-                ),
-                'constraints' => array(
-                    new Assert\NotBlank(),
-                    new Assert\Length(array(
-                        'min' => 3,
-                        'max' => 20,
-                        'minMessage' => 'le titre doit faire au moins 3 caractères'
-                    ))
-                )
-            ))
+            
             ->add('subject', TextType::class, array(
                 'attr' => array(
                     'placeholder' => 'Subject'
