@@ -50,7 +50,7 @@ $app->match('/contact', 'WF3\Controller\HomeController::contactAction')
 ->bind('contact');
 
 //connexion
-$app->match('/connexion', 'WF3\Controller\HomeController::loginAction')
+$app->match('/login', 'WF3\Controller\HomeController::loginAction')
 ->bind('connexion');
 
 //inscription
@@ -60,6 +60,11 @@ $app->match('/inscription', 'WF3\Controller\HomeController::signInAction')
 //Back ADMIN 
 $app->match('/administration', 'WF3\Controller\AdminController::indexAction')
 ->bind('admin');
+
+//Back USER
+$app->match('/administration', 'WF3\Controller\AdminController::indexAction')
+->bind('admin');
+
 
 
 //Affichage cours du jour 
