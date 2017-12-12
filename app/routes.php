@@ -61,6 +61,7 @@ $app->match('/inscription', 'WF3\Controller\HomeController::signInAction')
 $app->match('/administration', 'WF3\Controller\AdminController::indexAction')
 ->bind('admin');
 
+
 //Affichage cours du jour 
 $app->match('/ajax/jourcours/{j}', 'WF3\Controller\AjaxHomeController::jourCours')
 ->bind('ajaxJourCour');
