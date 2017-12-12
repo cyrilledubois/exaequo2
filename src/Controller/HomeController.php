@@ -21,7 +21,7 @@ class HomeController{
         //initialisation de l'affichage du planning de réservation avec la date du jour.
         //$dataffich = date("Y"). '-' .date("m") . '-' . date("d");
         //Pour les tests on peut afficher le planning de réervation à une date donnée, commenter la ligne du dessus !!!
-        $dateaffich = '2017-12-18';   
+        $dataffich = '2017-12-18';   
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
 
         return $app['twig']->render('reservation.html.twig', array(

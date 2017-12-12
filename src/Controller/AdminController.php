@@ -12,19 +12,18 @@ use WF3\Domain\Cours;
 
 class AdminController   {
     
-
-    
-
-// MODIF 06/12 14h
     //page d'accueil du back office
-    public function indexAction(Application $app){   
-        $planning = $app['dao.planning']->getInfoPlanning();
+    public function indexAction(Application $app){  
+        $datecible = new \DateTime;
+        $dataffich = $datecible->format('Y-m-d');
+        $planning = $app['dao.planning']->getInfoPlanning($dataffich);
         $reserv = $app['dao.user']->getInfoReserv($dataffich);
-        $users = $app['dao.user']->getAlluser($dataffich);
+        $users = $app['dao.user']->getAlluser();
         return $app['twig']->render('admin/index.admin.html.twig', array(
                                         'planning'=>$planning,
                                         'users'=>$users,
-                                        'reserv'=>$reserv
+                                        'reserv'=>$reserv,
+                                        'dataffich' => $dataffich
                                     ));
     }
 

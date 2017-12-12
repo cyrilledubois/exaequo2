@@ -21,8 +21,8 @@ class AjaxHomeController{
         $ecart = $jour - date('w');
         $calcul = date("d")+$ecart;
 
-        //$dataffich = mktime(0, 0, 0, date("m")  , date("d")+$ecart, date("Y"));
-        $dataffich = '2017-12-11';   
+        $dataffich = mktime(0, 0, 0, date("m")  , date("d") , date("Y"));
+        //$dataffich = '2017-12-11';   
                 
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
         return $app['twig']->render('jour.html.twig', array(

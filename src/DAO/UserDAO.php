@@ -54,16 +54,10 @@ class UserDAO extends DAO implements UserProviderInterface
     }
 
 // Requête pour utilisateur inscrit / par cours
-    public function getInfoReserv(){ 
-        $ecart = $j - date('w');
-        $datecible = new \DateTime;
-        //ajoute l'écart en jour pour aller à la date cible
-        $datecible->modify('+'.$ecart.' day');
-        //Transforme ensuite le format pour qu'il soit compatible SQL
-        $dataffich = $datecible->format('Y-m-d');
+    public function getInfoReserv($dataffich){ 
         $result = $this->bdd->prepare('SELECT * FROM users INNER JOIN users_has_planning ON users_has_planning.users_id = users.id 
         INNER JOIN planning ON users_has_planning.Planning_idPlanning = planning.id
-        INNER JOIN cours ON planning.cours_id=cours.id WHERE planning.date_cours = :date_cours');
+        INNER JOIN cours ON planning.cours_id=cours.id WHERE planning.date_cours LIKE "%2017-12-18%" ');
         $result->bindValue(':date_cours', $dataffich, \PDO::PARAM_INT);
         $result->execute();
 		return $result->fetchAll(\PDO::FETCH_ASSOC);

@@ -37,13 +37,12 @@
           <li>
           <a>Semaine suivante</a>
           </li>
-							<li><a href="#">Lundi</a></li>
-							<li><a href="#">Mardi</a></li>
-							<li><a href="#">Mercredi</a></li>
-							<li><a href="#">Jeudi</a></li>
-							<li><a href="#">Vendredi</a></li>
-							<li><a href="#">Samedi</a></li>
-							<li><a href="#">Dimanche</a></li>
+						{#	<li><a href="{{ path('ajaxJourCour', {j:1}) }}">Lundi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:2}) }}">Mardi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:3}) }}">Mercredi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:4}) }}">Jeudi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:5}) }}">Vendredi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:6}) }}">Samedi</a></li> #}
 							<li>
               <a>Semaine precedente</a>
 						</li>
@@ -86,8 +85,10 @@
                 {% for inscrit in reserv %}
                 <tbody>
                   <tr>
-                    <td>{{ inscrit.firstname }}</td>
-                    <td>{{ inscrit.nom}}</td>
+                    <td> {{ inscrit.firstname }} </td>
+                    <td> {{ inscrit.username}} </td>
+                    <td> {{ inscrit.nom}} </td>
+                    <td> {{ inscrit.phone}} </td>
                   </tr>
                 </tbody>
                 {% endfor %}	
