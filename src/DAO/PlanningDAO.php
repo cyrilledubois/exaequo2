@@ -40,5 +40,11 @@ class PlanningDAO extends DAO{
 		$result->execute();
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
 	}
-		
+	// Trouve la dernière date générée
+    public function lastDate(){
+    	//Trouve la dernière date générée :
+		$result = $this->bdd->query('SELECT MAX(date_cours) FROM planning');
+		return $result->fetch(\PDO::FETCH_ASSOC);
+	}
+
 }

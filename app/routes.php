@@ -70,3 +70,6 @@ $app->match('/ajax/jourcours/{j}', 'WF3\Controller\AjaxHomeController::jourCours
 $app->match('/back', 'WF3\Controller\HomeController::backUser')
 ->bind('back');
 
+//Generation planning à partir de Planning_Type
+$app->match('/planninggenere', 'WF3\Controller\AdminController::generationPlanning')
+->bind('planning genere');
