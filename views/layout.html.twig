@@ -100,6 +100,7 @@
 		</header>
 
 		{% block content %}{% endblock %}
+		{% block script %}{% endblock %}
 
 {#<?php
 if  !strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'googlebot') )
@@ -152,6 +153,9 @@ width="800" height="400" style="border:0; width:100%" allowfullscreen></iframe>
 		<script src="../web/js/wow.min.js"></script>
         <!-- Video mode -->
 		<script src="../web/js/isInViewport.min.js"></script>
+		<!-- jQuery -->
+    
+    	{% block javascript %}{% endblock %}
         <script>
         	new WOW().init();
 

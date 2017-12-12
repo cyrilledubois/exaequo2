@@ -11,26 +11,28 @@ use WF3\Form\Type\ContactType;
 use WF3\Domain\User;
 use WF3\Form\Type\UserRegisterType;
 use WF3\Form\Type\SearchEngineType;
+use Symfony\Component\Validator\Constraints\DateTime;
 //permet de générer des erreurs 403 (accès interdit)
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class AjaxHomeController{
 
-    public function coursJour(Application $app, $jour){
-        //navigation : calcul de l'écart entre le jour actuel et le jour demandé
-        $ecart = $jour - date('w');
-        $calcul = date("d")+$ecart;
-
-        //$dataffich = mktime(0, 0, 0, date("m")  , date("d")+$ecart, date("Y"));
-        $dataffich = '2017-12-11';   
+    public function jourCours(Application $app, $j){
+        //navigation : calcul de l'écart entre le jour actuel et le jour demandé dans le planning  : est récupéré par $j
+        $ecart = $j - date('w');
+        $datecible = new \DateTime;
+        //ajoute l'écart en jour pour aller à la date cible
+        $datecible->modify('+'.$ecart.' day');
+        //Transforme ensuite le format pour qu'il soit compatible SQL
+        $dataffich = $datecible->format('Y-m-d');
                 
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
-        return $app['twig']->render('jour.html.twig', array(
+        return $app['twig']->render('reservation.html.twig', array(
             'planning'=>$planning,
-            'dataffich'=>$dataffich,
-            'jour demandé'=>$jour,
-            'ecart'=>$ecart,
-            'calcul' => $calcul
+           
+            //'ecart'=>$ecart,
+            //'calcul'=>$datecalculee
+
             
         ));
     }

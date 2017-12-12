@@ -62,7 +62,7 @@ $app->match('/administration', 'WF3\Controller\AdminController::indexAction')
 ->bind('admin');
 
 //Affichage cours du jour 
-$app->match('/ajax/jourcours/{j}', 'WF3\Controller\AjaxHomeController::coursJour')
+$app->match('/ajax/jourcours/{j}', 'WF3\Controller\AjaxHomeController::jourCours')
 ->bind('ajaxJourCour');
 
 //Back user 
