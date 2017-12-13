@@ -11,23 +11,6 @@
       </div>
     </header>
 
-   {# <nav id="navadmin" class="navbar navbar-default">
-      <div class="navbar-header">
-        <ul id="uladmin" class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#planning">Gestion calendrier</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#membres">Liste des membres</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#upload">Uploads</a>
-          </li>
-        </ul>
-      </div>
-    </nav> #}
-   {# <a href="{{ path('', {id: cours.id}) }}">Supprimer</a> | <a href="{{ path('', {id: cours.id}) }}">Modifier</a> </p>#}
-
 <div id="pagination" class="container-fluid">
 	<h1>Gestion calendrier</h1>
 		<div class="row">
@@ -37,54 +20,41 @@
           <li>
           <a>Semaine suivante</a>
           </li>
-							<li><a href="#">Lundi</a></li>
-							<li><a href="#">Mardi</a></li>
-							<li><a href="#">Mercredi</a></li>
-							<li><a href="#">Jeudi</a></li>
-							<li><a href="#">Vendredi</a></li>
-							<li><a href="#">Samedi</a></li>
-							<li><a href="#">Dimanche</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:1}) }}">Lundi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:2}) }}">Mardi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:3}) }}">Mercredi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:4}) }}">Jeudi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:5}) }}">Vendredi</a></li>
+							<li><a href="{{ path('ajaxJourCour', {j:6}) }}">Samedi</a></li> 
 							<li>
-              <a>Semaine precedente</a>
-						</li>
+          <a>Semaine precedente</a>
+					</li>
 					</ul>
         </nav>
-        {% for cours in planning %}
-        <div>{{cours.date_cours|date('d') }}</div>
-        {% endfor %}
-			</div>
-		</div>
-	</div>
-
-  <div class="container-fluid">
-    <div class="row">
-    {# VUE PLANNING #}
-      <div class="col-md-8 bg-info">
-          {% for cours in planning %}
-          <div class="liste_cours">
-            <div class="col-md-2">{{ cours.date_cours|date('h:i') }}</div>
-            <div class="col-md-2">{{ cours.nom }}</div>
-            <div class="col-md-2">{{ cours.intensite }}</div>
-            <div class="col-md-2">{{ cours.duree }} minutes</div>
-          </div>
-          {% endfor %}
-      </div>
-
-      <div class="col-md-6">
-        {% for inscrit in reservation %}
-        <div id="planning" class="col-md-1 bg-primary text-white">{{ inscrit.firstname }}</div>
-        <div id="planning" class="col-md-2 bg-secondary text-white">{{ inscrit.username }}</div>
-        <div id="planning" class="col-md-3 bg-success text-white">{{ inscrit.cours_id }}</div>
-        {% endfor %}				
       </div>
     </div>
   </div>
 
 
 
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6 bg-info">
+      <h2>Planning de la journée</h2>
+      {{dump(planning)}}
+        {% for cours in planning %}
+        <div class="row">
+        <div class="col-md-3">heure: {{ cours.date_cours|date('h:i') }}</div>
+        <div class="col-md-3">cour: {{ cours.nom }}</div>
+        <div class="col-md-3">place: {{ cours.place_max }}</div>
+        <div class="col-md-3"><a  href="{{ path('updatePlanning', {id: cours.id}) }}">modifier</a></div>
+        </div>
+        {% endfor %}
+      </div>
+
     {# UTILISATEUR AYANT RESERVER #}
-    <div class="col-md-4 bg-success">
-      <h2>Liste des inscrits</h2>
+    <div class="col-md-6 bg-success">
+      <h2>Liste des inscrits à la journée</h2>
             <table class="table">
               <thead>
                 <tr>
@@ -97,8 +67,10 @@
                 {% for inscrit in reserv %}
                 <tbody>
                   <tr>
-                    <td>{{ inscrit.firstname }}</td>
-                    <td>{{ inscrit.nom}}</td>
+                    <td> {{ inscrit.firstname }} </td>
+                    <td> {{ inscrit.username}} </td>
+                    <td> {{ inscrit.nom}} </td>
+                    <td> {{ inscrit.phone}} </td>
                   </tr>
                 </tbody>
                 {% endfor %}	
@@ -107,52 +79,41 @@
         </div>
       </div>
 
-<section>
-  <div class="container-fluid">
-    <div class="row">
-    {# SECTION LISTE UTILISATEURS GENERAUX #}
-      <div class="col-md-6 bg-primary">
-        <h2>Liste des membres</h2>
-        <table class="table">
-          <thead>
-            <tr>
 
-              <th scope="row">1</th>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 bg-warning">
+    <h2>Liste des adherents</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Phone</th>
+          </tr>
+          </thead>
+          {% for membres in users %}
+          <tbody>
+            <tr>
               <td>{{ membres.username }}</td>
               <td>{{ membres.firstname }}</td>
               <td>{{ membres.phone }}</td>
-
-              <th scope="col">*</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Prenom</th>
-              <th scope="col">Phone</th>
-
             </tr>
-            </thead>
-            {% for membres in users %}
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>{{ membres.username }}</td>
-                <td>{{ membres.firstname }}</td>
-                <td>{{ membres.phone }}</td>
-              </tr>
-            </tbody>
-            {% endfor %}	
-          </table>
+          </tbody>
+          {% endfor %}	
+        </table>
         </div>
-
-        {#SECTION UPLOAD PDF#}
-        <div class="col-md-6 bg-warning">
-          <h2>Upload PDF</h2>
-          <form action="upload.php" method="post" enctype="multipart/form-data">
-            <p>Nouveau planning PDF:</p>
-            <input type="file" name="fileToUpload" id="fileToUpload">
-            <input type="submit" value="Envoyer" name="submit">
-          </form>
-        </div>
+  
+      <div class="col-md-6 bg-primary ">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+          <p>Fichier PDF du nouveau planning:</p>
+          <input type="file" name="fileToUpload" id="fileToUpload">
+          <input type="submit" value="Envoyer" name="submit">
+        </form>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
+<body>
 {% endblock %}
