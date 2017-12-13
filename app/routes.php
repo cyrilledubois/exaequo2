@@ -61,7 +61,6 @@ $app->match('/inscription', 'WF3\Controller\HomeController::signInAction')
 $app->match('/administration', 'WF3\Controller\AdminController::indexAction')
 ->bind('admin');
 
-
 //Modif planning
 $app->match('/administration/change/{id}', 'WF3\Controller\AdminController::updatePlanning')
 ->bind('updatePlanning');

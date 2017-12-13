@@ -72,6 +72,7 @@ class UserType extends AbstractType
                                                 'maxMessage' => 'L\adresse ne peut comporter plus de 255 caractères.'
                                                 )))
             ))
+
             //////////////////////////////////////////////
             ->add('cp', TextType::class, array(
                 'label' => 'Code Postal*',

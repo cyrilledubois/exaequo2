@@ -69,16 +69,17 @@
 	<div id="planning" class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-			{% for cours in planning %}
-			<div class="liste_cours">
-		{#<div  class="col-md-1 bg-primary text-white">{{ cours.date_cours|date('d/m/Y') }}</div> #} 
-			<div class="col-md-3 text-white">{{ cours.date_cours|date('h:i') }}</div>
-			<div class="col-md-3 text-white">Cours : {{ cours.nom }}</div>
-			<div class="col-md-3 text-white">Intensité du cours: {{ cours.intensite }}</div>
-			<div class="col-md-3 text-white">Durée : {{ cours.duree }} minutes</div>
-		{#<div id="planning" class="col-md-3 text-white"> <a href="{{ path('', {id: cours.id}) }}">réserver</a>reserver</div>#}
-			</div>
-			{% endfor %}	
+
+    			{% for cours in planning %}
+				<div class="liste_cours">
+			{# <div  class="col-md-1 bg-primary text-white">{{ cours.date_cours|date('d/m/Y') }}</div> #} 
+				<div class="col-md-3 text-white">{{ cours.date_cours|date('h:i') }}</div>
+				<div class="col-md-3 text-white">Cours : {{ cours.nom }}</div>
+				<div class="col-md-3 text-white">Intensité du cours: {{ cours.intensite }}</div>
+				<div class="col-md-3 text-white">Durée : {{ cours.duree }} minutes</div>
+			{#<div id="planning" class="col-md-3 text-white"> <a href="{{ path('', {id: cours.id}) }}">réserver</a>reserver</div>#}
+				</div>
+				{% endfor %}	
 		</div>
 	</div>
 </div>
