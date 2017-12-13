@@ -50,7 +50,7 @@ $app->match('/contact', 'WF3\Controller\HomeController::contactAction')
 ->bind('contact');
 
 //connexion
-$app->match('/login', 'WF3\Controller\HomeController::loginAction')
+$app->match('/connexion', 'WF3\Controller\HomeController::loginAction')
 ->bind('connexion');
 
 //inscription
@@ -78,3 +78,7 @@ $app->match('/back', 'WF3\Controller\HomeController::backUser')
 //Generation planning à partir de Planning_Type
 $app->match('/planninggenere', 'WF3\Controller\AdminController::generationPlanning')
 ->bind('planning genere');
+
+//Back user 
+$app->match('/back', 'WF3\Controller\HomeController::updateUserAction')
+->bind('back');

@@ -28,6 +28,33 @@ class HomeController{
             'planning'=>$planning,
         ));
     }
+    public function updateUserAction(Application $app, Request $request ){
+   //  On  utilise la ligne suivante afin de récuperer l'user en objet
+       $user = $app['user'];
+       
+       $userForm = $app['form.factory']->create(UserType::class, $user);
+       $userForm->handleRequest($request);
+       if ($userForm->isSubmitted() && $userForm->isValid()) {
+     
+           //on récupère le mot de passe en clair (envoyé par l'utilisateur)
+           $plainPassword = $user->getPassword();
+           // on récupère l'encoder de silex
+           $encoder = $app['security.encoder.bcrypt'];
+           // on encode le mdp
+           $password = $encoder->encodePassword($plainPassword, $user->getSalt());
+           // on remplace le mdp en clair par le mdp crypté
+           $user->setPassword($password);
+           $app['dao.user']->update($user->getId(), $user);
+           $app['session']->getFlashBag()->add('success', 'The user was successfully updated.');
+           // Redirect to admin home page
+           return $app->redirect($app['url_generator']->generate('back'));
+       }
+       return $app['twig']->render('back.html.twig', array(
+           'title' => 'update user',
+           'userForm' => $userForm->createView(),
+           'user' => $user
+       ));
+   }
     // Back user
    public function backUser(Application $app){
        return $app['twig']->render('back.user.html.twig');
