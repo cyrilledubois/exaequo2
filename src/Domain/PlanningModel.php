@@ -1,7 +1,7 @@
 <?php
 namespace WF3\Domain;
 
-class PlanningType{
+class PlanningModel{
     //déclaration des attributs
     private $id;
     private $jour;

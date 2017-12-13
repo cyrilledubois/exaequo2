@@ -4,11 +4,11 @@ namespace WF3\Domain;
 class Planning{
     //déclaration des attributs
     private $id;
-    private $datecours;
+    private $date_cours;
     private $duree;
-    private $placemax;
+    private $place_max;
     private $decouverte_max;
-    private $coursid;
+    private $cours_id;
     
     public function getId(){
         return $this->id;
@@ -30,7 +30,7 @@ class Planning{
         return $this->decouverte_max;
     }
     public function getCours_id(){
-        return $this->coursid;
+        return $this->cours_id;
     }
     
     //setters
@@ -65,9 +65,9 @@ class Planning{
         }     
     }
 
-    public function setCours_id($cours_id){   
-        if(!empty($cours_id) AND is_int($cours_id)){        
-        $this->cours_id = $cours_id;         
+    public function setCours_id($Cours_id){   
+        if(!empty($Cours_id) AND is_int($Cours_id)){        
+        $this->Cours_id = $Cours_id;         
         }
     }
 }

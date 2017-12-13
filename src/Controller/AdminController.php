@@ -13,18 +13,19 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class AdminController   {
     
+
+    
+
+// MODIF 06/12 14h
     //page d'accueil du back office
-    public function indexAction(Application $app){  
-        $datecible = new \DateTime;
-        $dataffich = $datecible->format('Y-m-d');
-        $planning = $app['dao.planning']->getInfoPlanning($dataffich);
+    public function indexAction(Application $app){   
+        $planning = $app['dao.planning']->getInfoPlanning();
         $reserv = $app['dao.user']->getInfoReserv($dataffich);
-        $users = $app['dao.user']->getAlluser();
+        $users = $app['dao.user']->getAlluser($dataffich);
         return $app['twig']->render('admin/index.admin.html.twig', array(
                                         'planning'=>$planning,
                                         'users'=>$users,
-                                        'reserv'=>$reserv,
-                                        'dataffich' => $dataffich
+                                        'reserv'=>$reserv
                                     ));
     }
 
@@ -39,34 +40,33 @@ class AdminController   {
         return $app->redirect($app['url_generator']->generate('homeAdmin'));
     }
 
-
- 	// Update planning 
-     public function updatePlanning(Application $app, Request $request, $id){
+ 	// Update periode du planning 
+     public function updatePeriodPlanning(Application $app, Request $request, $id){
 		//on récupère les infos de la periode 
-                ////$period = $app['dao.planning']->findAll($id);
-        $period = $app['dao.planning']->selectPlanning($id);
-                
+				$period = $app['dao.planning']->find($id);
+				
 		//on crée le planning et on lui passe la periode en paramètre
         //il va utiliser $planning pour pré remplir les champs
-        $planningForm = $app['form.factory']->create(PlanningType::class, $period);	
-        	
-        $planningForm->handleRequest($request);
-        
-		if($planningForm->isSubmitted() && $planningForm->isValid()){
+		$planning = $app['form.factory']->create(PlanningType::class, $period);		
+		
+		$planning->handleRequest($request);
+
+		if($planning->isSubmitted() && $planning->isValid()){
             //si le formulaire a été soumis
             //on update avec les données envoyées par l'utilisateur
-           //// $app['dao.planning']->update($id, $period);
-           $app['dao.planning']->update($period->getId(),$period);
+            $app['dao.planning']->update($id, array(
+                'cours'=>$planning->getCours(),
+                'duree_cours'=>$planning->getContent(),
+                'author'=>$planning->getAuthor()->getId()
+            ));
         }
 	
-        return $app['twig']->render('update.planning.html.twig', array(
+        return $app['twig']->render('admin/index.admin.html.twig', array(
                 'planningForm' => $planningForm->createView(),
-                
+                'title' => 'modif'
         ));
 
     }
-
-
 
     public function addCoursAction(Application $app, Request $request){
         $cours = new Cours();
@@ -78,11 +78,12 @@ class AdminController   {
         if($coursForm->isSubmitted() AND $coursForm->isValid()){
             $app['dao.cours']->insert(array(
                 'title'=>$cours->getTitle(),
-                'content'=>$cours->getContent()
+                'content'=>$cours->getContent(),
+                'author'=>$app['user']->getId()
             ));
         }
 
-        return $app['twig']->render('admin/index.admin.html.twig', array(
+        return $app['twig']->render('admin/admin.ajout.cours.html.twig', array(
                 'coursForm' => $coursForm->createView(),
                 'title' => 'ajout'
         ));
@@ -173,18 +174,17 @@ class AdminController   {
         $datedebgeneration = $datedebgeneration->modify('+ 1 day');
         //Cherche le numéro du jour de la semaine de cette date 
         $joursemaine = date_format($datedebgeneration, 'w');
-        /*if($joursemaine == '0'){
-        $joursemaine = '1';             
-        }*/
-
+        
         //Chagement des données de la table planning_type dans un tableau de tableaux
         $planning_type = $app['dao.planningtype']->findAll();
         
-        foreach($planning_type as $cle => $jour){
+        foreach($planning_type as $jour){
             //boucle de changement du tableau $planning_Type pour créer la date attendue dans la table Planning
-            } 
-            for($d = $joursemaine ; $i <= 6 ; $i++){
-                foreach($cle as $jour) 
+            if ($joursemaine == 0) {
+                $joursemaine = 1;
+            }
+            
+            for($j=$joursemaine;$j<=6;$j++){
                 $jour['jour'] = date_format($datedebgeneration, 'Y-m-d'). ' ' . $jour['heure'];        
             } 
             
@@ -198,7 +198,7 @@ class AdminController   {
             'joursemaine' => $joursemaine,
             //'dateinsert' => $dateinsert,
             'planning_type' => $planning_type
-        ));
+        ));        
 
 
     // En attente de modification ....    
