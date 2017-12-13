@@ -27,7 +27,7 @@ class AjaxHomeController{
         $dataffich = $datecible->format('Y-m-d');
                 
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
-        return $app['twig']->render('reservation.html.twig', array(
+        return $app['twig']->render('jour.html.twig', array(
             'planning'=>$planning,
            
             //'ecart'=>$ecart,

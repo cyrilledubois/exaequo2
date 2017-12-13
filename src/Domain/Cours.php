@@ -23,7 +23,7 @@ class Cours{
     //setters
 
     public function setNom($nom){
-        if(!empty($nom) && is_int($nom)){
+        if(!empty($nom) && is_nuemric($nom)){
             $this->nom = $nom; 
         }
     }
@@ -35,7 +35,7 @@ class Cours{
     }
 
     public function setId($id){
-        if(!empty($id) AND is_int($id)){
+        if(!empty($id) AND is_nuemric($id)){
             $this->id = $id; 
         }
     }
