@@ -9,6 +9,7 @@ use WF3\Domain\Article;
 use WF3\Form\Type\ArticleType;
 use WF3\Form\Type\ContactType;
 use WF3\Domain\User;
+use WF3\Form\Type\UserType;
 use WF3\Form\Type\UserRegisterType;
 use WF3\Form\Type\SearchEngineType;
 //permet de générer des erreurs 403 (accès interdit)
@@ -55,10 +56,10 @@ class HomeController{
            'user' => $user
        ));
    }
-    // Back user
-   public function backUser(Application $app){
-       return $app['twig']->render('back.user.html.twig');
-   }
+//     // Back user
+//    public function backUser(Application $app){
+//        return $app['twig']->render('back.user.html.twig');
+//    }
 
 	//page d'accueil
 	public function homePageAction(Application $app){
@@ -166,6 +167,8 @@ class HomeController{
     		'error' => $app['security.last_error']($request),
     		'last_username' => $app['session']->get('_security.last_username')
     	));
+
+            
     }
 
     public function ajoutArticleAction(Application $app, Request $request){
@@ -248,15 +251,17 @@ class HomeController{
             $app['session']->save(); // this will be done automatically but it does not hurt to do it explicitly*/
 
 
-            $app['session']->getFlashBag()->add('success', 'Hello ' .  $user->getUsername());
+            $app['session']->getFlashBag()->add('success', 'Vous êtes bien enregistré ' .  $user->getFirstname());
             // Redirect to admin home page
-            return $app->redirect($app['url_generator']->generate('accueil'));
+            return $app->redirect($app['url_generator']->generate('inscription'));
         }
         return $app['twig']->render('user_register.html.twig', array(
-            'title' => 'Sign in',
+            'title' => 'Inscription',
             'userForm' => $userForm->createView()
         ));
     }
+
+
 
 
 }

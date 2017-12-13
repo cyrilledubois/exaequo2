@@ -1,5 +1,5 @@
 <?php
-//on utilise des composants Symfony qui vont nous permettre d'avoir des erreurs plus précises
+//on utie des composants Symfony qui vont nous permettre d'avoir des erreurs plus précises
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
 use Silex\Provider;
@@ -10,6 +10,18 @@ ExceptionHandler::register();
 
 $app->register(new Provider\HttpFragmentServiceProvider());
 $app->register(new Provider\ServiceControllerServiceProvider());
+
+//Paypal//paypal
+$app->register(new SKoziel\Silex\PayPalRest\PayPalServiceProvider(), array(
+    'paypal.settings'=>array(
+        'mode'=>'sandbox', //'live' or 'sandbox'(default)
+        'clientID'=>'jhgjhgfgufu', //Checkout PayPal Documentation for more info
+        'secret'=>'gfchgfcfhygtcfy', //Checkout PayPal Documentation for more info
+        'connectionTimeOut'=>30, //Connection time out in seconds, optional, default = 30
+        'logEnabled'=>false, //This parameter is optional, default = true
+        'logdir'=>'logs', //This parameter is optional, default = ROOT/logs
+        'currency'=>'EUR' //This parameter is optional, default = EUR
+    )));
 
 //On enregistre le service dbal
 $app->register(new Silex\Provider\DoctrineServiceProvider());

@@ -84,6 +84,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('admin') }}">administration</a></li>
                     {% elseif is_granted('ROLE_USER')%}
+                    <p class="connecté">Bonjour {{app.user.firstname}} ! </p>
                     <li><a href="{{ path('back') }}">back</a></li>
                     {% endif %}
                     <li><a href="{{ path('logout') }}">déconnexion</a></li>
@@ -97,7 +98,6 @@
 			</div>
 			</nav>
 		</header>
-
 		{% block content %}{% endblock %}
 {#<?php
 if  !strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'googlebot') )
