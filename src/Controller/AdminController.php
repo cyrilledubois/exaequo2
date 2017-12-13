@@ -10,6 +10,7 @@ use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 use WF3\Domain\Cours;
 use Symfony\Component\Validator\Constraints\DateTime;
+use WF3\Domain\PlanningType;
 
 class AdminController   {
     
@@ -47,23 +48,21 @@ class AdminController   {
         $period = $app['dao.planning']->selectPlanning($id);
                 
 		//on crée le planning et on lui passe la periode en paramètre
-        //il va utiliser $planning pour pré remplir les champs
+        //il va utiliser $planningForm pour pré remplir les champs
         $planningForm = $app['form.factory']->create(PlanningType::class, $period);	
-        	
+
         $planningForm->handleRequest($request);
-        
+    
 		if($planningForm->isSubmitted() && $planningForm->isValid()){
             //si le formulaire a été soumis
             //on update avec les données envoyées par l'utilisateur
            //// $app['dao.planning']->update($id, $period);
            $app['dao.planning']->update($period->getId(),$period);
         }
-	
         return $app['twig']->render('update.planning.html.twig', array(
                 'planningForm' => $planningForm->createView(),
                 
         ));
-
     }
 
 
@@ -189,7 +188,6 @@ class AdminController   {
             
         }
         
-
 
         return $app['twig']->render('planninggenere.html.twig', array(
             'datedeb' => $datedeb,

@@ -92,7 +92,7 @@ $app['dao.user'] = function($app){
 };
 
 //on pourra ainsi accéder à notre classe UserDAO grâce à $app['dao.user'] 
-$app['dao.planningtype'] = function($app){
+$app['dao.planningModel'] = function($app){
     return new WF3\DAO\CoursDAO($app['db'], 'planning_type', 'WF3\Domain\PlanningType');
 };
 

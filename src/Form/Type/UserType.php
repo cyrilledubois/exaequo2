@@ -72,18 +72,6 @@ class UserType extends AbstractType
                                                 'maxMessage' => 'L\adresse ne peut comporter plus de 255 caractères.'
                                                 )))
             ))
-            ->add('compadress', TextType::class, array('label' => 'compadress'))
-            //////////////////////////////////////////////
-            ->add('cp', TextType::class, array(
-                'label' => 'Code Postal*',
-                'constraints' => array (
-                                        new Assert\NotBlank(),
-                                        new Assert\Length(array(
-                                                                'min' => 5,
-                                                                'max' => 5,
-                                                                'exactMessage' => 'Le code postal doit comporter 5 chiffres.',
-                                        )))
-            ))
             ////////////////////////////////////////////////
             ->add('town', TextType::class, array(
                 'label' => 'Ville*',

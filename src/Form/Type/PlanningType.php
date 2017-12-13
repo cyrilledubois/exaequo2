@@ -21,7 +21,6 @@ class PlanningType extends AbstractType{
             ->add('cours_id', TextType::class, array(
                 'label' => 'id ou nom du cour a changer'))
                
-            ///////////////////////////////////////////////////////////
             
             /////////////////////////////////////////////////////////////
             ->add('date_cours',  TextType::class, array(
