@@ -9,6 +9,7 @@ use WF3\Domain\Planning;
 use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 use WF3\Domain\Cours;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class AdminController   {
     
@@ -161,6 +162,47 @@ class AdminController   {
             'userForm' => $userForm->createView(),
             'user' => $user
         ));
+
+    }
+    //Génération du planning sur un mois 
+    public function generationPlanning (Application $app){
+        //trouve la dernière date générée dans le planning et la retourne sous forme de tableau à une entrée
+        $datedeb = $app['dao.planning']->lastDate();
+        //Génère un objet DateTime contenant la date la plus lointaine générée
+        $datedebgeneration = new \DateTime($datedeb['MAX(date_cours)']);
+        //Ajoute 1 pour obtenir la nouvelle date, début de la période de génération
+        $datedebgeneration = $datedebgeneration->modify('+ 1 day');
+        //Cherche le numéro du jour de la semaine de cette date 
+        $joursemaine = date_format($datedebgeneration, 'w');
+        /*if($joursemaine == '0'){
+        $joursemaine = '1';             
+        }*/
+
+        //Chagement des données de la table planning_type dans un tableau de tableaux
+        $planning_type = $app['dao.planningtype']->findAll();
+        
+        foreach($planning_type as $cle){
+            //boucle de changement du tableau $planning_Type pour créer la date attendue dans la table Planning
+            for($i = $joursemaine ; $i <= 6 ; $i++){
+                foreach($cle as $jour) 
+                $jour['jour'] = date_format($datedebgeneration, 'Y-m-d'). ' ' . $jour['heure'];        
+            } 
+            
+        }
+        
+
+
+        return $app['twig']->render('planninggenere.html.twig', array(
+            'datedeb' => $datedeb,
+            'dategen' => $datedebgeneration,
+            'joursemaine' => $joursemaine,
+            //'dateinsert' => $dateinsert,
+            'planning_type' => $planning_type
+        ));        
+
+
+    // En attente de modification ....    
+
 
     }
 }

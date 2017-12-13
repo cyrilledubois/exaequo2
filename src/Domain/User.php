@@ -48,6 +48,8 @@ class User implements UserInterface
 
     private $adress;
 
+    private $compadress;
+
     private $cp;
 
     private $town;
@@ -55,6 +57,15 @@ class User implements UserInterface
     private $profession;
 
     private $groupeclient;
+
+    public function getCompadress() {
+        return $this->compadress;
+    }
+
+    public function setCompadress($compadress) {
+        $this->compadress = $compadress;
+        return $this;
+    }
 
 
     public function getId() {
@@ -144,8 +155,7 @@ class User implements UserInterface
         // Nothing to do here
     }
 
-
-    //prenom 2 /////////////////////////////////////////////
+    //prenom
      public function getFirstname() {
         return $this->firstname;
     }
@@ -154,9 +164,6 @@ class User implements UserInterface
         $this->firstname = $firstname;
         return $this;
     }
-    /////////////////////////////////////////////////////////
-
-
 
     //sexe
      public function getSex() {
