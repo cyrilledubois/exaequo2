@@ -105,8 +105,7 @@ $app['dao.user'] = function($app){
 
 //on pourra ainsi accéder à notre classe planningmodelDAO grâce à $app['dao.planningmodel'] 
 $app['dao.planningmodel'] = function($app){
-    return new WF3\DAO\planningModel($app['db'], 'planningmodel', 'WF3\Domain\Planningmodel');
+    return new WF3\DAO\PlanningModelDAO($app['db'], 'planningmodel', 'WF3\Domain\PlanningModel');
 };
-
 
 
