@@ -180,9 +180,10 @@ class AdminController   {
         //Chagement des données de la table planning_type dans un tableau de tableaux
         $planning_type = $app['dao.planningtype']->findAll();
         
-        foreach($planning_type as $cle){
+        foreach($planning_type as $cle => $jour){
             //boucle de changement du tableau $planning_Type pour créer la date attendue dans la table Planning
-            for($i = $joursemaine ; $i <= 6 ; $i++){
+            } 
+            for($d = $joursemaine ; $i <= 6 ; $i++){
                 foreach($cle as $jour) 
                 $jour['jour'] = date_format($datedebgeneration, 'Y-m-d'). ' ' . $jour['heure'];        
             } 
@@ -197,7 +198,7 @@ class AdminController   {
             'joursemaine' => $joursemaine,
             //'dateinsert' => $dateinsert,
             'planning_type' => $planning_type
-        ));        
+        ));
 
 
     // En attente de modification ....    

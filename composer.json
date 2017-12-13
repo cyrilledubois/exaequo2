@@ -17,9 +17,8 @@
       "components/jquery": "3.2.1",
       "skoziel/silex-paypal": "1.00",
       "paypal/rest-api-sdk-php" : "1.7.*"
-
-  },
-  "autoload":{
-      "psr-4":{"WF3\\":"src"}
-  }
+ },
+ "autoload":{
+     "psr-4":{"WF3\\":"src"}
+ }
 }
