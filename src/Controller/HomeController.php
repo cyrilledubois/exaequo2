@@ -166,6 +166,8 @@ class HomeController{
     		'error' => $app['security.last_error']($request),
     		'last_username' => $app['session']->get('_security.last_username')
     	));
+
+            
     }
 
     public function ajoutArticleAction(Application $app, Request $request){
@@ -248,15 +250,17 @@ class HomeController{
             $app['session']->save(); // this will be done automatically but it does not hurt to do it explicitly*/
 
 
-            $app['session']->getFlashBag()->add('success', 'Hello ' .  $user->getUsername());
+            $app['session']->getFlashBag()->add('success', 'Vous êtes bien enregistré ' .  $user->getFirstname());
             // Redirect to admin home page
-            return $app->redirect($app['url_generator']->generate('accueil'));
+            return $app->redirect($app['url_generator']->generate('inscription'));
         }
         return $app['twig']->render('user_register.html.twig', array(
-            'title' => 'Sign in',
+            'title' => 'Inscription',
             'userForm' => $userForm->createView()
         ));
     }
+
+
 
 
 }

@@ -21,6 +21,16 @@
  color: white;
 }
 
+.connecté {
+  color: red;
+  position: absolute;
+  top: 29px;
+  left: 1895px;
+  font-weight: bold; 
+}
+
+
+
 /*MODIF TEAM WF3*/
 /*BACK ADMIN*/
 
@@ -33,34 +43,6 @@ top: 5px;
 
 .form-group{
   width: 100%;
-}
-
-.paypal1{
-  height: 37px;
-  position: absolute;
-  top: 360px;
-  left: 195px; 
-}
-
-.paypal2{
-  height: 37px;
-  position: absolute;
-  top: 443px;
-  left: 195px; 
-}
-
-.paypal3{
-  height: 37px;
-  position: absolute;
-  top: 469px;
-  left: 195px; 
-}
-
-.paypal4{
-  height: 37px;
-  position: absolute;
-  top: 495px;
-  left: 195px; 
 }
 
 #navadmin{
@@ -400,6 +382,35 @@ video::-webkit-media-controls-start-playback-button {
 
 /*__________________________________*/
 
+.paypal1{
+  height: 37px;
+  position: absolute;
+  top: 360px;
+  left: 195px; 
+}
+
+.paypal2{
+  height: 37px;
+  position: absolute;
+  top: 443px;
+  left: 195px; 
+}
+
+.paypal3{
+  height: 37px;
+  position: absolute;
+  top: 469px;
+  left: 195px; 
+}
+
+.paypal4{
+  height: 37px;
+  position: absolute;
+  top: 495px;
+  left: 195px; 
+}
+
+
 #pres {
   margin: 40px 0;
 }
@@ -716,6 +727,105 @@ h1 {
 
 @media screen and (max-width: 1200px) {
   .paypal1 {
-      height: 97px;
+      height: 32px;
+      top: 390px;
+      left: 159px; 
+  }
+
+  .paypal2 {
+      height: 32px;
+      top: 432px;
+      left: 159px; 
+  }
+
+  .paypal3 {
+      height: 32px;
+      top: 514px;
+      left: 159px; 
+  }
+
+  .paypal4 {
+      height: 32px;
+      top: 525px;
+      left: 159px; 
+  }
+}
+
+
+@media screen and (max-width: 992px) {
+  .paypal1 {
+      height: 37px;
+      top: 350px;
+      left: 278px; 
+  }
+
+  .paypal2 {
+      height: 37px;
+      top: 433px;
+      left: 278px; 
+  }
+
+  .paypal3 {
+      height: 37px;
+      top: 460px;
+      left: 278px; 
+  }
+
+  .paypal4 {
+      height: 37px;
+      top: 485px;
+      left: 278px; 
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .paypal1 {
+      height: 37px;
+      top: 360px;
+      left: 278px; 
+  }
+
+  .paypal2 {
+      height: 37px;
+      top: 443px;
+      left: 278px; 
+  }
+
+  .paypal3 {
+      height: 37px;
+      top: 470px;
+      left: 278px; 
+  }
+
+  .paypal4 {
+      height: 37px;
+      top: 495px;
+      left: 278px; 
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .paypal1 {
+      height: 58px;
+      top: 372px;
+      left: 528px; 
+  }
+
+  .paypal2 {
+      height: 58px;
+      top: 457px;
+      left: 528px; 
+  }
+
+  .paypal3 {
+      height: 58px;
+      top: 482px;
+      left: 528px; 
+  }
+
+  .paypal4 {
+      height: 58px;
+      top: 508px;
+      left: 528px; 
   }
 }
