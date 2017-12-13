@@ -14,6 +14,13 @@ use WF3\Form\Type\UserRegisterType;
 use WF3\Form\Type\SearchEngineType;
 //permet de générer des erreurs 403 (accès interdit)
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+//paypal
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
+use PayPal\Api\Transaction;
 
 class HomeController{
 
@@ -127,9 +134,19 @@ class HomeController{
         return $app['twig']->render('contact.html.twig');
     }
     
-    
-    
-	//page contact
+	//page paiemenb accepté
+    public function paiementAccepte(Application $app){
+
+        return $app['twig']->render('paiement_accepte.html.twig');
+    }
+
+    //page paiemenb refusé
+    public function paiementRefuse(Application $app){
+
+        return $app['twig']->render('paiement_refuse.html.twig');
+    }
+
+
 	public function contactAction(Application $app, Request $request){
         $contactForm = $app['form.factory']->create(ContactType::class);
         $contactForm->handleRequest($request);
@@ -260,6 +277,39 @@ class HomeController{
             'userForm' => $userForm->createView()
         ));
     }
+
+
+
+    public function achatPaypal(Application $app, Request $request, $id){
+        //on va vérifier que l'utilisateur est connecté
+        if(!$app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')){
+            //je peux rediriger l'utilisateur non authentifié
+            //return $app->redirect($app['url_generator']->generate('home'));
+            throw new AccessDeniedHttpException();
+        }
+        //on récupère le token si l'utilisateur est connecté
+        $token = $app['security.token_storage']->getToken();
+        if(NULL !== $token){
+            $user = $token->getUser();
+        }
+
+        $abonnement = $app['dao.abonnement']->find($id);
+
+        $expressCheckout = $app['paypal']->createExpressCheckout();
+        $expressCheckout
+               ->addItem($abonnement->getNom(), 1, 'sku0', $abonnement->getPrix(), 'tarifs.html.twig')
+               ->setDescription($abonnement->getDescriptif())
+               ->setInvoiceNumber('un numéro unique à générer')
+               ->setSuccessUrl('https://localhost/exaequo2/web/paiement_accepte')
+               ->setFailureUrl('https://localhost/exaequo2/web/paiement_refuse');
+
+        $approvalUrl = $expressCheckout->getApprovalUrl($app['paypal']->getPayPalApiContext());
+        return $app->redirect($approvalUrl);
+
+
+        return  $abonnement->getNom();
+
+    }   
 
 
 

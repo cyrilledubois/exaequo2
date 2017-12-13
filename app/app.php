@@ -15,8 +15,8 @@ $app->register(new Provider\ServiceControllerServiceProvider());
 $app->register(new SKoziel\Silex\PayPalRest\PayPalServiceProvider(), array(
     'paypal.settings'=>array(
         'mode'=>'sandbox', //'live' or 'sandbox'(default)
-        'clientID'=>'jhgjhgfgufu', //Checkout PayPal Documentation for more info
-        'secret'=>'gfchgfcfhygtcfy', //Checkout PayPal Documentation for more info
+        'clientID'=>'AYymrboMXRkgtN2aV-7InQtEHw-aryaT4-B-QCisyhxPwu53zk-oHnDyI2Yswj-mxxhz1CCsn4lhp4ha', //Checkout PayPal Documentation for more info
+        'secret'=>'EJWs4NRNQVxHk2OecE084oyexYUaLkEpe_2STUqMrigksPpMBSteHQJaCvkv3HrNREJc-2fhWZh878zf', //Checkout PayPal Documentation for more info
         'connectionTimeOut'=>30, //Connection time out in seconds, optional, default = 30
         'logEnabled'=>false, //This parameter is optional, default = true
         'logdir'=>'logs', //This parameter is optional, default = ROOT/logs
@@ -108,4 +108,7 @@ $app['dao.planningmodel'] = function($app){
     return new WF3\DAO\PlanningModelDAO($app['db'], 'planningmodel', 'WF3\Domain\PlanningModel');
 };
 
-
+//paypal, prix abonnement.
+$app['dao.abonnement'] = function($app){
+    return new WF3\DAO\AbonnementDAO($app['db'], 'abonnement', 'WF3\Domain\abonnement');
+};
