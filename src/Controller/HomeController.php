@@ -9,6 +9,7 @@ use WF3\Domain\Article;
 use WF3\Form\Type\ArticleType;
 use WF3\Form\Type\ContactType;
 use WF3\Domain\User;
+use WF3\Form\Type\UserType;
 use WF3\Form\Type\UserRegisterType;
 use WF3\Form\Type\SearchEngineType;
 //permet de générer des erreurs 403 (accès interdit)
@@ -55,10 +56,10 @@ class HomeController{
            'user' => $user
        ));
    }
-    // Back user
-   public function backUser(Application $app){
-       return $app['twig']->render('back.user.html.twig');
-   }
+//     // Back user
+//    public function backUser(Application $app){
+//        return $app['twig']->render('back.user.html.twig');
+//    }
 
 	//page d'accueil
 	public function homePageAction(Application $app){

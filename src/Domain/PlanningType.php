@@ -76,9 +76,9 @@ class PlanningType{
         }     
     }
 
-    public function setCours_id($Cours_id){   
-        if(!empty($Cours_id) AND is_int($Cours_id)){        
-        $this->Cours_id = $Cours_id;         
+    public function setCours_id($cours_id){   
+        if(!empty($cours_id) AND is_int($cours_id)){        
+        $this->cours_id = $cours_id;         
         }
     }
 }
