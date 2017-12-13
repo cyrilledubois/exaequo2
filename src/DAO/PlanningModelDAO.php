@@ -1,7 +1,7 @@
 <?php
 namespace WF3\DAO;
 
-class PlanningModel extends DAO{
+class PlanningModelDAO extends DAO{
 
 	
 

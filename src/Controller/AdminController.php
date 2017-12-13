@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use WF3\Form\Type\ArticleType;
 use WF3\Domain\Article;
 use WF3\Domain\Planning;
+use WF3\Domain\PlanningModel;
 use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 use WF3\Domain\Cours;
@@ -176,9 +177,9 @@ class AdminController   {
         $joursemaine = date_format($datedebgeneration, 'w');
         
         //Chagement des données de la table planning_type dans un tableau de tableaux
-        $planning_type = $app['dao.planningtype']->findAll();
+        $planningModel = $app['dao.planningmodel']->findAll();
         
-        foreach($planning_type as $jour){
+        foreach($planningModel as $jour){
             //boucle de changement du tableau $planning_Type pour créer la date attendue dans la table Planning
             if ($joursemaine == 0) {
                 $joursemaine = 1;
@@ -197,7 +198,7 @@ class AdminController   {
             'dategen' => $datedebgeneration,
             'joursemaine' => $joursemaine,
             //'dateinsert' => $dateinsert,
-            'planning_type' => $planning_type
+            'planningmodel' => $planningModel
         ));        
 
 
