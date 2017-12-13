@@ -1,19 +1,10 @@
-	redirection pour préaration insertion AJAX (jour.html.twig)
-
-			{{dump(dataffich)}}
-			{{dump(jour)}}
-			{{dump(ecart)}}
-			{{dump(calcul)}}
 {% for cours in planning %}
 <div class="liste_cours">
-	<h1>Date du cours :{{ cours.date_cours|date('d/m/Y') }}</h1>
-	<h2>Heure du cours {{ cours.date_cours|date('h:i') }}</h2>
-	<p>Durée : {{ cours.duree }} minutes </p>
-	<p>Cours : {{ cours.nom }}</p>
-	<p>Intensité du cours {{ cours.intensite }}</p>
-	<p>{{ cours.id }}</p>
-	{#<p><a href="{{ path('', {id: cours.id}) }}">réserver</a> | <a href="{{ path('', {id: cours.id}) }}">Supprimer</a> | <a href="{{ path('', {id: cours.id}) }}">Modifier</a> </p>#}
-
-	
+	<div  class="col-md-1 bg-primary text-white">{{ cours.date_cours|date('d/m/Y') }}</div> 
+	<div class="col-md-3 text-white">{{ cours.date_cours|date('h:i') }}</div>
+	<div class="col-md-3 text-white">Cours : {{ cours.nom }}</div>
+	<div class="col-md-3 text-white">Intensité du cours: {{ cours.intensite }}</div>
+	<div class="col-md-3 text-white">Durée : {{ cours.duree }} minutes</div>
+	{#<div id="planning" class="col-md-3 text-white"> <a href="{{ path('#', {id: cours.id}) }}">réserver</a>reserver</div>#}
 </div>
 {% endfor %}

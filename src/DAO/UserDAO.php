@@ -57,7 +57,7 @@ class UserDAO extends DAO implements UserProviderInterface
     public function getInfoReserv($dataffich){ 
         $result = $this->bdd->prepare('SELECT * FROM users INNER JOIN users_has_planning ON users_has_planning.users_id = users.id 
         INNER JOIN planning ON users_has_planning.Planning_idPlanning = planning.id
-        INNER JOIN cours ON planning.cours_id=cours.id WHERE planning.date_cours LIKE "%2017-12-18%" ');
+        INNER JOIN cours ON planning.cours_id=cours.id WHERE planning.date_cours LIKE :date_cours ');
         $result->bindValue(':date_cours', $dataffich, \PDO::PARAM_INT);
         $result->execute();
 		return $result->fetchAll(\PDO::FETCH_ASSOC);

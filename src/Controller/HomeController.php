@@ -19,9 +19,9 @@ class HomeController{
     public function homePageReserv(Application $app){
         //NE PAS SUPPRIMER : 
         //initialisation de l'affichage du planning de réservation avec la date du jour.
-        //$dataffich = date("Y"). '-' .date("m") . '-' . date("d");
+        $dataffich = date("Y"). '-' .date("m") . '-' . date("d");
         //Pour les tests on peut afficher le planning de réervation à une date donnée, commenter la ligne du dessus !!!
-        $dataffich = '2017-12-18';   
+        //$dataffich = '2017-12-18';   
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
 
         return $app['twig']->render('reservation.html.twig', array(
@@ -207,7 +207,7 @@ class HomeController{
             $user->setRole('ROLE_USER');
             $app['dao.user']->insert($user);
 
-            /*//this code automatically login new user 
+            /*//this code automatically login new user ..
             $token = new UsernamePasswordToken(
                 $user, 
                 $user->getPassword(), 

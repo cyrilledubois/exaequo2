@@ -144,15 +144,19 @@ class User implements UserInterface
         // Nothing to do here
     }
 
-    //prenom
+
+    //prenom 2 /////////////////////////////////////////////
      public function getFirstname() {
         return $this->firstname;
     }
 
     public function setFirstname($firstname) {
-        $this->$firstname = $firstname;
+        $this->firstname = $firstname;
         return $this;
     }
+    /////////////////////////////////////////////////////////
+
+
 
     //sexe
      public function getSex() {

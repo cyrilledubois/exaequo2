@@ -24,10 +24,42 @@
 /*MODIF TEAM WF3*/
 /*BACK ADMIN*/
 
-.paypal{
+
+.champ{
+left: 195px;
+position: absolute;
+top: 5px;
+}
+
+.form-group{
+  width: 100%;
+}
+
+.paypal1{
   height: 37px;
   position: absolute;
-  top: 80px;
+  top: 360px;
+  left: 195px; 
+}
+
+.paypal2{
+  height: 37px;
+  position: absolute;
+  top: 443px;
+  left: 195px; 
+}
+
+.paypal3{
+  height: 37px;
+  position: absolute;
+  top: 469px;
+  left: 195px; 
+}
+
+.paypal4{
+  height: 37px;
+  position: absolute;
+  top: 495px;
   left: 195px; 
 }
 
@@ -679,4 +711,11 @@ h3 {
 }
 h1 {
   font-size: 45px;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .paypal1 {
+      height: 97px;
+  }
 }

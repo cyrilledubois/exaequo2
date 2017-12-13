@@ -1,68 +1,57 @@
 {% extends 'layout.html.twig' %}
 {% set adminMenu = true %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}{% endblock %}
 
 {% block content %}
-<h2 class="text-center">{{ block('title') }}</h2>
-{% for flashMessage in app.session.flashbag.get('success') %}
-<div class="alert alert-success">
-    {{ flashMessage }}
-</div>
-{% endfor %}
 
-{% if form_errors(userForm.password.first) %}
-<div class="alert alert-danger">
-    {{ form_errors(userForm.password.first) }}
-</div>
-{% endif %}
 
 <div class="well">
-{{ form_start(userForm, { 'attr': {'class': 'form-horizontal'} }) }}
+{{ form_start(planningForm, { 'attr': {'class': 'form-horizontal'} }) }}
 
-    <div class="form-group" > <!- SEXE ->
-        {{ form_label(userForm.sex, null, { 'label_attr':  {
+    <div class="form-group" > <!-- cours_id -->
+        {{ form_label(planningForm.sex, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-2">
-            {{ form_errors(userForm.sex) }}
-            {{ form_widget(userForm.sex, { 'attr':  {
+            {{ form_errors(planningForm.sex) }}
+            {{ form_widget(planningForm.sex, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
     </div>
 
     <div class="form-group" id="truc"> <!- NOM ->
-        {{ form_label(userForm.username, null, { 'label_attr':  {
+        {{ form_label(planningForm.username, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-3">
-            {{ form_errors(userForm.username) }}
-            {{ form_widget(userForm.username, { 'attr':  {
+            {{ form_errors(planningForm.username) }}
+            {{ form_widget(planningForm.username, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
     </div>
 
     <div class="form-group"> <!- PRENOM ->
-        {{ form_label(userForm.firstname, null, { 'label_attr':  {
+        {{ form_label(planningForm.firstname, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-3">
-            {{ form_errors(userForm.firstname) }}
-            {{ form_widget(userForm.firstname, { 'attr':  {
+            {{ form_errors(planningForm.firstname) }}
+            {{ form_widget(planningForm.firstname, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
     </div>
 
     <div class="form-group"> <!- DATE DE NAISSANCE->
-            {{ form_label(userForm.datedenaissance, null, { 'label_attr':  {
+            {{ form_label(planningForm.datedenaissance, null, { 'label_attr':  {
                 'class': 'col-sm-5 control-label', 'placeholder': 'your username',
             }}) }}
             <div class="col-sm-3">
-                {{ form_errors(userForm.datedenaissance) }}
-                {{ form_widget(userForm.datedenaissance, { 'attr':  {
+                {{ form_errors(planningForm.datedenaissance) }}
+                {{ form_widget(planningForm.datedenaissance, { 'attr':  {
                     'class': 'form-control'
                 }}) }}
             </div>
@@ -70,104 +59,104 @@
     
 
     <div class="form-group"> <!- ADRESSE ->
-        {{ form_label(userForm.adress, null, { 'label_attr':  {
+        {{ form_label(planningForm.adress, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label',
         }}) }}
         <div class="col-sm-3">
-            {{ form_errors(userForm.adress) }}
-            {{ form_widget(userForm.adress, { 'attr':  {
+            {{ form_errors(planningForm.adress) }}
+            {{ form_widget(planningForm.adress, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
     </div>
 
     <div class="form-group"> <!- CODE POSTAL ->
-        {{ form_label(userForm.cp, null, { 'label_attr':  {
+        {{ form_label(planningForm.cp, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-3">
-            {{ form_errors(userForm.cp) }}
-            {{ form_widget(userForm.cp, { 'attr':  {
+            {{ form_errors(planningForm.cp) }}
+            {{ form_widget(planningForm.cp, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
     </div>
 
     <div class="form-group"> <!- VILLE ->
-        {{ form_label(userForm.town, null, { 'label_attr':  {
+        {{ form_label(planningForm.town, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-3">
-            {{ form_errors(userForm.town) }}
-            {{ form_widget(userForm.town, { 'attr':  {
+            {{ form_errors(planningForm.town) }}
+            {{ form_widget(planningForm.town, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
     </div>
 
     <div class="form-group"> <!- PROFESSION ->
-        {{ form_label(userForm.profession, null, { 'label_attr':  {
+        {{ form_label(planningForm.profession, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-3">
-            {{ form_errors(userForm.profession) }}
-            {{ form_widget(userForm.profession, { 'attr':  {
+            {{ form_errors(planningForm.profession) }}
+            {{ form_widget(planningForm.profession, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
     </div>
 
     <div class="form-group"> <!- GROUPE CLIENT ->
-        {{ form_label(userForm.groupeclient, null, { 'label_attr':  {
+        {{ form_label(planningForm.groupeclient, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-3">
-            {{ form_errors(userForm.groupeclient) }}
-            {{ form_widget(userForm.groupeclient, { 'attr':  {
+            {{ form_errors(planningForm.groupeclient) }}
+            {{ form_widget(planningForm.groupeclient, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
     </div>
 
     <div class="form-group"> <!- EMAIL->
-        {{ form_label(userForm.email, null, { 'label_attr':  {
+        {{ form_label(planningForm.email, null, { 'label_attr':  {
         'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-3">
-            {{ form_errors(userForm.email) }}
-            {{ form_widget(userForm.email) }}
+            {{ form_errors(planningForm.email) }}
+            {{ form_widget(planningForm.email) }}
         </div>
     </div>
 
     <div class="form-group"> <!- TELEPHONE ->
-        {{ form_label(userForm.phone, null, { 'label_attr':  {
+        {{ form_label(planningForm.phone, null, { 'label_attr':  {
         'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-3">
-            {{ form_errors(userForm.phone) }}
-            {{ form_widget(userForm.phone, { 'attr':  {
+            {{ form_errors(planningForm.phone) }}
+            {{ form_widget(planningForm.phone, { 'attr':  {
             'class': 'form-control'
             }}) }}
         </div>
     </div>
 
     <div class="form-group"> <!- MOT DE PASSE ->
-        {{ form_label(userForm.password.first, null, { 'label_attr':  {
+        {{ form_label(planningForm.password.first, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-3">
-            {{ form_widget(userForm.password.first, { 'attr':  {
+            {{ form_widget(planningForm.password.first, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
     </div>
 
     <div class="form-group"> <!- REPETER MOT DE PASSE ->
-        {{ form_label(userForm.password.second, null, { 'label_attr':  {
+        {{ form_label(planningForm.password.second, null, { 'label_attr':  {
             'class': 'col-sm-5 control-label'
         }}) }}
         <div class="col-sm-3">
-            {{ form_widget(userForm.password.second, { 'attr':  {
+            {{ form_widget(planningForm.password.second, { 'attr':  {
                 'class': 'form-control'
             }}) }}
         </div>
@@ -180,6 +169,6 @@
         </div>
     </div>
 
-{{ form_end(userForm) }}
+{{ form_end(planningForm) }}
 </div>
 {% endblock %}

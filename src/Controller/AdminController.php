@@ -9,6 +9,7 @@ use WF3\Domain\Planning;
 use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 use WF3\Domain\Cours;
+use WF3\Form\Type\PlanningType;
 
 class AdminController   {
     
@@ -38,33 +39,34 @@ class AdminController   {
         return $app->redirect($app['url_generator']->generate('homeAdmin'));
     }
 
- 	// Update periode du planning 
-     public function updatePeriodPlanning(Application $app, Request $request, $id){
+
+ 	// Update planning 
+     public function updatePlanning(Application $app, Request $request, $id){
 		//on récupère les infos de la periode 
-				$period = $app['dao.planning']->find($id);
-				
+                ////$period = $app['dao.planning']->findAll($id);
+        $period = $app['dao.planning']->selectPlanning($id);
+                
 		//on crée le planning et on lui passe la periode en paramètre
         //il va utiliser $planning pour pré remplir les champs
-		$planning = $app['form.factory']->create(PlanningType::class, $period);		
-		
-		$planning->handleRequest($request);
-
-		if($planning->isSubmitted() && $planning->isValid()){
+        $planningForm = $app['form.factory']->create(PlanningType::class, $period);	
+        	
+        $planningForm->handleRequest($request);
+        
+		if($planningForm->isSubmitted() && $planningForm->isValid()){
             //si le formulaire a été soumis
             //on update avec les données envoyées par l'utilisateur
-            $app['dao.planning']->update($id, array(
-                'cours'=>$planning->getCours(),
-                'duree_cours'=>$planning->getContent(),
-                'author'=>$planning->getAuthor()->getId()
-            ));
+           //// $app['dao.planning']->update($id, $period);
+           $app['dao.planning']->update($period->getId(),$period);
         }
 	
-        return $app['twig']->render('admin/index.admin.html.twig', array(
+        return $app['twig']->render('update.planning.html.twig', array(
                 'planningForm' => $planningForm->createView(),
-                'title' => 'modif'
+                
         ));
 
     }
+
+
 
     public function addCoursAction(Application $app, Request $request){
         $cours = new Cours();
@@ -76,12 +78,11 @@ class AdminController   {
         if($coursForm->isSubmitted() AND $coursForm->isValid()){
             $app['dao.cours']->insert(array(
                 'title'=>$cours->getTitle(),
-                'content'=>$cours->getContent(),
-                'author'=>$app['user']->getId()
+                'content'=>$cours->getContent()
             ));
         }
 
-        return $app['twig']->render('admin/admin.ajout.cours.html.twig', array(
+        return $app['twig']->render('admin/index.admin.html.twig', array(
                 'coursForm' => $coursForm->createView(),
                 'title' => 'ajout'
         ));
