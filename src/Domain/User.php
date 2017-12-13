@@ -47,7 +47,7 @@ class User implements UserInterface
     private $datedenaissance;
 
     private $adress;
-   
+
     private $cp;
 
     private $town;
@@ -55,6 +55,7 @@ class User implements UserInterface
     private $profession;
 
     private $groupeclient;
+
 
     public function getId() {
         return $this->id;
