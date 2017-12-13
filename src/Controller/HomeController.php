@@ -5,7 +5,7 @@ use Silex\Application;
 //cette ligne nous permet d'utiliser le service fourni par symfony pour gérer 
 // les $_GET et $_POST
 use Symfony\Component\HttpFoundation\Request;
-use WF3\Domain\Article;
+use WF3\Domain\Planning;
 use WF3\Form\Type\ArticleType;
 use WF3\Form\Type\ContactType;
 use WF3\Domain\User;

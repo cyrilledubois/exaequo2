@@ -5,22 +5,22 @@ class PlanningDAO extends DAO{
 
 	// Select planning generale
     public function selectPlanning(){
-		$result = $this->bdd->query('SELECT * FROM planning ORDER BY date_cours asc LIMIT 10');
+		$result = $this->bdd->query('SELECT * FROM planning ORDER BY datecours asc LIMIT 10');
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
     }
 
 	// Select planning de "date à date"
 	// PREVOIR UN LIKE EN FIN DE REQUETE
-	public function selectPeriod($date_cours){
-		$result = $this->bdd->prepare('SELECT * FROM planning WHERE date_cours = :date_cours');
-		$result->bindValue(':date_cours', $date_cours, \PDO::PARAM_INT);
+	public function selectPeriod($datecours){
+		$result = $this->bdd->prepare('SELECT * FROM planning WHERE datecours = :datecours');
+		$result->bindValue(':datecours', $datecours, \PDO::PARAM_INT);
 		$result->execute();
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
 	}
 
-	public function getInfoPlanning($date_jour){
-		$result = $this->bdd->prepare ('SELECT * FROM planning INNER JOIN cours ON planning.cours_id = cours.id WHERE date_cours LIKE :date_jour ORDER BY date_cours');
-        $result->bindValue(':date_jour', '%' . $date_jour . '%');
+	public function getInfoPlanning($datejour){
+		$result = $this->bdd->prepare ('SELECT * FROM planning INNER JOIN cours ON planning.coursid = cours.id WHERE datecours LIKE :datejour ORDER BY datecours');
+        $result->bindValue(':datejour', '%' . $datejour . '%');
         $result->execute();
         return $result->fetchALL(\PDO::FETCH_ASSOC);
     }
@@ -35,7 +35,7 @@ class PlanningDAO extends DAO{
 
 	// 
 	public function selectIntensity($intensite){
-		$result = $this->bdd->prepare('SELECT * FROM planning INNER JOIN cours ON planning.id_cours = cours.id WHERE intensite = :intensite');
+		$result = $this->bdd->prepare('SELECT * FROM planning INNER JOIN cours ON planning.coursid = cours.id WHERE intensite = :intensite');
 		$result->bindValue(':intensite', $intensite, \PDO::PARAM_INT);
 		$result->execute();
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
@@ -43,7 +43,7 @@ class PlanningDAO extends DAO{
 	// Trouve la dernière date générée
     public function lastDate(){
     	//Trouve la dernière date générée :
-		$result = $this->bdd->query('SELECT MAX(date_cours) FROM planning');
+		$result = $this->bdd->query('SELECT MAX(datecours) FROM planning');
 		return $result->fetch(\PDO::FETCH_ASSOC);
 	}
 
