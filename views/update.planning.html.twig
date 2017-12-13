@@ -1,0 +1,174 @@
+{% extends 'layout.html.twig' %}
+{% set adminMenu = true %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+
+<div class="well">
+{{ form_start(planningForm, { 'attr': {'class': 'form-horizontal'} }) }}
+
+    <div class="form-group" > <!-- cours_id -->
+        {{ form_label(planningForm.sex, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-2">
+            {{ form_errors(planningForm.sex) }}
+            {{ form_widget(planningForm.sex, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group" id="truc"> <!- NOM ->
+        {{ form_label(planningForm.username, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_errors(planningForm.username) }}
+            {{ form_widget(planningForm.username, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- PRENOM ->
+        {{ form_label(planningForm.firstname, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_errors(planningForm.firstname) }}
+            {{ form_widget(planningForm.firstname, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- DATE DE NAISSANCE->
+            {{ form_label(planningForm.datedenaissance, null, { 'label_attr':  {
+                'class': 'col-sm-5 control-label', 'placeholder': 'your username',
+            }}) }}
+            <div class="col-sm-3">
+                {{ form_errors(planningForm.datedenaissance) }}
+                {{ form_widget(planningForm.datedenaissance, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+            </div>
+    </div>
+    
+
+    <div class="form-group"> <!- ADRESSE ->
+        {{ form_label(planningForm.adress, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label',
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_errors(planningForm.adress) }}
+            {{ form_widget(planningForm.adress, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- CODE POSTAL ->
+        {{ form_label(planningForm.cp, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_errors(planningForm.cp) }}
+            {{ form_widget(planningForm.cp, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- VILLE ->
+        {{ form_label(planningForm.town, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_errors(planningForm.town) }}
+            {{ form_widget(planningForm.town, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- PROFESSION ->
+        {{ form_label(planningForm.profession, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_errors(planningForm.profession) }}
+            {{ form_widget(planningForm.profession, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- GROUPE CLIENT ->
+        {{ form_label(planningForm.groupeclient, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_errors(planningForm.groupeclient) }}
+            {{ form_widget(planningForm.groupeclient, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- EMAIL->
+        {{ form_label(planningForm.email, null, { 'label_attr':  {
+        'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_errors(planningForm.email) }}
+            {{ form_widget(planningForm.email) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- TELEPHONE ->
+        {{ form_label(planningForm.phone, null, { 'label_attr':  {
+        'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_errors(planningForm.phone) }}
+            {{ form_widget(planningForm.phone, { 'attr':  {
+            'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- MOT DE PASSE ->
+        {{ form_label(planningForm.password.first, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_widget(planningForm.password.first, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- REPETER MOT DE PASSE ->
+        {{ form_label(planningForm.password.second, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-3">
+            {{ form_widget(planningForm.password.second, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+    <div class="form-group"> <!- VALIDER ->
+        <div class="col-sm-offset-5 col-sm-3">
+            <input type="submit" class="btn btn-primary" value="Valider" />
+            <p class="champ">* champ obligatoire</p>
+        </div>
+    </div>
+
+{{ form_end(planningForm) }}
+</div>
+{% endblock %}

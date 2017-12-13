@@ -48,38 +48,39 @@
 	</head>
 	<body>
 		<header>
-		  <!-- menu de navigation -->
-		  <nav class="navbar navbar-inverse navbar-static-top navbar-custom">
-			<div class="container">
-			  <div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar3">
-				  <span class="sr-only">Toggle navigation</span>
-				  <span class="icon-bar"></span>
-				  <span class="icon-bar"></span>
-				  <span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="http://www.exaequo-merignac.com"/><img src="../web/images/logo_menu.jpg" alt="Votre salle de sport à Mérignac">
-				</a>
-			  </div>
-			  <div id="navbar3" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-				  <li class="active"><a href="{{ path('accueil') }}">Accueil</a></li>
-				  <li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Nos prestations<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-					  <li><a href="{{ path('cours_collectifs') }}">Cours collectifs</a></li>
-					  <li><a href="{{ path('fitness_cardio_physique') }}">Fitness/cardio/musculation</a></li>
-					  <li><a href="{{ path('cours_boxe') }}">Boxe</a></li>
-					  <li><a href="{{ path('cours_pilates') }}">Pilates</a></li>
-					  <li><a href="{{ path('cours_yoga') }}">Yoga</a></li>
-					</ul>
-				  </li>
-				  <li><a href="{{ path('equipe') }}">Notre équipe</a></li>
-				  <li><a href="{{ path('tarifs') }}">Nos tarifs</a></li>
-				  <li><a href="{{ path('partenaires') }}">Nos Partenaires</a></li>
-				  <li><a href="{{ path('back') }}">Back user</a></li>
-				  <li><a href="{{ path('contact') }}">Contact</a></li>
-					{# GESTION DES ROLES USER - ADMIN #}
+          <!-- menu de navigation -->
+          <nav class="navbar navbar-inverse navbar-static-top navbar-custom">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar3">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.exaequo-merignac.com"/><img src="../web/images/logo_menu.jpg" alt="Votre salle de sport à Mérignac">
+                </a>
+              </div>
+              <div id="navbar3" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="{{ path('accueil') }}">Accueil</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Nos prestations<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{{ path('cours_collectifs') }}">Cours collectifs</a></li>
+                      <li><a href="{{ path('fitness_cardio_physique') }}">Fitness/cardio/musculation</a></li>
+                      <li><a href="{{ path('cours_boxe') }}">Boxe</a></li>
+                      <li><a href="{{ path('cours_pilates') }}">Pilates</a></li>
+                      <li><a href="{{ path('cours_yoga') }}">Yoga</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="{{ path('equipe') }}">Notre équipe</a></li>
+                  <li><a href="{{ path('tarifs') }}">Nos tarifs</a></li>
+                  <li><a href="{{ path('partenaires') }}">Nos Partenaires</a></li>
+        
+                    <li><a href="{{ path('contact') }}">Contact</a></li>
+                    
+                        {# ROLE ADMIN #}
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('admin') }}">administration</a></li>
@@ -91,21 +92,24 @@
                     <li><a href="{{ path('inscription') }}">inscription</a></li>
                     <li><a href="{{ path('connexion') }}">connexion</a></li>
                     {% endif %}
-					<li><a href="{{ path('reservation') }}">Réserver une session</a></li>
-				</ul>
-			  </div>
-			</div>
-			</nav>
-		</header>
 
+
+
+
+                    <li><a href="{{ path('reservation') }}">Réserver une session</a></li>
+                </ul>
+              </div>
+            </div>
+            </nav>
+        </header>
 		{% block content %}{% endblock %}
 {#<?php
 if  !strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'googlebot') )
 { #}
-<div id="map" class="wow">
+{#<div id="map" class="wow">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2829.0110411397272!2d-0.6777082999999978!3d44.84170850000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54da027c4fed81%3A0xf0fd85dc9bae57f8!2s19+Rue+Nicolas+Leblanc%2C+33700+M%C3%A9rignac!5e0!3m2!1sfr!2sfr!4v1442322802792" 
 width="800" height="400" style="border:0; width:100%" allowfullscreen></iframe>
-</div>
+</div>#}
 
 {#}?>#}
 		<footer>
