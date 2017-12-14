@@ -1,7 +1,7 @@
 <?php
 namespace WF3\Domain;
 
-class Abonnement {
+class abonnement {
     
     private $id;
     private $nom;

@@ -1,0 +1,32 @@
+	{% extends "layout.html.twig" %}
+		{% block title %}Récupération du mot de passe{% endblock %}
+
+		{% block content %}
+        <h2 class="text-center">Récupération du mot de passe</h2>
+
+        <div>
+            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                <p>Impossible de vous connecter ? Soyez rassuré, nous n'allons pas vous laisser dans cette situation plus longtemps !</p>
+                <p>Renseignez simplement votre adresse email et vous recevrez un lien pour rétablir votre mot de passe.</p>
+            </div>
+
+            <form class="form-signin form-horizontal" role="form"  method="post">
+
+                <div class="form-group">
+                    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                        <input type="text" name="_email"  class="form-control" placeholder="Entrer votre adresse email." required autofocus>
+                    </div>
+                </div>
+            
+
+            <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                        <button type="submit" class="btn btn-default btn-primary" > Envoyer</button>
+                        
+                </div>
+            </div>
+
+            </form>
+
+        </div>
+		{% endblock %}

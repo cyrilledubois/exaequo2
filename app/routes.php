@@ -90,3 +90,7 @@ $app->match('/paiement_accepte', 'WF3\Controller\HomeController::paiementAccepte
 //paiement refusé
 $app->match('/paiement_refuse', 'WF3\Controller\HomeController::paiementRefuse')
 ->bind('paiement_refuse');
+
+//mot de passe perdu
+$app->match('/mdp_perdu', 'WF3\Controller\HomeController::mdpPerdu')
+->bind('mdp_perdu');
