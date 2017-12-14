@@ -70,7 +70,7 @@ $app->match('/ajax/jourcours/{j}', 'WF3\Controller\AjaxHomeController::jourCours
 ->bind('ajaxJourCour');
 
 
-//Generation planning à partir de Planning_Type
+//Generation planning à partir de Planningmodel (pour tests)
 $app->match('/planninggenere', 'WF3\Controller\AdminController::generationPlanning')
 ->bind('planning genere');
 
