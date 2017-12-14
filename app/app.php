@@ -42,7 +42,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.access_rules' => array(
 
 
-        array('^/adminnn', 'ROLE_ADMIN')
+        array('^/admin', 'ROLE_ADMIN')
 
     )
 ));
@@ -92,8 +92,8 @@ $app['dao.user'] = function($app){
 };
 
 //on pourra ainsi accéder à notre classe UserDAO grâce à $app['dao.user'] 
-$app['dao.planningModel'] = function($app){
-    return new WF3\DAO\CoursDAO($app['db'], 'planning_type', 'WF3\Domain\PlanningType');
+$app['dao.planningmodel'] = function($app){
+    return new WF3\DAO\PlanningModelDAO($app['db'], 'planningmodel', 'WF3\Domain\PlanningModel');
 };
 
 

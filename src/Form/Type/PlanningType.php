@@ -17,21 +17,26 @@ use Symfony\Component\Validator\Constraints as Assert;
 class PlanningType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options){
-        $builder
-            ->add('cours_id', TextType::class, array(
-                'label' => 'id ou nom du cour a changer'))
-               
+            $builder
+            ->add('coursid', TextType::class, array(
+                'label' => 'id ou nom du cour'
+            ));
+            $builder
             
-            /////////////////////////////////////////////////////////////
-            ->add('date_cours',  TextType::class, array(
+            ->add('datecours',  TextType::class, array(
                 'label' => 'Date du cour'
-                   
-             ))
-            /////////////////////////////////////////////////////////////
+            ));
+            $builder
+            
             ->add('duree', TextType::class, array(
                 'label' => 'duree'
             ));
+            $builder
+
+            ->add('placemax', TextType::class, array(
+                'label' => 'place maximum'
+            ));
           
-}
+        }
 }
 

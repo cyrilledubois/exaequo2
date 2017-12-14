@@ -9,8 +9,9 @@ use WF3\Domain\Planning;
 use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 use WF3\Domain\Cours;
+use WF3\Domain\PlanningModel;
+use WF3\Form\Type\PlanningType;
 use Symfony\Component\Validator\Constraints\DateTime;
-use WF3\Domain\PlanningType;
 
 class AdminController   {
     
@@ -21,15 +22,28 @@ class AdminController   {
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
         $reserv = $app['dao.user']->getInfoReserv($dataffich);
         $users = $app['dao.user']->getAlluser();
+       // PAGINATION COMMENTER  $nombreDePages = $app['dao.user']->paginationUser();
+       // $nombreDePages = ceil($nombreArticles/$nombreParPage);
+       // if(isset($_GET['numero']) AND is_numeric($_GET['numero']) AND $_GET['numero'] <= $nombreDePages AND $_GET['numero'] > 0){
+        //    $page = $_GET['numero'];
+        
+       // else{
+         //   $page = 1;
+       // }
+        //$offset = ($page - 1) * $nombreParPage;
         return $app['twig']->render('admin/index.admin.html.twig', array(
                                         'planning'=>$planning,
                                         'users'=>$users,
                                         'reserv'=>$reserv,
                                         'dataffich' => $dataffich
+                                        //'page' => $page,
+                                       // 'offset' => $offset,
+                                        //'nombre' => $nombre,
+                                        //'nombrearticles' => $nombreArticles,
+                                        //'nombredepage' => $nombreDePages
                                     ));
     }
 
-    
     //suppression de cours
     //page de suppression de cours
     public function deleteCoursAction(Application $app, $id){
@@ -45,23 +59,27 @@ class AdminController   {
      public function updatePlanning(Application $app, Request $request, $id){
 		//on récupère les infos de la periode 
                 ////$period = $app['dao.planning']->findAll($id);
-        $period = $app['dao.planning']->selectPlanning($id);
-                
+        $period = $app['dao.planning']->selectPeriod(date('Y-m-d'), $id);
+        $cours = $app['dao.cours']->find($id);
+        $period->setCoursid($cours->getNom());
+            var_dump($period);  
+            
 		//on crée le planning et on lui passe la periode en paramètre
-        //il va utiliser $planningForm pour pré remplir les champs
+        //il va utiliser $planning pour pré remplir les champs
         $planningForm = $app['form.factory']->create(PlanningType::class, $period);	
-
+        	
         $planningForm->handleRequest($request);
-    
 		if($planningForm->isSubmitted() && $planningForm->isValid()){
             //si le formulaire a été soumis
             //on update avec les données envoyées par l'utilisateur
            //// $app['dao.planning']->update($id, $period);
            $app['dao.planning']->update($period->getId(),$period);
+           
         }
-        return $app['twig']->render('update.planning.html.twig', array(
+	
+        return $app['twig']->render('admin/update.planning.html.twig', array(
                 'planningForm' => $planningForm->createView(),
-                
+
         ));
     }
 
@@ -189,6 +207,7 @@ class AdminController   {
         }
         
 
+
         return $app['twig']->render('planninggenere.html.twig', array(
             'datedeb' => $datedeb,
             'dategen' => $datedebgeneration,
@@ -196,10 +215,6 @@ class AdminController   {
             //'dateinsert' => $dateinsert,
             'planning_type' => $planning_type
         ));        
-
-
     // En attente de modification ....    
-
-
     }
 }

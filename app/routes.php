@@ -42,7 +42,6 @@ $app->match('/partenaires', 'WF3\Controller\HomeController::homePagePartenaires'
 
 //reservation
 $app->match('/reservation', 'WF3\Controller\HomeController::homePageReserv')
-
 ->bind('reservation');
 
 //contact
@@ -62,7 +61,7 @@ $app->match('/administration', 'WF3\Controller\AdminController::indexAction')
 ->bind('admin');
 
 //Modif planning
-$app->match('/administration/change/{id}', 'WF3\Controller\AdminController::updatePlanning')
+$app->match('/administration/update/{id}', 'WF3\Controller\AdminController::updatePlanning')
 ->bind('updatePlanning');
 
 //Affichage cours du jour 

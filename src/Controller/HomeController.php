@@ -16,18 +16,26 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class HomeController{
 
-    public function homePageReserv(Application $app){
+    public function homePageReserv(Application $app, Request $request){
         //NE PAS SUPPRIMER : 
         //initialisation de l'affichage du planning de réservation avec la date du jour.
         $dataffich = date("Y"). '-' .date("m") . '-' . date("d");
-        //Pour les tests on peut afficher le planning de réervation à une date donnée, commenter la ligne du dessus !!!
-        //$dataffich = '2017-12-18';   
+        //Pour les tests on peut afficher le planning de réervation à une date donnée, commenter la ligne du dessus !!! 
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
-
+        $user = $app['user'];
+        $idplanning = $request->query->get('id');
+        if($request->query->get('id')){
+            $idplanning = $request->query->get('id');
+            $reservation = $app['dao.user']->reservAction($user->getId(), $request->query->get('id'));
+        }
         return $app['twig']->render('reservation.html.twig', array(
-            'planning'=>$planning,
+            'planning'=> $planning,
+            'user' => $user->getId(),
+            'idplanning' => $idplanning
+            //'reservation' => $reservation
         ));
     }
+
     public function updateUserAction(Application $app, Request $request ){
    //  On  utilise la ligne suivante afin de récuperer l'user en objet
        $user = $app['user'];
@@ -55,6 +63,10 @@ class HomeController{
            'user' => $user
        ));
    }
+
+
+
+   
     // Back user
    public function backUser(Application $app){
        return $app['twig']->render('back.user.html.twig');

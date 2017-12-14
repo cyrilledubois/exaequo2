@@ -6,19 +6,31 @@
  padding-bottom: 3rem;
 }
 
-#headuser{
- margin-bottom: 0rem;
-}
-#uluser{
- list-style-type: none;
- text-align: center;
+#planningadmin{
+background: rgb(112, 16, 73);
+color: white;
+padding-top: 6rem;
 }
 
-#uluser>li>a{
- margin: 2rem;
- padding: 2rem;
- margin-left: 2rem;
- color: white;
+#bla{
+  border: 0.1rem solid black;
+  padding-bottom: 5rem;
+}
+
+#headadmin{
+  margin-bottom: 0rem;
+}
+
+#uladmin{
+  list-style-type: none; 
+  text-align: center;
+}
+
+#uladmin>li>a{
+  margin: 2rem;
+  padding: 2rem;
+  margin-left: 2rem;
+  color: white;
 }
 
 /*MODIF TEAM WF3*/
@@ -63,32 +75,6 @@ top: 5px;
   left: 195px; 
 }
 
-#navadmin{
-  background: black;
-  color: white;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-#upload{
-  background-color: rgb(75, 11, 49);
-}
-
-#headadmin{
-  margin-bottom: 0rem;
-}
-#uladmin{
-  list-style-type: none; 
-  text-align: center;
-}
-
-#uladmin>li>a{
-  margin: 2rem;
-  padding: 2rem;
-  margin-left: 2rem;
-  color: white;
-}
-
 
 /*START PAGE DE RESERVATION*/
 .liste_cours{
@@ -98,7 +84,7 @@ top: 5px;
   margin-bottom: 2rem;
 }
 
-#pagination{
+#pagination{ /*admin aussi*/
   text-align: center;
   background: rgb(75, 11, 49);
 }

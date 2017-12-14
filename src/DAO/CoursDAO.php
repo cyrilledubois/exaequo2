@@ -11,7 +11,8 @@ class CoursDAO extends DAO {
 
     public function selectPlanning($id_cours){
     $PlanningModif = $this->bdd->prepare('SELECT * FROM planning WHERE id_cours = :id_cours');
-    $PlanningModif->bindValue(':id_cours', $id_cours);
+    $result->bindValue(':id_cours', $id_cours);
     return $PlanningModif->fetchAll(\PDO::FETCH_ASSOC);
     }
+
 }

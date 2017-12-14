@@ -37,55 +37,75 @@
 
 
 
-<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-6 bg-info">
-      <h2>Planning de la journée</h2>
-      {{dump(planning)}}
-        {% for cours in planning %}
-        <div class="row">
-        <div class="col-md-3">heure: {{ cours.date_cours|date('h:i') }}</div>
-        <div class="col-md-3">cour: {{ cours.nom }}</div>
-        <div class="col-md-3">place: {{ cours.place_max }}</div>
-        <div class="col-md-3"><a  href="{{ path('updatePlanning', {id: cours.id}) }}">modifier</a></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div id="bla" class="col-md-6">
+          <h2>Planning de la journée</h2>
+            {% for cours in planning %}
+          <div class="row">
+            <div class="col-md-3">heure: {{ cours.datecours|date('h:i') }}</div>
+            <div class="col-md-3">cour: {{ cours.nom }}</div>
+            <div class="col-md-3">place: {{ cours.placemax }}</div>
+            <div class="col-md-3"><a  href="{{ path('updatePlanning', {id: cours.id}) }}">modifier</a></div>
         </div>
-        {% endfor %}
+          {% endfor %}
       </div>
 
     {# UTILISATEUR AYANT RESERVER #}
-    <div class="col-md-6 bg-success">
+    <div class="col-md-6">
       <h2>Liste des inscrits à la journée</h2>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Prenom</th>
-                  <th scope="col">Cour</th>
-                  <th scope="col">Phone</th>
-                </tr>
-                </thead>
-                {% for inscrit in reserv %}
-                <tbody>
-                  <tr>
-                    <td> {{ inscrit.firstname }} </td>
-                    <td> {{ inscrit.username}} </td>
-                    <td> {{ inscrit.nom}} </td>
-                    <td> {{ inscrit.phone}} </td>
-                  </tr>
-                </tbody>
-                {% endfor %}	
-              </table>
-            </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Prenom</th>
+              <th scope="col">Cour</th>
+              <th scope="col">Phone</th>
+            </tr>
+            </thead>
+            {% for inscrit in reserv %}
+            <tbody>
+              <tr>
+                <td> {{ inscrit.firstname }} </td>
+                <td> {{ inscrit.username}} </td>
+                <td> {{ inscrit.nom}} </td>
+                <td> {{ inscrit.phone}} </td>
+              </tr>
+            </tbody>
+            {% endfor %}	
+          </table>
         </div>
       </div>
+    </div>
 
 
-<div class="container-fluid">
+<div id="planningadmin" class="container-fluid">
   <div class="row">
-    <div class="col-md-6 bg-warning">
+    <div class="col-md-6">
     <h2>Liste des adherents</h2>
       <table class="table">
         <thead>
+        <ul class="pagination">
+             {# PAGINATION COMMENTER <ul>
+            
+                {% if page > 1 %}
+                  <li class="page-item">
+                    <a class="page-link" href="index.php?numero='{{ page-1 }}'">Page précédente</a>
+                  </li>     
+                {% endif %}
+
+                {% for i=1;i<=nombreDePages;i++  %}
+                  <li class="page-item">
+                    <a href="index.php?numero='{{ i }}''"></a> |
+                  </li>
+            
+                {% if page < nombreDePages %}
+                    <li class="page-item">
+                      <a class="page-link" href="index.php?numero='{{ page+1 }}'">Page suivante</a>
+                    </li>
+                {% endif %}
+              #}
+            </ul>
           <tr>
             <th scope="col">Nom</th>
             <th scope="col">Prenom</th>
@@ -104,9 +124,10 @@
         </table>
         </div>
   
-      <div class="col-md-6 bg-primary ">
+        
+      <div class="col-md-6">
         <form action="upload.php" method="post" enctype="multipart/form-data">
-          <p>Fichier PDF du nouveau planning:</p>
+          <p>Ajout fichier PDF du nouveau planning:</p>
           <input type="file" name="fileToUpload" id="fileToUpload">
           <input type="submit" value="Envoyer" name="submit">
         </form>

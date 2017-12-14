@@ -48,8 +48,6 @@ class User implements UserInterface
 
     private $adress;
 
-    private $compadress;
-
     private $cp;
 
     private $town;
@@ -58,14 +56,12 @@ class User implements UserInterface
 
     private $groupeclient;
 
-    public function getCompadress() {
-        return $this->compadress;
-    }
+    private $userid;
 
-    public function setCompadress($compadress) {
-        $this->compadress = $compadress;
-        return $this;
-    }
+    private $PlanningidPlanning;
+
+    
+   
 
 
     public function getId() {
@@ -232,6 +228,24 @@ class User implements UserInterface
 
     public function setGroupeClient($groupeclient) {
         $this->groupeclient = $groupeclient;
+        return $this;
+    }
+
+    public function getUserId(){
+        return $this->userid;
+    }
+
+    public function setUserId($userid) {
+        $this->groupeclient = $groupeclient;
+        return $this;
+    }
+
+    public function getPlanningIdPlanning(){
+        return $this->PlanningidPlanning;
+    }
+
+    public function setPlanningIdPlanning($PlanningidPlanning) {
+        $this->PlanningidPlanning = $PlanningidPlanning;
         return $this;
     }
 
