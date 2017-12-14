@@ -3,9 +3,8 @@ namespace WF3\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-use WF3\Form\Type\ArticleType;
-use WF3\Domain\Article;
 use WF3\Domain\Planning;
+use WF3\Domain\PlanningModel;
 use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 use WF3\Domain\Cours;
@@ -185,8 +184,8 @@ class AdminController   {
         //trouve la dernière date générée dans le planning et la retourne sous forme de tableau à une entrée
         $datedeb = $app['dao.planning']->lastDate();
         //Génère un objet DateTime contenant la date la plus lointaine générée
-        $datedebgeneration = new \DateTime($datedeb['MAX(date_cours)']);
-        //Ajoute 1 pour obtenir la nouvelle date, début de la période de génération
+        $datedebgeneration = new \DateTime($datedeb['MAX(datecours)']);
+        //Ajoute 1 pour obtenir la nouvelle date, début de la période de génération ()
         $datedebgeneration = $datedebgeneration->modify('+ 1 day');
         //Cherche le numéro du jour de la semaine de cette date 
         $joursemaine = date_format($datedebgeneration, 'w');
@@ -205,15 +204,48 @@ class AdminController   {
             } 
             
         }
-        
+        //Chagement des données de la table planningmodel dans un tableau de tableaux
+        $planningModel = $app['dao.planningmodel']->findAll();
 
+        foreach($planningModel as $jour){
+            //Gestion de la date de début de génération du planning dans le cas du Dimanche 
+            if($joursemaine <= $jour->getJour()){                 
+            //calcul de la différence de jours     
+            $diff = $jour->getJour() - $joursemaine;
+            $dataaentrer = $datedebgeneration->modify('+'. $diff . ' day');
+            //récupération des données du tableau
+            $numerodujour= $jour->getJour();
+            $heure = $jour->getHeure();
+            $duree = $jour->getDuree();
+            $placemax = $jour->getPlacemax();
+            $coursid = $jour->getCoursid();
 
+            //Création de l'objet planning à insérer en base
+            $planninginsert = new planning();   
+            
+            //modification du jour pour insérer la date et l'heure
+            $planninginsert -> setDatecours(date_format($dataaentrer, 'Y-m-d').' '. $heure);
+            $planninginsert -> setDuree($duree);
+            $planninginsert -> setPlacemax($placemax);
+            $planninginsert -> setCoursid($coursid);
+
+            
+
+            //insertion dans la base de l'objet planninginsert
+            $app['dao.planning']->insert($planninginsert);
+            }
+        }
+             
         return $app['twig']->render('planninggenere.html.twig', array(
             'datedeb' => $datedeb,
             'dategen' => $datedebgeneration,
             'joursemaine' => $joursemaine,
             //'dateinsert' => $dateinsert,
-            'planning_type' => $planning_type
+            'planningModel' => $planningModel
+
+        
+            
+            
         ));        
     // En attente de modification ....    
     }

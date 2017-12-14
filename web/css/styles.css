@@ -20,6 +20,13 @@ padding-top: 6rem;
 #headadmin{
   margin-bottom: 0rem;
 }
+.connecté {
+  color: red;
+  position: absolute;
+  top: 29px;
+  left: 1695px;
+  font-weight: bold; 
+}
 
 #uladmin{
   list-style-type: none; 

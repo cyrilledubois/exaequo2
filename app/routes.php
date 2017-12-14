@@ -79,3 +79,20 @@ $app->match('/planninggenere', 'WF3\Controller\AdminController::generationPlanni
 //Back user 
 $app->match('/back', 'WF3\Controller\HomeController::updateUserAction')
 ->bind('back');
+
+//paypal
+$app->match('/achat/{id}', 'WF3\Controller\HomeController::achatPaypal')
+->assert('id','\d+')
+->bind('achatPaypal');
+
+//paiement accepté
+$app->match('/paiement_accepte', 'WF3\Controller\HomeController::paiementAccepte')
+->bind('paiement_accepte');
+
+//paiement refusé
+$app->match('/paiement_refuse', 'WF3\Controller\HomeController::paiementRefuse')
+->bind('paiement_refuse');
+
+//mot de passe perdu
+$app->match('/mdp_perdu', 'WF3\Controller\HomeController::mdpPerdu')
+->bind('mdp_perdu');

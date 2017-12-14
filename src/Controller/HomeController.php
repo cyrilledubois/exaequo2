@@ -13,6 +13,13 @@ use WF3\Form\Type\UserRegisterType;
 use WF3\Form\Type\SearchEngineType;
 //permet de générer des erreurs 403 (accès interdit)
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+//paypal
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
+use PayPal\Api\Transaction;
 
 class HomeController{
 
@@ -138,9 +145,145 @@ class HomeController{
         return $app['twig']->render('contact.html.twig');
     }
     
-    
-    
-	//page contact
+	//page paiemenb accepté
+    public function paiementAccepte(Application $app, Request $request){
+        
+
+
+        $paymentId = $request->query->get('paymentId');
+        $payerId = $request->query->get('PayerID');
+        $executionSuccessful = $app['paypal']->executePayment($payerId, $paymentId);
+        $payment = Payment::get($paymentId, $app['paypal']->getPayPalApiContext());
+
+
+        $payer = $payment->getPayer()->getPayerInfo();
+
+       $email = $payer->getEmail();
+
+       $firstName = $payer->getFirstName();
+
+       $lastName = $payer->getLastName();
+
+       $shipping = $payer->getShippingAddress();
+
+       $city = $shipping->getCity();
+
+       $state = $shipping->getState();
+
+       $postalCode = $shipping->getPostalCode();
+
+       $phone = $payer->getPhone();
+
+       $country = $shipping->getCountryCode();        
+
+       $adress = $firstName . ' ' . $lastName . ' - ' .
+
+               $shipping->getLine1() . ' - ' . $shipping->getLine2() . ' - ' .
+
+               $city . ' - ' . $postalCode . ' - ' . $state . ' - ' . $country;
+
+       $createtime = $payment->getCreateTime();
+
+
+       foreach($payment->getTransactions() as $transaction)
+        {
+            //$shipping = $transaction->getItemList()->getShippingAddress();
+            $amount = $transaction->getAmount()->getTotal();
+            $currency = $transaction->getAmount()->getCurrency();
+            $tab = explode('--', $transaction->getDescription());
+            $abonnementID = $tab[0];
+            $itemDescription = $tab[1];
+            //on récupère l'abonnement avec l'id renvoyée par paypal
+            $abonnement = $app['dao.abonnement']->getAmount($abonnementID);
+            if($abonnement->getPrix() == $amount AND $currency == 'EUR' AND $executionSuccessful){
+                //prices matches, product ids matches,currency is US Dollar and payment is valid
+                $status = 'valid';
+                $message = 'Congratulations, your payment has been accepted !'
+                        . '<br>The artist have been notified of your purchase.';
+                $product = $app['dao.product']->find($productId);
+                $product->setStatus('I'); //set status to sold;
+                $app['dao.product']->updateProduct($product);
+                //send notifications
+                //first purchase confirmation to customer
+                $notification = \Swift_Message::newInstance()
+                ->setSubject('Purchase notification on peddle-art.com')
+                ->setFrom(array('no-reply@peddle-art.com'))
+                ->setTo(array($user->getEmail()))
+                /*->setBody($app['twig']->render('email/purchase.confirmation.email.html.twig',   // email template
+                    array('name'      => $user->getUsername(),
+                          'product'     => $product,
+                    )),'text/html');*/
+                ->setBody($message);
+                $app['mailer']->send($notification);
+                
+                //then sale notification to exaequo
+                $notification3 = \Swift_Message::newInstance()
+                ->setSubject('Vente d\'un abonnement')
+                ->setFrom(array('no-reply@exaequo.com'))
+                ->setTo(array('adresse email de la salle de sport'))
+                /*->setBody($app['twig']->render('email/sale.confirmation.email.html.twig',   // email template
+                    array('name'      => $seller->getUsername(),
+                          'product'     => $product,
+                          'adress' => $adress,
+                          'buyer' => $user->getUsername()
+                    )),'text/html');*/
+                ->setBody($message);
+
+                $app['mailer']->send($notification3);
+            }
+            else{
+                $status = 'invalid';
+                $message = 'Unfortunalty, Your payment have not been accepted.'
+                        . '<br>Contact us for any question you may have.';
+            
+                $notification4 = \Swift_Message::newInstance()
+                ->setSubject('error : Sale notification on peddle-art.com')
+                ->setFrom(array('no-reply@peddle-art.com'))
+                ->setTo(array('contact@le-web-developpeur.com'))
+                /*->setBody($app['twig']->render('email/sale.confirmation.email.html.twig',   // email template
+                    array('name'      => $seller->getUsername(),
+                          'product'     => $product,
+                          'adress' => $adress,
+                          'buyer' => $user->getUsername(). ' - ' . $productID . ' / ' . $productId . ' -- ' . $dbAmount . ' / ' . $amount . ' -- ' . $currency . ' -- ' . $executionSuccessful
+                    )),'text/html');*/
+                    ->setBody($message);
+
+                $app['mailer']->send($notification4);
+            }
+                
+            
+        }
+       //ici c'est l'enregistrement de la transaction dans la base: il faut créer une classe saleDAO (tu l'appelles comme tu veux) et la table associée qui va stocker les informations 
+        $sale = new Sale();
+        $sale
+           ->setAmount($amount)
+           ->setBuyerid($user->getId())
+           ->setPaymentid($paymentId)
+           ->setPayerid($payerId)
+           ->setProductid($abonnementID)
+           ->setEmail($email)
+           ->setCreatetime($createtime)
+           ->setPhone($phone)
+           ->setShipping($adress)
+           ->setStatus($status);
+        $app['dao.sale']->insert($sale);
+
+        return $app['twig']->render('paiement_accepte.html.twig',array('request'=>$payment));
+    }
+
+    //page paiemenb refusé
+    public function paiementRefuse(Application $app){
+
+        return $app['twig']->render('paiement_refuse.html.twig');
+    }
+
+    //mot de passe perdu
+    public function mdpPerdu(Application $app){
+
+        return $app['twig']->render('mdp_perdu.html.twig');
+    }
+
+
 	public function contactAction(Application $app, Request $request){
         $contactForm = $app['form.factory']->create(ContactType::class);
         $contactForm->handleRequest($request);
@@ -269,6 +412,43 @@ class HomeController{
             'userForm' => $userForm->createView()
         ));
     }
+
+
+
+    public function achatPaypal(Application $app, Request $request, $id){
+        //on va vérifier que l'utilisateur est connecté
+        if(!$app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')){
+            //je peux rediriger l'utilisateur non authentifié
+            //return $app->redirect($app['url_generator']->generate('home'));
+            $app['session']->getFlashBag()->add('success', 'Vous devez vous connecter pour effectuer un achat.');
+            return $app->redirect($app['url_generator']->generate('connexion'));
+
+        }
+        //on récupère le token si l'utilisateur est connecté
+        $token = $app['security.token_storage']->getToken();
+        if(NULL !== $token){
+            $user = $token->getUser();
+        }
+
+        $abonnement = $app['dao.abonnement']->find($id);
+
+        $expressCheckout = $app['paypal']->createExpressCheckout();
+        $expressCheckout
+               ->addItem($abonnement->getNom(), 1, 'sku0', $abonnement->getPrix(), 'tarifs.html.twig')
+               ->setDescription($abonnement->getId() . '--' . $abonnement->getDescriptif())
+               ->setInvoiceNumber('546456')
+               ->setSuccessUrl('https://localhost/exaequo2/web/paiement_accepte') //la route qui va gérer les infos de paiement accepté
+               ->setFailureUrl('https://localhost/exaequo2/web/paiement_refuse'); //la route qui va gérer les erreurs de paiement
+
+        $approvalUrl = $expressCheckout->getApprovalUrl($app['paypal']->getPayPalApiContext());
+        return $app->redirect($approvalUrl);
+
+
+        return  $abonnement->getNom();
+
+    }   
+
+
 
 
 }

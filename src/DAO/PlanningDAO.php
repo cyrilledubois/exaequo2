@@ -5,7 +5,7 @@ class PlanningDAO extends DAO{
 
 	// Select planning generale
     public function selectPlanning(){
-		$result = $this->bdd->query('SELECT * FROM planning ORDER BY date_cours asc LIMIT 10');
+		$result = $this->bdd->query('SELECT * FROM planning ORDER BY datecours asc LIMIT 10');
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
     }
 
@@ -38,7 +38,7 @@ class PlanningDAO extends DAO{
 
 	// 
 	public function selectIntensity($intensite){
-		$result = $this->bdd->prepare('SELECT * FROM planning INNER JOIN cours ON planning.id_cours = cours.id WHERE intensite = :intensite');
+		$result = $this->bdd->prepare('SELECT * FROM planning INNER JOIN cours ON planning.coursid = cours.id WHERE intensite = :intensite');
 		$result->bindValue(':intensite', $intensite, \PDO::PARAM_INT);
 		$result->execute();
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
@@ -46,7 +46,7 @@ class PlanningDAO extends DAO{
 	// Trouve la dernière date générée
     public function lastDate(){
     	//Trouve la dernière date générée :
-		$result = $this->bdd->query('SELECT MAX(date_cours) FROM planning');
+		$result = $this->bdd->query('SELECT MAX(datecours) FROM planning');
 		return $result->fetch(\PDO::FETCH_ASSOC);
 	}
 
