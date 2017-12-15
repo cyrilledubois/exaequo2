@@ -1,5 +1,5 @@
 <?php
-//on utie des composants Symfony qui vont nous permettre d'avoir des erreurs plus précises
+//on utilise des composants Symfony qui vont nous permettre d'avoir des erreurs plus précises
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
 use Silex\Provider;
@@ -11,17 +11,18 @@ ExceptionHandler::register();
 $app->register(new Provider\HttpFragmentServiceProvider());
 $app->register(new Provider\ServiceControllerServiceProvider());
 
+
 //Paypal//paypal
 $app->register(new SKoziel\Silex\PayPalRest\PayPalServiceProvider(), array(
     'paypal.settings'=>array(
         'mode'=>'sandbox', //'live' or 'sandbox'(default)
-        'clientID'=>'jhgjhgfgufu', //Checkout PayPal Documentation for more info
-        'secret'=>'gfchgfcfhygtcfy', //Checkout PayPal Documentation for more info
+        'clientID'=>'AYymrboMXRkgtN2aV-7InQtEHw-aryaT4-B-QCisyhxPwu53zk-oHnDyI2Yswj-mxxhz1CCsn4lhp4ha', //Checkout PayPal Documentation for more info
+        'secret'=>'EJWs4NRNQVxHk2OecE084oyexYUaLkEpe_2STUqMrigksPpMBSteHQJaCvkv3HrNREJc-2fhWZh878zf', //Checkout PayPal Documentation for more info
         'connectionTimeOut'=>30, //Connection time out in seconds, optional, default = 30
         'logEnabled'=>false, //This parameter is optional, default = true
         'logdir'=>'logs', //This parameter is optional, default = ROOT/logs
         'currency'=>'EUR' //This parameter is optional, default = EUR
-)));
+    )));
 
 //On enregistre le service dbal
 $app->register(new Silex\Provider\DoctrineServiceProvider());
@@ -103,30 +104,26 @@ $app['dao.user'] = function($app){
 	return new WF3\DAO\UserDAO($app['db'], 'users', 'WF3\Domain\User');
 };
 
-//on pourra ainsi accéder à notre classe planningmodelDAO grâce à $app['dao.planningmodel'] 
+//on pourra ainsi accéder à notre classe UserDAO grâce à $app['dao.user'] 
 $app['dao.planningmodel'] = function($app){
     return new WF3\DAO\PlanningModelDAO($app['db'], 'planningmodel', 'WF3\Domain\PlanningModel');
 };
 
-
-$app['dao.abo'] = function($app){
-   return new WF3\DAO\AboDAO($app['db'], 'abo', 'WF3\Domain\abo');
-};
-
-
 //paypal, prix abonnement.
 $app['dao.abonnement'] = function($app){
-    return new WF3\DAO\AbonnementDAO($app['db'], 'abonnement', 'WF3\Domain\Abonnement');
+    return new WF3\DAO\AbonnementDAO($app['db'], 'abonnement', 'WF3\Domain\abonnement');
 };
 
+$app['dao.abo'] = function($app){
+  return new WF3\DAO\AboDAO($app['db'], 'abo', 'WF3\Domain\abo');
+};
 
 //PaypalInvoiceDAO
 $app['dao.paypalInvoice'] = function($app){
-    return new WF3\DAO\PaypalInvoiceDAO($app['db'], 'paypalInvoice', 'WF3\Domain\PaypalInvoice');
+   return new WF3\DAO\PaypalInvoiceDAO($app['db'], 'paypalInvoice', 'WF3\Domain\PaypalInvoice');
 };
 
 //SaleDAO
 $app['dao.sale'] = function($app){
-    return new WF3\DAO\SaleDAO($app['db'], 'sale', 'WF3\Domain\Sale');
+   return new WF3\DAO\SaleDAO($app['db'], 'sale', 'WF3\Domain\Sale');
 };
-
