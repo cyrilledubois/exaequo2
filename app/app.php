@@ -22,7 +22,7 @@ $app->register(new SKoziel\Silex\PayPalRest\PayPalServiceProvider(), array(
         'logEnabled'=>false, //This parameter is optional, default = true
         'logdir'=>'logs', //This parameter is optional, default = ROOT/logs
         'currency'=>'EUR' //This parameter is optional, default = EUR
-
+)));
 //On enregistre le service dbal
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 

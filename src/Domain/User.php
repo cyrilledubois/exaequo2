@@ -241,7 +241,8 @@ class User implements UserInterface
 
     public function setLastname($lastname) {
         $this->lastname = $lastname;
-
+    }
+    
     public function getUserId(){
         return $this->userid;
     }
