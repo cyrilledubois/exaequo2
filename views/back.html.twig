@@ -38,6 +38,19 @@
         </div>
       </div>
 
+        
+      <div class="form-group">
+        {{ form_label(userForm.lastname, null) }}
+        <div class='form-input'>
+          
+          {{ form_widget(userForm.lastname, { 'attr':  {
+            'class': 'form-control'
+          }}) }}
+          {{ form_errors(userForm.lastname) }}
+        </div>
+      </div>
+
+        
       <div class="form-group">
         {{ form_label(userForm.firstname, null) }}
         <div class='form-textarea'>
