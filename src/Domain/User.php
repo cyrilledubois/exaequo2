@@ -40,6 +40,8 @@ class User implements UserInterface
 
     private $role;
 
+    private $lastname;
+
     private $firstname;
 
     private $sex;
@@ -221,6 +223,16 @@ class User implements UserInterface
 
     public function setGroupeClient($groupeclient) {
         $this->groupeclient = $groupeclient;
+        return $this;
+    }
+
+    //pseudo
+     public function getLastname() {
+        return $this->lastname;
+    }
+
+    public function setLastname($lastname) {
+        $this->lastname = $lastname;
         return $this;
     }
 

@@ -1,3 +1,13 @@
+a .surlignement { 
+ text-decoration: none; 
+} 
+
+.merci{
+  font-weight: bold;
+  color: rgb(75, 11, 49);
+
+}
+
 /*Back user*/
 #navuser{
  background:  rgb(73,7,49);
@@ -588,6 +598,7 @@ ul.tarif-description li:after {
   border-top: none;
   margin-bottom: 30px;
   border-radius: 15px;
+
 }
 #tarif .bloc-tarif h2 {
   margin-top: 0px;
@@ -752,6 +763,8 @@ h1 {
 }
 
 
+
+
 @media screen and (max-width: 992px) {
   .paypal1 {
       height: 37px;
@@ -807,25 +820,78 @@ h1 {
 @media screen and (max-width: 768px) {
   .paypal1 {
       height: 58px;
-      top: 372px;
-      left: 528px; 
+      top: 350px;
+      left: 240px; 
   }
 
   .paypal2 {
       height: 58px;
-      top: 457px;
-      left: 528px; 
+      top: 435px;
+      left: 240px; 
   }
 
   .paypal3 {
       height: 58px;
-      top: 482px;
-      left: 528px; 
+      top: 460px;
+      left: 240px; 
   }
 
   .paypal4 {
       height: 58px;
-      top: 508px;
-      left: 528px; 
+      top: 485px;
+      left: 240px; 
   }
 }
+
+@media screen and (max-width: 736px) {
+  .paypal1 {
+      height: 58px;
+      top: 350px;
+      left: 260px; 
+  }
+
+  .paypal2 {
+      height: 58px;
+      top: 435px;
+      left: 260px; 
+  }
+
+  .paypal3 {
+      height: 58px;
+      top: 460px;
+      left: 260px; 
+  }
+
+  .paypal4 {
+      height: 58px;
+      top: 485px;
+      left: 260px; 
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .paypal1 {
+      height: 58px;
+      top: 349px;
+      left: 235px; 
+  }
+
+  .paypal2 {
+      height: 58px;
+      top: 435px;
+      left: 235px; 
+  }
+
+  .paypal3 {
+      height: 58px;
+      top: 460px;
+      left: 235px; 
+  }
+
+  .paypal4 {
+      height: 58px;
+      top: 485px;
+      left: 235px; 
+  }
+}
+

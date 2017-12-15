@@ -68,4 +68,13 @@ class UserDAO extends DAO implements UserProviderInterface
         $result->execute();
 		return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+//mot de passe perdu:
+public function mdpPerdu() {
+    //on vérifie s'il y a une entrée dans la base qui correspond à l'email envoyé dans le formulaire
+        $resultat = $bdd->prepare('SELECT password FROM users WHERE email = :email');
+        $resultat->bindValue(':email', trim($_POST['email']));
+        $resultat->execute();
+}
+
 }

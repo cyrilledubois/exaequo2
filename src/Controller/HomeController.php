@@ -21,6 +21,8 @@ use PayPal\Api\ExecutePayment;
 use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
+use WF3\Domain\PaypalInvoice;
+use WF3\Domain\Sale;
 
 class HomeController{
 
@@ -137,7 +139,7 @@ class HomeController{
 	//page paiemenb accepté
     public function paiementAccepte(Application $app, Request $request){
         
-
+        $user = $app['user'];
 
         $paymentId = $request->query->get('paymentId');
         $payerId = $request->query->get('PayerID');
@@ -183,15 +185,12 @@ class HomeController{
             $abonnementID = $tab[0];
             $itemDescription = $tab[1];
             //on récupère l'abonnement avec l'id renvoyée par paypal
-            $abonnement = $app['dao.abonnement']->getAmount($abonnementID);
+            $abonnement = $app['dao.abonnement']->find($abonnementID);
             if($abonnement->getPrix() == $amount AND $currency == 'EUR' AND $executionSuccessful){
                 //prices matches, product ids matches,currency is US Dollar and payment is valid
                 $status = 'valid';
                 $message = 'Congratulations, your payment has been accepted !'
                         . '<br>The artist have been notified of your purchase.';
-                $product = $app['dao.product']->find($productId);
-                $product->setStatus('I'); //set status to sold;
-                $app['dao.product']->updateProduct($product);
                 //send notifications
                 //first purchase confirmation to customer
                 $notification = \Swift_Message::newInstance()
@@ -249,11 +248,11 @@ class HomeController{
            ->setBuyerid($user->getId())
            ->setPaymentid($paymentId)
            ->setPayerid($payerId)
-           ->setProductid($abonnementID)
+           ->setAbonnementid($abonnementID)
            ->setEmail($email)
            ->setCreatetime($createtime)
            ->setPhone($phone)
-           ->setShipping($adress)
+           ->setAdress($adress)
            ->setStatus($status);
         $app['dao.sale']->insert($sale);
 
@@ -394,7 +393,7 @@ class HomeController{
             $app['session']->save(); // this will be done automatically but it does not hurt to do it explicitly*/
 
 
-            $app['session']->getFlashBag()->add('success', 'Vous êtes bien enregistré ' .  $user->getFirstname());
+            $app['session']->getFlashBag()->add('success', 'Vous êtes bien enregistré ' .  $user->getUsername());
             // Redirect to admin home page
             return $app->redirect($app['url_generator']->generate('inscription'));
         }
@@ -424,10 +423,14 @@ class HomeController{
         $abonnement = $app['dao.abonnement']->find($id);
 
         $expressCheckout = $app['paypal']->createExpressCheckout();
+
+        $invoice = new PaypalInvoice();
+        $ppinvoice = $app['dao.paypalInvoice']->insert($invoice);
+        $numeroUnique = $app['db']->lastInsertId();
         $expressCheckout
                ->addItem($abonnement->getNom(), 1, 'sku0', $abonnement->getPrix(), 'tarifs.html.twig')
                ->setDescription($abonnement->getId() . '--' . $abonnement->getDescriptif())
-               ->setInvoiceNumber('546456')
+               ->setInvoiceNumber($numeroUnique)
                ->setSuccessUrl('https://localhost/exaequo2/web/paiement_accepte') //la route qui va gérer les infos de paiement accepté
                ->setFailureUrl('https://localhost/exaequo2/web/paiement_refuse'); //la route qui va gérer les erreurs de paiement
 
