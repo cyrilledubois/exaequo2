@@ -77,14 +77,15 @@
                   <li><a href="{{ path('equipe') }}">Notre équipe</a></li>
                   <li><a href="{{ path('tarifs') }}">Nos tarifs</a></li>
                   <li><a href="{{ path('partenaires') }}">Nos Partenaires</a></li>
+<<<<<<< HEAD
                  
                   <li><a href="{{ path('contact') }}">Contact</a></li>
                     {# GESTION DES ROLES USER - ADMIN #}
                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                    {% if is_granted('ROLE_ADMIN') %}
-                   <li><a href="{{ path('admin') }}">administration</a></li>
+                   <li><a href="{{ path('admin') }}">Administration</a></li>
                    {% elseif is_granted('ROLE_USER')%}
-                   <p class="connecté">Bonjour {{app.user.firstname}} ! </p>
+                   <p class="connecté">Bonjour {{app.user.username}} ! </p>
                    <li><a href="{{ path('back') }}">Mon compte</a></li>
                    {% endif %}
                    <li><a href="{{ path('logout') }}">Déconnexion</a></li>
@@ -92,6 +93,7 @@
                    <li><a href="{{ path('inscription') }}">Inscription</a></li>
                    <li><a href="{{ path('connexion') }}">Connexion</a></li>
                    {% endif %}
+
                     <li><a href="{{ path('reservation') }}">Réserver une session</a></li>
                 </ul>
 			  </div>

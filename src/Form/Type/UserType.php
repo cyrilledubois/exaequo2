@@ -22,14 +22,14 @@ class UserType extends AbstractType
                'choices' => array('Mlle' => 'Mlle', 'Mme' => 'Mme', 'M.' => 'M.')))
             ///////////////////////////////////////////////////////////
             ->add('username', TextType::class, array(
-                'label' => 'Nom*',
+                'label' => 'Pseudo*',
                 'constraints'     => array(
                                             new Assert\NotBlank(),
                                             new Assert\Length(array(
                                                 'min' => 2,
                                                 'max' => 50,
-                                                'minMessage' => 'Le nom ne peut comporter moins de 2 caractères',
-                                                'maxMessage' => 'Le nom ne peut comporter plus de 50 caractères'
+                                                'minMessage' => 'Le pseudo ne peut comporter moins de 2 caractères',
+                                                'maxMessage' => 'Le pseudo ne peut comporter plus de 50 caractères'
                                                 ))
                                             )
             ))
@@ -58,6 +58,18 @@ class UserType extends AbstractType
                                                 'max' => 50,
                                                 'minMessage' => 'Le prénom ne peut comporter moins de 2 caractères.',
                                                 'maxMessage' => 'Le prénom ne peut comporter plus de 50 caractères.'
+                                                )))
+            ))
+            ///////////////////////////////////////////////
+            ->add('lastname', TextType::class, array(
+                'label' => 'Nom*',
+                'constraints'     => array(
+                                            new Assert\NotBlank(),
+                                            new Assert\Length(array(
+                                                'min' => 2,
+                                                'max' => 50,
+                                                'minMessage' => 'Le nom ne peut comporter moins de 2 caractères.',
+                                                'maxMessage' => 'Le nom ne peut comporter plus de 50 caractères.'
                                                 )))
             ))
             ///////////////////////////////////////////////

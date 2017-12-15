@@ -21,7 +21,7 @@ $app->register(new SKoziel\Silex\PayPalRest\PayPalServiceProvider(), array(
         'logEnabled'=>false, //This parameter is optional, default = true
         'logdir'=>'logs', //This parameter is optional, default = ROOT/logs
         'currency'=>'EUR' //This parameter is optional, default = EUR
-    )));
+)));
 
 //On enregistre le service dbal
 $app->register(new Silex\Provider\DoctrineServiceProvider());
@@ -108,7 +108,25 @@ $app['dao.planningmodel'] = function($app){
     return new WF3\DAO\PlanningModelDAO($app['db'], 'planningmodel', 'WF3\Domain\PlanningModel');
 };
 
+
 $app['dao.abo'] = function($app){
    return new WF3\DAO\AboDAO($app['db'], 'abo', 'WF3\Domain\abo');
+};
+
+
+//paypal, prix abonnement.
+$app['dao.abonnement'] = function($app){
+    return new WF3\DAO\AbonnementDAO($app['db'], 'abonnement', 'WF3\Domain\Abonnement');
+};
+
+
+//PaypalInvoiceDAO
+$app['dao.paypalInvoice'] = function($app){
+    return new WF3\DAO\PaypalInvoiceDAO($app['db'], 'paypalInvoice', 'WF3\Domain\PaypalInvoice');
+};
+
+//SaleDAO
+$app['dao.sale'] = function($app){
+    return new WF3\DAO\SaleDAO($app['db'], 'sale', 'WF3\Domain\Sale');
 };
 

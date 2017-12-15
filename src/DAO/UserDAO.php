@@ -68,6 +68,7 @@ class UserDAO extends DAO implements UserProviderInterface
         $result->execute();
 		return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
+
     //pour récupérer les cours par utilisateur
     public function getCoursByUser($id){
        $result = $this->bdd->prepare('SELECT * FROM usershasplanning
@@ -79,4 +80,24 @@ class UserDAO extends DAO implements UserProviderInterface
        $result->execute();
        return $result->fetchAll(\PDO::FETCH_ASSOC);
    }
+
+
+
+//mot de passe perdu:
+public function mdpPerdu() {
+    //on vérifie s'il y a une entrée dans la base qui correspond à l'email envoyé dans le formulaire
+        $resultat = $bdd->prepare('SELECT password FROM users WHERE email = :email');
+        $resultat->bindValue(':email', trim($_POST['email']));
+        $resultat->execute();
+}
+
+
+    public function reservAction($userId, $planningId){
+        $result = $this->bdd->prepare('INSERT INTO users_has_planning (usersid, PlanningidPlanning) VALUES (:usersid, :PlanningidPlanning)');
+        $result->bindValue(':usersid', $userId);
+        $result->bindValue(':PlanningidPlanning', $planningId);
+        return $result->execute();
+        //\PDO::PARAM_INT);
+    }
+
 }
