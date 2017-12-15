@@ -61,9 +61,6 @@ class User implements UserInterface
     private $PlanningidPlanning;
 
     
-   
-
-
     public function getId() {
         return $this->id;
     }
