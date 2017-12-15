@@ -32,7 +32,7 @@ class Planning{
     //setters
 
     public function setId($id){
-        if(!empty($id) && is_numeric($id)){
+        if(!empty($id) && is_nuemric($id)){
             $this->id = $id; 
         }
     }
@@ -55,9 +55,8 @@ class Planning{
         }         
     }
 
-
     public function setCoursid($coursid){   
-        if(!empty($coursid)){        
+        if(!empty($coursid) AND is_numeric($coursid)){        
         $this->coursid = $coursid;         
         }
     }

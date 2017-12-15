@@ -1,3 +1,13 @@
+a .surlignement { 
+ text-decoration: none; 
+} 
+
+.merci{
+  font-weight: bold;
+  color: rgb(75, 11, 49);
+
+}
+
 /*Back user*/
 #navuser{
  background:  rgb(73,7,49);
@@ -6,39 +16,29 @@
  padding-bottom: 3rem;
 }
 
-#planningadmin{
-background: rgb(112, 16, 73);
-color: white;
-padding-top: 6rem;
+#headuser{
+ margin-bottom: 0rem;
+}
+#uluser{
+ list-style-type: none;
+ text-align: center;
 }
 
-#bla{
-  border: 0.1rem solid black;
-  padding-bottom: 5rem;
+#uluser>li>a{
+ margin: 2rem;
+ padding: 2rem;
+ margin-left: 2rem;
+ color: white;
 }
 
-#headadmin{
-  margin-bottom: 0rem;
-}
 .connecté {
-  color: red;
-  position: absolute;
-  top: 29px;
-  left: 1695px;
-  font-weight: bold; 
+ color: red;
+ position: absolute;
+ top: 29px;
+ left: 1695px;
+ font-weight: bold; 
 }
 
-#uladmin{
-  list-style-type: none; 
-  text-align: center;
-}
-
-#uladmin>li>a{
-  margin: 2rem;
-  padding: 2rem;
-  margin-left: 2rem;
-  color: white;
-}
 
 /*MODIF TEAM WF3*/
 /*BACK ADMIN*/
@@ -54,32 +54,30 @@ top: 5px;
   width: 100%;
 }
 
-.paypal1{
-  height: 37px;
-  position: absolute;
-  top: 360px;
-  left: 195px; 
+#navadmin{
+  background: black;
+  color: white;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-.paypal2{
-  height: 37px;
-  position: absolute;
-  top: 443px;
-  left: 195px; 
+#upload{
+  background-color: rgb(75, 11, 49);
 }
 
-.paypal3{
-  height: 37px;
-  position: absolute;
-  top: 469px;
-  left: 195px; 
+#headadmin{
+  margin-bottom: 0rem;
+}
+#uladmin{
+  list-style-type: none; 
+  text-align: center;
 }
 
-.paypal4{
-  height: 37px;
-  position: absolute;
-  top: 495px;
-  left: 195px; 
+#uladmin>li>a{
+  margin: 2rem;
+  padding: 2rem;
+  margin-left: 2rem;
+  color: white;
 }
 
 
@@ -91,7 +89,7 @@ top: 5px;
   margin-bottom: 2rem;
 }
 
-#pagination{ /*admin aussi*/
+#pagination{
   text-align: center;
   background: rgb(75, 11, 49);
 }
@@ -393,6 +391,35 @@ video::-webkit-media-controls-start-playback-button {
 
 /*__________________________________*/
 
+.paypal1{
+  height: 37px;
+  position: absolute;
+  top: 360px;
+  left: 195px; 
+}
+
+.paypal2{
+  height: 37px;
+  position: absolute;
+  top: 443px;
+  left: 195px; 
+}
+
+.paypal3{
+  height: 37px;
+  position: absolute;
+  top: 469px;
+  left: 195px; 
+}
+
+.paypal4{
+  height: 37px;
+  position: absolute;
+  top: 495px;
+  left: 195px; 
+}
+
+
 #pres {
   margin: 40px 0;
 }
@@ -570,6 +597,7 @@ ul.tarif-description li:after {
   border-top: none;
   margin-bottom: 30px;
   border-radius: 15px;
+
 }
 #tarif .bloc-tarif h2 {
   margin-top: 0px;
@@ -708,6 +736,160 @@ h1 {
 
 @media screen and (max-width: 1200px) {
   .paypal1 {
-      height: 97px;
+      height: 32px;
+      top: 390px;
+      left: 159px; 
+  }
+
+  .paypal2 {
+      height: 32px;
+      top: 432px;
+      left: 159px; 
+  }
+
+  .paypal3 {
+      height: 32px;
+      top: 514px;
+      left: 159px; 
+  }
+
+  .paypal4 {
+      height: 32px;
+      top: 525px;
+      left: 159px; 
   }
 }
+
+
+@media screen and (max-width: 992px) {
+  .paypal1 {
+      height: 37px;
+      top: 350px;
+      left: 278px; 
+  }
+
+  .paypal2 {
+      height: 37px;
+      top: 433px;
+      left: 278px; 
+  }
+
+  .paypal3 {
+      height: 37px;
+      top: 460px;
+      left: 278px; 
+  }
+
+  .paypal4 {
+      height: 37px;
+      top: 485px;
+      left: 278px; 
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .paypal1 {
+      height: 37px;
+      top: 360px;
+      left: 278px; 
+  }
+
+  .paypal2 {
+      height: 37px;
+      top: 443px;
+      left: 278px; 
+  }
+
+  .paypal3 {
+      height: 37px;
+      top: 470px;
+      left: 278px; 
+  }
+
+  .paypal4 {
+      height: 37px;
+      top: 495px;
+      left: 278px; 
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .paypal1 {
+      height: 58px;
+      top: 350px;
+      left: 240px; 
+  }
+
+  .paypal2 {
+      height: 58px;
+      top: 435px;
+      left: 240px; 
+  }
+
+  .paypal3 {
+      height: 58px;
+      top: 460px;
+      left: 240px; 
+  }
+
+  .paypal4 {
+      height: 58px;
+      top: 485px;
+      left: 240px; 
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .paypal1 {
+      height: 58px;
+      top: 350px;
+      left: 260px; 
+  }
+
+  .paypal2 {
+      height: 58px;
+      top: 435px;
+      left: 260px; 
+  }
+
+  .paypal3 {
+      height: 58px;
+      top: 460px;
+      left: 260px; 
+  }
+
+  .paypal4 {
+      height: 58px;
+      top: 485px;
+      left: 260px; 
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .paypal1 {
+      height: 58px;
+      top: 349px;
+      left: 235px; 
+  }
+
+  .paypal2 {
+      height: 58px;
+
+      top: 435px;
+      left: 235px; 
+  }
+
+  .paypal3 {
+      height: 58px;
+
+      top: 460px;
+      left: 235px; 
+  }
+
+  .paypal4 {
+      height: 58px;
+      top: 485px;
+      left: 235px; 
+  }
+}
+

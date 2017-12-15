@@ -5,14 +5,16 @@ use Silex\Application;
 //cette ligne nous permet d'utiliser le service fourni par symfony pour gérer 
 // les $_GET et $_POST
 use Symfony\Component\HttpFoundation\Request;
-use WF3\Domain\Article;
+use WF3\Domain\Planning;
 use WF3\Form\Type\ArticleType;
 use WF3\Form\Type\ContactType;
 use WF3\Domain\User;
+use WF3\Form\Type\UserType;
 use WF3\Form\Type\UserRegisterType;
 use WF3\Form\Type\SearchEngineType;
 //permet de générer des erreurs 403 (accès interdit)
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 //paypal
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -20,14 +22,17 @@ use PayPal\Api\ExecutePayment;
 use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
+use WF3\Domain\PaypalInvoice;
+use WF3\Domain\Sale;
 
 class HomeController{
 
-    public function homePageReserv(Application $app, Request $request){
+    public function homePageReserv(Application $app){
         //NE PAS SUPPRIMER : 
         //initialisation de l'affichage du planning de réservation avec la date du jour.
         $dataffich = date("Y"). '-' .date("m") . '-' . date("d");
-        //Pour les tests on peut afficher le planning de réervation à une date donnée, commenter la ligne du dessus !!! 
+        //Pour les tests on peut afficher le planning de réervation à une date donnée, commenter la ligne du dessus !!!
+        //$dataffich = '2017-12-18';   
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
 
        // $fullreserv = $app['dao.planning']->fullReserv($userhasreserv);
@@ -74,42 +79,43 @@ class HomeController{
             //'reservation' => $reservation
         ));
     }
-
-    public function updateUserAction(Application $app, Request $request ){
-   //  On  utilise la ligne suivante afin de récuperer l'user en objet
-       $user = $app['user'];
-       
-       $userForm = $app['form.factory']->create(UserType::class, $user);
-       $userForm->handleRequest($request);
-       if ($userForm->isSubmitted() && $userForm->isValid()) {
+public function updateUserAction(Application $app, Request $request ){
+  //  On  utilise la ligne suivante afin de récuperer l'user en objet
+      $user = $app['user'];
      
-           //on récupère le mot de passe en clair (envoyé par l'utilisateur)
-           $plainPassword = $user->getPassword();
-           // on récupère l'encoder de silex
-           $encoder = $app['security.encoder.bcrypt'];
-           // on encode le mdp
-           $password = $encoder->encodePassword($plainPassword, $user->getSalt());
-           // on remplace le mdp en clair par le mdp crypté
-           $user->setPassword($password);
-           $app['dao.user']->update($user->getId(), $user);
-           $app['session']->getFlashBag()->add('success', 'The user was successfully updated.');
-           // Redirect to admin home page
-           return $app->redirect($app['url_generator']->generate('back'));
-       }
-       return $app['twig']->render('back.html.twig', array(
-           'title' => 'update user',
-           'userForm' => $userForm->createView(),
-           'user' => $user
-       ));
-   }
-
-
-
+      $userForm = $app['form.factory']->create(UserType::class, $user);
+      $userForm->handleRequest($request);
+      if ($userForm->isSubmitted() && $userForm->isValid()) {
    
-    // Back user
-   public function backUser(Application $app){
-       return $app['twig']->render('back.user.html.twig');
-   }
+          //on récupère le mot de passe en clair (envoyé par l'utilisateur)
+          $plainPassword = $user->getPassword();
+          // on récupère l'encoder de silex
+          $encoder = $app['security.encoder.bcrypt'];
+          // on encode le mdp
+          $password = $encoder->encodePassword($plainPassword, $user->getSalt());
+          // on remplace le mdp en clair par le mdp crypté
+          $user->setPassword($password);
+          $app['dao.user']->update($user->getId(), $user);
+          $app['session']->getFlashBag()->add('success', 'The user was successfully updated.');
+          // Redirect to admin home page
+          return $app->redirect($app['url_generator']->generate('back'));
+      }
+
+      $abonnements = $app['dao.abo']->selectAbo($user->getId());
+      $cours = $app['dao.user']->getCoursByUser($user->getId());
+
+      return $app['twig']->render('back.html.twig', array(
+          'title' => 'update user',
+          'userForm' => $userForm->createView(),
+          'user' => $user,
+          'cours' => $cours,
+          'abonnements' => $abonnements
+      ));
+  }
+//     // Back user
+//    public function backUser(Application $app){
+//        return $app['twig']->render('back.user.html.twig');
+//    }
 
 	//page d'accueil
 	public function homePageAction(Application $app){
@@ -180,7 +186,7 @@ class HomeController{
 	//page paiemenb accepté
     public function paiementAccepte(Application $app, Request $request){
         
-
+        $user = $app['user'];
 
         $paymentId = $request->query->get('paymentId');
         $payerId = $request->query->get('PayerID');
@@ -226,15 +232,12 @@ class HomeController{
             $abonnementID = $tab[0];
             $itemDescription = $tab[1];
             //on récupère l'abonnement avec l'id renvoyée par paypal
-            $abonnement = $app['dao.abonnement']->getAmount($abonnementID);
+            $abonnement = $app['dao.abonnement']->find($abonnementID);
             if($abonnement->getPrix() == $amount AND $currency == 'EUR' AND $executionSuccessful){
                 //prices matches, product ids matches,currency is US Dollar and payment is valid
                 $status = 'valid';
                 $message = 'Congratulations, your payment has been accepted !'
                         . '<br>The artist have been notified of your purchase.';
-                $product = $app['dao.product']->find($productId);
-                $product->setStatus('I'); //set status to sold;
-                $app['dao.product']->updateProduct($product);
                 //send notifications
                 //first purchase confirmation to customer
                 $notification = \Swift_Message::newInstance()
@@ -292,11 +295,11 @@ class HomeController{
            ->setBuyerid($user->getId())
            ->setPaymentid($paymentId)
            ->setPayerid($payerId)
-           ->setProductid($abonnementID)
+           ->setAbonnementid($abonnementID)
            ->setEmail($email)
            ->setCreatetime($createtime)
            ->setPhone($phone)
-           ->setShipping($adress)
+           ->setAdress($adress)
            ->setStatus($status);
         $app['dao.sale']->insert($sale);
 
@@ -314,8 +317,7 @@ class HomeController{
 
         return $app['twig']->render('mdp_perdu.html.twig');
     }
-
-
+  //Messagerie contact
 	public function contactAction(Application $app, Request $request){
         $contactForm = $app['form.factory']->create(ContactType::class);
         $contactForm->handleRequest($request);
@@ -328,7 +330,7 @@ class HomeController{
                         ->setFrom(array('promo5wf3@gmx.fr'))
                         ->setTo(array('desporout@gmail.com'))
                         ->setBody($app['twig']->render('contact.email.html.twig',
-                            array('name'=>$data['name'],
+                            array('subject'=>$data['subject'],
                                 'email' => $data['email'],
                                 'message' => $data['message']
                             )
@@ -345,7 +347,7 @@ class HomeController{
         ));
 	}
     
-   
+   //login
     public function loginAction(Application $app, Request $request){
     	//j'appelle la vue qui contient le formulaire de connexion
     	//error va contenir les éventuels messages d'erreur
@@ -353,6 +355,8 @@ class HomeController{
     		'error' => $app['security.last_error']($request),
     		'last_username' => $app['session']->get('_security.last_username')
     	));
+
+            
     }
 
     public function ajoutArticleAction(Application $app, Request $request){
@@ -435,17 +439,16 @@ class HomeController{
             $app['session']->save(); // this will be done automatically but it does not hurt to do it explicitly*/
 
 
-            $app['session']->getFlashBag()->add('success', 'Hello ' .  $user->getUsername());
+            $app['session']->getFlashBag()->add('success', 'Vous êtes bien enregistré ' .  $user->getUsername());
+
             // Redirect to admin home page
-            return $app->redirect($app['url_generator']->generate('accueil'));
+            return $app->redirect($app['url_generator']->generate('inscription'));
         }
         return $app['twig']->render('user_register.html.twig', array(
-            'title' => 'Sign in',
+            'title' => 'Inscription',
             'userForm' => $userForm->createView()
         ));
     }
-
-
 
     public function achatPaypal(Application $app, Request $request, $id){
         //on va vérifier que l'utilisateur est connecté
@@ -465,10 +468,14 @@ class HomeController{
         $abonnement = $app['dao.abonnement']->find($id);
 
         $expressCheckout = $app['paypal']->createExpressCheckout();
+
+        $invoice = new PaypalInvoice();
+        $ppinvoice = $app['dao.paypalInvoice']->insert($invoice);
+        $numeroUnique = $app['db']->lastInsertId();
         $expressCheckout
                ->addItem($abonnement->getNom(), 1, 'sku0', $abonnement->getPrix(), 'tarifs.html.twig')
                ->setDescription($abonnement->getId() . '--' . $abonnement->getDescriptif())
-               ->setInvoiceNumber('546456')
+               ->setInvoiceNumber($numeroUnique)
                ->setSuccessUrl('https://localhost/exaequo2/web/paiement_accepte') //la route qui va gérer les infos de paiement accepté
                ->setFailureUrl('https://localhost/exaequo2/web/paiement_refuse'); //la route qui va gérer les erreurs de paiement
 
@@ -477,10 +484,5 @@ class HomeController{
 
 
         return  $abonnement->getNom();
-
     }   
-
-
-
-
 }

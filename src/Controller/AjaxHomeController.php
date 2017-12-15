@@ -17,22 +17,21 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class AjaxHomeController{
 
-    public function coursJour(Application $app, $jour){
-        //navigation : calcul de l'écart entre le jour actuel et le jour demandé
-        $ecart = $jour - date('w');
-        $calcul = date("d")+$ecart;
-
-        $dataffich = mktime(0, 0, 0, date("m")  , date("d") , date("Y"));
-        //$dataffich = '2017-12-11';   
+    public function jourCours(Application $app, $j){
+        //navigation : calcul de l'écart entre le jour actuel et le jour demandé dans le planning  : est récupéré par $j
+        $ecart = $j;
+        //$ecart = $j - date('w');
+        $datecible = new \DateTime;
+        //ajoute l'écart en jour pour aller à la date cible
+        $datecible->modify('+'.$ecart.' day');
+        //Transforme ensuite le format pour qu'il soit compatible SQL
+        $dataffich = $datecible->format('Y-m-d');
                 
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
         return $app['twig']->render('jour.html.twig', array(
             'planning'=>$planning,
+            //'ecart'=>$ecart
            
-            //'ecart'=>$ecart,
-            //'calcul'=>$datecalculee
-
-            
         ));
     }
 

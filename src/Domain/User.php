@@ -40,6 +40,8 @@ class User implements UserInterface
 
     private $role;
 
+    private $lastname;
+
     private $firstname;
 
     private $sex;
@@ -228,6 +230,16 @@ class User implements UserInterface
         return $this;
     }
 
+
+    //pseudo
+     public function getLastname() {
+        return $this->lastname;
+    }
+
+    public function setLastname($lastname) {
+        $this->lastname = $lastname;
+    }
+    
     public function getUserId(){
         return $this->userid;
     }

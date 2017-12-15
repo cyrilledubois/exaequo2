@@ -47,17 +47,17 @@
 				<nav aria-label="Page navigation">
 					<ul class="pagination pagination-lg">
 						<li>
-							<a class="semainemoins" >Semaine précédente</a>
+							<a class="semainemoins" id="semainePrecedente" data-semaine="-1">Semaine précédente</a>
 							</li>
-							<li><a class="lundi" >Lundi</a></li>
-                            <li><a class="mardi" >Mardi</a></li>
-                            <li><a class="mercredi" >Mercredi</a></li>
-                            <li><a class="jeudi" >Jeudi</a></li>
-                            <li><a class="vendredi" >Vendredi</a></li>
-                            <li><a class="samedi">Samedi</a></li>
+							<li><a class="lundi" id="1">Lundi</a></li>
+                            <li><a class="mardi" id="2">Mardi</a></li>
+                            <li><a class="mercredi" id="3">Mercredi</a></li>
+                            <li><a class="jeudi" id="4">Jeudi</a></li>
+                            <li><a class="vendredi" id="5">Vendredi</a></li>
+                            <li><a class="samedi" id="6">Samedi</a></li>
 							<li><a>Dimanche</a></li>
 							<li>
-							<a class="semaineplus" >Semaine suivante</a>
+							<a class="semaineplus" id="semaineSuivante" data-semaine="1">Semaine suivante</a>
 						</li>
 					</ul>
 				</nav>	
@@ -98,30 +98,50 @@
     <!-- jQuery -->
     <script>
         $(function(){
-        	$('.semainemoins').click(function(event){
+            //initialisation des variables permettant la gestion des semaines + et -
+                semaineS = $('#semaineSuivante').attr('data-semaine');
+                semaineP = $('#semainePrecedente').attr('data-semaine');
+                var date = new Date;
+                var jourSemaine = date.getDay();
+                //Focus sur le jour de la semaine et changement de style à la volée
+                $('#'+jourSemaine).css('background-color', '#5d2248', 'color', 'white');
+                $('#'+jourSemaine).css('color', 'white');
+            $('.semainemoins').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
+          
                 //construction de l'url de la requête avec les paramètres
-                var url = "{{ path('ajaxJourCour', {j:-7}) }}";
-                //requête ajax en POST
+                var url = "{{ path('ajaxJourCour', {j:'trucaremplacer'}) }}";
+                //On par à -7 et on ajout à chaque clic -7
+                var calcul  = -7 + 7 * (parseInt($('#semainePrecedente').attr('data-semaine'))+parseInt($('#semaineSuivante').attr('data-semaine')));
+                var url  = url.replace("trucaremplacer", calcul);
+                                
+                //Modification de la valeur de la classe semainePrecedente pour ajouter -1 à chaque clique après chaque traitement, même chose sur la variable
+                $('#semainePrecedente').attr('data-semaine', parseInt(semaineP)-1);
+                semaineP = $('#semainePrecedente').attr('data-semaine');
+                //requête ajax en POST  
                 $.ajax({
                     type: 'POST',
                     url: url,
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('.liste_cours').html(data);
+                        $('#list').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
                     }
                 });
             });
-        	$('.lundi').click(function(event){
+            
+            $('.lundi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
-                //construction de l'url de la requête avec les paramètres
-                var url = "{{ path('ajaxJourCour', {j:1}) }}";
+                //construction de l'url de la requête avec les paramètres permettant de revenir au lundi de chaque semaine, quelque soit la navigation en semaine +/- 
+                var url = "{{ path('ajaxJourCour', {j:'trucaremplacer'}) }}";
+                var calcul  = 1 - jourSemaine + 7 * (parseInt($('#semainePrecedente').attr('data-semaine'))+parseInt($('#semaineSuivante').attr('data-semaine')));
+                var url  = url.replace("trucaremplacer", calcul);
+          
                 //requête ajax en POST
                 $.ajax({
                     type: 'POST',
@@ -129,18 +149,20 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('.liste_cours').html(data);
+                        $('#list').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
                     }
                 });
             });
-        	$('.mardi').click(function(event){
+            $('.mardi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
-                //construction de l'url de la requête avec les paramètres
-                var url = "{{ path('ajaxJourCour', {j:2}) }}";
+                //construction de l'url de la requête avec les paramètres permettant de revenir au mardi de chaque semaine, quelque soit la navigation en semaine +/-
+                var url = "{{ path('ajaxJourCour', {j:'trucaremplacer'}) }}";
+                var calcul  = 2 - jourSemaine + 7 * (parseInt($('#semainePrecedente').attr('data-semaine'))+parseInt($('#semaineSuivante').attr('data-semaine')));
+                var url  = url.replace("trucaremplacer", calcul);
                 //requête ajax en POST
                 $.ajax({
                     type: 'POST',
@@ -148,18 +170,20 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('.liste_cours').html(data);
+                        $('#list').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
                     }
                 });
             });
-        	$('.mercredi').click(function(event){
+            $('.mercredi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
-                //construction de l'url de la requête avec les paramètres
-                var url = "{{ path('ajaxJourCour', {j:3}) }}";
+                //construction de l'url de la requête avec les paramètres permettant de revenir au mercredi de chaque semaine, quelque soit la navigation en semaine +/-
+                var url = "{{ path('ajaxJourCour', {j:'trucaremplacer'}) }}";
+                var calcul  = 3 - jourSemaine + 7 * (parseInt($('#semainePrecedente').attr('data-semaine'))+parseInt($('#semaineSuivante').attr('data-semaine')));
+                var url  = url.replace("trucaremplacer", calcul);
                 //requête ajax en POST
                 $.ajax({
                     type: 'POST',
@@ -167,7 +191,7 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('.liste_cours').html(data);
+                        $('#list').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
@@ -177,8 +201,10 @@
             $('.jeudi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
-                //construction de l'url de la requête avec les paramètres
-                var url = "{{ path('ajaxJourCour', {j:4}) }}";
+                //construction de l'url de la requête avec les paramètres permettant de revenir au jeudi de chaque semaine, quelque soit la navigation en semaine +/-
+                var url = "{{ path('ajaxJourCour', {j:'trucaremplacer'}) }}";
+                var calcul  = 4 - jourSemaine + 7 * (parseInt($('#semainePrecedente').attr('data-semaine'))+parseInt($('#semaineSuivante').attr('data-semaine')));
+                var url  = url.replace("trucaremplacer", calcul);
                 //requête ajax en POST
                 $.ajax({
                     type: 'POST',
@@ -186,7 +212,7 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('.liste_cours').html(data);
+                        $('#list').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
@@ -196,8 +222,10 @@
             $('.vendredi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
-                //construction de l'url de la requête avec les paramètres
-                var url = "{{ path('ajaxJourCour', {j:5}) }}";
+                //construction de l'url de la requête avec les paramètres permettant de revenir au vendredi de chaque semaine, quelque soit la navigation en semaine +/-
+                var url = "{{ path('ajaxJourCour', {j:'trucaremplacer'}) }}";
+                var calcul  = 5 - jourSemaine + 7 * (parseInt($('#semainePrecedente').attr('data-semaine'))+parseInt($('#semaineSuivante').attr('data-semaine')));
+                var url  = url.replace("trucaremplacer", calcul);
                 //requête ajax en POST
                 $.ajax({
                     type: 'POST',
@@ -205,7 +233,7 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('.liste_cours').html(data);
+                        $('#list').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
@@ -215,8 +243,10 @@
             $('.samedi').click(function(event){
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
-                //construction de l'url de la requête avec les paramètres
-                var url = "{{ path('ajaxJourCour', {j:6}) }}";
+                //construction de l'url de la requête avec les paramètres permettant de revenir au samedi de chaque semaine, quelque soit la navigation en semaine +/-
+                var url = "{{ path('ajaxJourCour', {j:'trucaremplacer'}) }}";
+                var calcul  = 6 - jourSemaine + 7 * (parseInt($('#semainePrecedente').attr('data-semaine'))+parseInt($('#semaineSuivante').attr('data-semaine')));
+                var url  = url.replace("trucaremplacer", calcul);
                 //requête ajax en POST
                 $.ajax({
                     type: 'POST',
@@ -224,7 +254,7 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('.liste_cours').html(data);
+                        $('#list').html(data);
                     },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
@@ -235,7 +265,14 @@
                 //permet d'empêcher la validation du formulaire et le chargement de la page
                 event.preventDefault();
                 //construction de l'url de la requête avec les paramètres
-                var url = "{{ path('ajaxJourCour', {j:7}) }}";
+                ///On part à +7 et on ajout à chaque clic +7
+                var url = "{{ path('ajaxJourCour', {j:'trucaremplacer'}) }}";
+                var calcul  = 7 + 7 * (parseInt($('#semaineSuivante').attr('data-semaine'))+parseInt($('#semainePrecedente').attr('data-semaine')));
+                var url  = url.replace("trucaremplacer", calcul);
+
+                //Modification de la valeur de la classe semaineSuivante pour ajouter +1 à chaque clique après chaque traitement, même chose sur la variable
+                $('#semaineSuivante').attr('data-semaine', parseInt(semaineS)+1);
+                semaineS = $('#semaineSuivante').attr('data-semaine');
                 //requête ajax en POST
                 $.ajax({
                     type: 'POST',
@@ -243,8 +280,8 @@
                     data: $('form').serialize(),
                     dataType: 'html',
                     success: function(data){
-                        $('.liste_cours').html(data);
-                    },1
+                        $('#list').html(data);
+                    },
                     error: function() {
                         alert('La requête n\'a pas abouti'); 
                     }
