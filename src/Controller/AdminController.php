@@ -163,30 +163,31 @@ class AdminController   {
         ));
 
     }
-    //Génération du planning sur un mois, tests dans la route web/planninggenere 
+    //Génération du planning sur un mois, génération du planning à partir de la route : web/planninggenere (à mettre dans l'adresse et entrer ...)
     public function generationPlanning (Application $app){
-        //trouve la dernière date générée dans le planning et la retourne sous forme de tableau à une entrée
         //nombre de semaines à générer 
-        $nb = 10;
+        $nb = 1;
         for($k=1;$k<=$nb;$k++){
+            //trouve la dernière date générée dans le planning et la retourne sous forme de tableau à une entrée
+            $datedeb = $app['dao.planning']->lastDate();
+            //Génère un objet DateTime contenant la date la plus lointaine générée
+            $datedebgeneration = new \DateTime($datedeb['MAX(datecours)']);
+            // Pour générer le planning à partir d'une date commençant par un dimanche, puisqu'on ajoute ensuite +1 ......(commenter la ligne au dessus) : $datedebgeneration = new \DateTime('2017-11-05');
 
-        $datedeb = $app['dao.planning']->lastDate();
-        //Génère un objet DateTime contenant la date la plus lointaine générée
-        $datedebgeneration = new \DateTime($datedeb['MAX(datecours)']);
-        //Ajoute 1 pour obtenir la nouvelle date, début de la période de génération ()
-        $datedebgeneration = $datedebgeneration->modify('+ 1 day');
-        //Cherche le numéro du jour de la semaine de cette date 
-        $joursemaine = date_format($datedebgeneration, 'w');
-        //Gestion du cas du dimanche, on décale tout au lundi : on cale le planningmodel sur le lundi ($joursemaine = 1) et on cale la date à insérer dans le planning au jour après le dimanche
-            if ($joursemaine == 0) {
-                $joursemaine = 1;
-                $datedebgeneration = $datedebgeneration->modify('+ 1 day');
-            }
-        //Chagement des données de la table planningmodel dans un tableau de tableaux
-        $planningModel = $app['dao.planningmodel']->findAll();
-        //iitialisation du tableau de données
-        $i = 1;
-        $objetCtrl = array();
+            //Ajoute 1 pour obtenir la nouvelle date, début de la période de génération ()
+            $datedebgeneration = $datedebgeneration->modify('+ 1 day');
+            //Cherche le numéro du jour de la semaine de cette date 
+            $joursemaine = date_format($datedebgeneration, 'w');
+            //Gestion du cas du dimanche, on décale tout au lundi : on cale le planningmodel sur le lundi ($joursemaine = 1) et on cale la date à insérer dans le planning au jour après le dimanche
+                if ($joursemaine == 0) {
+                    $joursemaine = 1;
+                    $datedebgeneration = $datedebgeneration->modify('+ 1 day');
+                }
+            //Chagement des données de la table planningmodel dans un tableau de tableaux
+            $planningModel = $app['dao.planningmodel']->findAll();
+            //iitialisation du tableau de données
+            $i = 1;
+            $objetCtrl = array();
             //Boucle sur la semaine à générer
             foreach($planningModel as $jour){
                 //Gestion de la date de début de génération du planning dans le cas du Dimanche 
@@ -231,10 +232,6 @@ class AdminController   {
             'planningModel' => $planningModel,
             'planninginsert' => $planninginsert,
             'objetCtrl' => $objetCtrl
-
-        
-            
-            
         ));        
 
 

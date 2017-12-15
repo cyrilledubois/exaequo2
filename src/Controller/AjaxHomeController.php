@@ -19,7 +19,8 @@ class AjaxHomeController{
 
     public function jourCours(Application $app, $j){
         //navigation : calcul de l'écart entre le jour actuel et le jour demandé dans le planning  : est récupéré par $j
-        $ecart = $j - date('w');
+        $ecart = $j;
+        //$ecart = $j - date('w');
         $datecible = new \DateTime;
         //ajoute l'écart en jour pour aller à la date cible
         $datecible->modify('+'.$ecart.' day');
@@ -29,11 +30,8 @@ class AjaxHomeController{
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
         return $app['twig']->render('jour.html.twig', array(
             'planning'=>$planning,
+            //'ecart'=>$ecart
            
-            //'ecart'=>$ecart,
-            //'calcul'=>$datecalculee
-
-            
         ));
     }
 

@@ -7,32 +7,13 @@
 <body id="page-top">
   <header id="headuser" class="bg-primary text-white">
     <div class="container text-center">
-      <h1>Bienvenue dans votre interface d'administration</h1>
+      <h1>Bienvenue dans votre espace personnel</h1>
     </div>
   </header>
-
-  <nav id="navuser" class="navbar navbar-default">
-    <div class="navbar-header">
-      <ul id="uluser" class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#planning">Mes Cours</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#abo">Mes Abonnements</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#info">Mes Infos</a>
-        </li>
-
-      </ul>
-    </div>
-  </nav>
-{# Ajout info utilisateur #}
-
+{# info & update utilisateur #}
+<br>
 <div class="container">
-<div class="col-lg-8 col-md-8 col-sm-7 col-xs-7" >
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 
     
     {{ form_start(userForm, { 'attr': {'class': 'form-horizontal'} }) }}
@@ -78,16 +59,6 @@
         </div>
       </div>
 
-      <div class="form-group">
-        {{ form_label(userForm.compadress, null) }}
-        <div class='form-input'>
-          
-          {{ form_widget(userForm.compadress, { 'attr':  {
-            'class': 'form-control'
-          }}) }}
-          {{ form_errors(userForm.compadress) }}
-        </div>
-      </div>
 
       <div class="form-group">
         {{ form_label(userForm.cp, null) }}
@@ -190,12 +161,52 @@
       </div>
 
       <div class="form-group">
-        <input type="submit" class="btn btn-primary btn-lg" name="submit" value="Send" />
+        <input type="submit" class="btn btn-primary btn-lg" name="submit" value="Mettre à jour mes infos" />
       </div>
     {{ form_end(userForm) }}
   </div>
 
-  </div>
+
+
+  {# Mes Abonnements #}
  
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 bg-warning">
+      <h2>Abonnement</h2>
+        <table class="table">
+      {% for abonnement in abonnements %}
+
+     <tbody>
+      <tr>
+        <td>Abonnement en cours: <br>{{abonnement.nom}}</td>
+        <td>Votre abonnement prend fin le: <br>{{abonnement.datefin}}</td>
+      </tr>
+      </tbody>
+
+      {% endfor %}
+        </table>
+      </div>
+
+
+
+      {# Mes reservations #}
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 bg-warning">
+          <h2>Reservations</h2>
+            <table class="table">
+          {% for cour in cours %}
+       
+         <tbody>
+          <tr>
+            <td>Cours<br>{{cour.nom}}</td>
+            <td>Date<br> {{ cour.datecours|date('d/m/Y') }}</td>
+            <td>Heure <br> {{ cour.datecours|date('h:i') }}</td>
+          </tr>
+          </tbody>
+    
+          {% endfor %}
+            </table>
+          </div>
+
+    </div>
+</div>    
 
 {% endblock %}

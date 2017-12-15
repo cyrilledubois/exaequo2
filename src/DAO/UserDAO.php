@@ -68,4 +68,15 @@ class UserDAO extends DAO implements UserProviderInterface
         $result->execute();
 		return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
+    //pour récupérer les cours par utilisateur
+    public function getCoursByUser($id){
+       $result = $this->bdd->prepare('SELECT * FROM usershasplanning
+       INNER JOIN planning ON usershasplanning.PlanningidPlanning = planning.id
+       INNER JOIN cours ON cours.id = planning.coursid
+       INNER JOIN users ON usershasplanning.usersid = users.id
+       WHERE usershasplanning.usersid = :id');
+       $result->bindValue(':id', $id, \PDO::PARAM_INT);
+       $result->execute();
+       return $result->fetchAll(\PDO::FETCH_ASSOC);
+   }
 }

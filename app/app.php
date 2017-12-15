@@ -108,4 +108,7 @@ $app['dao.planningmodel'] = function($app){
     return new WF3\DAO\PlanningModelDAO($app['db'], 'planningmodel', 'WF3\Domain\PlanningModel');
 };
 
+$app['dao.abo'] = function($app){
+   return new WF3\DAO\AboDAO($app['db'], 'abo', 'WF3\Domain\abo');
+};
 
