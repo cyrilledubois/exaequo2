@@ -9,7 +9,6 @@ use WF3\Domain\Article;
 use WF3\Form\Type\ArticleType;
 use WF3\Form\Type\ContactType;
 use WF3\Domain\User;
-use WF3\Form\Type\UserType;
 use WF3\Form\Type\UserRegisterType;
 use WF3\Form\Type\SearchEngineType;
 //permet de générer des erreurs 403 (accès interdit)
@@ -26,18 +25,26 @@ use WF3\Domain\Sale;
 
 class HomeController{
 
-    public function homePageReserv(Application $app){
+    public function homePageReserv(Application $app, Request $request){
         //NE PAS SUPPRIMER : 
         //initialisation de l'affichage du planning de réservation avec la date du jour.
         $dataffich = date("Y"). '-' .date("m") . '-' . date("d");
-        //Pour les tests on peut afficher le planning de réervation à une date donnée, commenter la ligne du dessus !!!
-        //$dataffich = '2017-12-18';   
+        //Pour les tests on peut afficher le planning de réervation à une date donnée, commenter la ligne du dessus !!! 
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
-
+        $user = $app['user'];
+        $idplanning = $request->query->get('id');
+        if($request->query->get('id')){
+            $idplanning = $request->query->get('id');
+            $reservation = $app['dao.user']->reservAction($user->getId(), $request->query->get('id'));
+        }
         return $app['twig']->render('reservation.html.twig', array(
-            'planning'=>$planning,
+            'planning'=> $planning,
+            'user' => $user->getId(),
+            'idplanning' => $idplanning
+            //'reservation' => $reservation
         ));
     }
+
     public function updateUserAction(Application $app, Request $request ){
    //  On  utilise la ligne suivante afin de récuperer l'user en objet
        $user = $app['user'];
@@ -65,10 +72,14 @@ class HomeController{
            'user' => $user
        ));
    }
-//     // Back user
-//    public function backUser(Application $app){
-//        return $app['twig']->render('back.user.html.twig');
-//    }
+
+
+
+   
+    // Back user
+   public function backUser(Application $app){
+       return $app['twig']->render('back.user.html.twig');
+   }
 
 	//page d'accueil
 	public function homePageAction(Application $app){
@@ -309,8 +320,6 @@ class HomeController{
     		'error' => $app['security.last_error']($request),
     		'last_username' => $app['session']->get('_security.last_username')
     	));
-
-            
     }
 
     public function ajoutArticleAction(Application $app, Request $request){
@@ -393,12 +402,14 @@ class HomeController{
             $app['session']->save(); // this will be done automatically but it does not hurt to do it explicitly*/
 
 
+
             $app['session']->getFlashBag()->add('success', 'Vous êtes bien enregistré ' .  $user->getUsername());
+
             // Redirect to admin home page
-            return $app->redirect($app['url_generator']->generate('inscription'));
+            return $app->redirect($app['url_generator']->generate('accueil'));
         }
         return $app['twig']->render('user_register.html.twig', array(
-            'title' => 'Inscription',
+            'title' => 'Sign in',
             'userForm' => $userForm->createView()
         ));
     }

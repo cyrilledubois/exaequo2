@@ -3,12 +3,6 @@
 	{% block title %}Votre salle de sport à Mérignac{% endblock %}
 
 	{% block content %}
-		{% for flashMessage in app.session.flashbag.get('success') %}
-		<div class="alert alert-success">
-		    {{ flashMessage }}
-		</div>
-	{% endfor %}
-
 			<!-- video -->
 			<section class="home-wrapper">
 				<div class="logo-video-wrapper">
@@ -42,7 +36,7 @@
 										<p style="text-align:justify;">Les cours collectifs Ex æquo sont des créations des 
 										professeurs. Ils sont développés en adéquation avec le concept et les 
 										valeurs de la salle. Les professeurs individualisent leurs cours.</p>
-										<p><a href="{{ path('cours_collectifs') }}" class="btn btn-primary" role="button" style="margin-top:20px;">En savoir plus...</a></p>
+										<p><a href="cours_collectifs.php" class="btn btn-primary" role="button" style="margin-top:20px;">En savoir plus...</a></p>
 									</div>
 								</div>
 							</div>
@@ -54,7 +48,7 @@
 										<p style="text-align:justify;">Ex aequo met à disposition une aire d’entraînement de 300 m2 
 										avec des équipements spécifiques, complets et de haute qualité. 
 										L’entraînement est suivi par des professeurs, sportifs de haut niveau.</p>
-										<p><a href="{{ path('fitness_cardio_physique') }}" class="btn btn-primary" role="button" style="margin-top:20px;">En savoir plus...</a></p>
+										<p><a href="fitness_cardio_physique.php" class="btn btn-primary" role="button" style="margin-top:20px;">En savoir plus...</a></p>
 									</div>
 								</div>
 							</div>
@@ -67,7 +61,7 @@
 										 développés en fonction des objectifs de chacun. Les cours sont donnés 
 										par un champion du monde de boxe, qui suit et encourage les évolutions 
 										de manière individuelle.</p>
-										<p><a href="{{ path('cours_boxe') }}" class="btn btn-primary" role="button" style="margin-top:20px;">En savoir plus...</a></p>
+										<p><a href="cours_boxe.php" class="btn btn-primary" role="button" style="margin-top:20px;">En savoir plus...</a></p>
 									</div>
 								</div>
 							</div>						
@@ -78,7 +72,7 @@
 										<h3 style="color:#00af4e;">Cours de pilates</h3>
 										<p style="text-align:justify;">La méthode Pilates est une méthode douce de renforcement des muscles posturaux 
 										permettant une meilleure utilisation des muscles superficiels en vue d'une amélioration de notre vie au quotidien.</p>
-										<p><a href="{{ path('cours_pilates') }}" class="btn btn-primary" role="button" style="margin-top:20px;">En savoir plus...</a></p>
+										<p><a href="cours_pilates.php" class="btn btn-primary" role="button" style="margin-top:20px;">En savoir plus...</a></p>
 									</div>
 								</div>
 							</div>							
@@ -89,7 +83,7 @@
 										<h3 style="color:#00af4e;">Cours de yoga</h3>
 										<p style="text-align:justify;">Le yoga est une discipline qui a pour objectif, par la méditation, l’ascèse morale et les 
 										exercices physiques, d'unifier le corps et l’esprit.</p>
-										<p><a href="{{ path('cours_yoga') }}" class="btn btn-primary" role="button" style="margin-top:20px;">En savoir plus...</a></p>
+										<p><a href="cours_yoga.php" class="btn btn-primary" role="button" style="margin-top:20px;">En savoir plus...</a></p>
 									</div>
 								</div>
 							</div>							

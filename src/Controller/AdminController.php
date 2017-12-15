@@ -8,27 +8,41 @@ use WF3\Domain\PlanningModel;
 use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 use WF3\Domain\Cours;
+use WF3\Domain\PlanningModel;
+use WF3\Form\Type\PlanningType;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class AdminController   {
     
-
-    
-
-// MODIF 06/12 14h
     //page d'accueil du back office
-    public function indexAction(Application $app){   
-        $planning = $app['dao.planning']->getInfoPlanning();
+    public function indexAction(Application $app){  
+        $datecible = new \DateTime;
+        $dataffich = $datecible->format('Y-m-d');
+        $planning = $app['dao.planning']->getInfoPlanning($dataffich);
         $reserv = $app['dao.user']->getInfoReserv($dataffich);
-        $users = $app['dao.user']->getAlluser($dataffich);
+        $users = $app['dao.user']->getAlluser();
+       // PAGINATION COMMENTER  $nombreDePages = $app['dao.user']->paginationUser();
+       // $nombreDePages = ceil($nombreArticles/$nombreParPage);
+       // if(isset($_GET['numero']) AND is_numeric($_GET['numero']) AND $_GET['numero'] <= $nombreDePages AND $_GET['numero'] > 0){
+        //    $page = $_GET['numero'];
+        
+       // else{
+         //   $page = 1;
+       // }
+        //$offset = ($page - 1) * $nombreParPage;
         return $app['twig']->render('admin/index.admin.html.twig', array(
                                         'planning'=>$planning,
                                         'users'=>$users,
-                                        'reserv'=>$reserv
+                                        'reserv'=>$reserv,
+                                        'dataffich' => $dataffich
+                                        //'page' => $page,
+                                       // 'offset' => $offset,
+                                        //'nombre' => $nombre,
+                                        //'nombrearticles' => $nombreArticles,
+                                        //'nombredepage' => $nombreDePages
                                     ));
     }
 
-    
     //suppression de cours
     //page de suppression de cours
     public function deleteCoursAction(Application $app, $id){
@@ -39,33 +53,36 @@ class AdminController   {
         return $app->redirect($app['url_generator']->generate('homeAdmin'));
     }
 
- 	// Update periode du planning 
-     public function updatePeriodPlanning(Application $app, Request $request, $id){
+
+ 	// Update planning 
+     public function updatePlanning(Application $app, Request $request, $id){
 		//on récupère les infos de la periode 
-				$period = $app['dao.planning']->find($id);
-				
+                ////$period = $app['dao.planning']->findAll($id);
+        $period = $app['dao.planning']->selectPeriod(date('Y-m-d'), $id);
+        $cours = $app['dao.cours']->find($id);
+        $period->setCoursid($cours->getNom());
+            var_dump($period);  
+            
 		//on crée le planning et on lui passe la periode en paramètre
         //il va utiliser $planning pour pré remplir les champs
-		$planning = $app['form.factory']->create(PlanningType::class, $period);		
-		
-		$planning->handleRequest($request);
-
-		if($planning->isSubmitted() && $planning->isValid()){
+        $planningForm = $app['form.factory']->create(PlanningType::class, $period);	
+        	
+        $planningForm->handleRequest($request);
+		if($planningForm->isSubmitted() && $planningForm->isValid()){
             //si le formulaire a été soumis
             //on update avec les données envoyées par l'utilisateur
-            $app['dao.planning']->update($id, array(
-                'cours'=>$planning->getCours(),
-                'duree_cours'=>$planning->getContent(),
-                'author'=>$planning->getAuthor()->getId()
-            ));
+           //// $app['dao.planning']->update($id, $period);
+           $app['dao.planning']->update($period->getId(),$period);
+           
         }
 	
-        return $app['twig']->render('admin/index.admin.html.twig', array(
+        return $app['twig']->render('admin/update.planning.html.twig', array(
                 'planningForm' => $planningForm->createView(),
-                'title' => 'modif'
-        ));
 
+        ));
     }
+
+
 
     public function addCoursAction(Application $app, Request $request){
         $cours = new Cours();
@@ -77,12 +94,11 @@ class AdminController   {
         if($coursForm->isSubmitted() AND $coursForm->isValid()){
             $app['dao.cours']->insert(array(
                 'title'=>$cours->getTitle(),
-                'content'=>$cours->getContent(),
-                'author'=>$app['user']->getId()
+                'content'=>$cours->getContent()
             ));
         }
 
-        return $app['twig']->render('admin/admin.ajout.cours.html.twig', array(
+        return $app['twig']->render('admin/index.admin.html.twig', array(
                 'coursForm' => $coursForm->createView(),
                 'title' => 'ajout'
         ));
@@ -173,9 +189,20 @@ class AdminController   {
         $datedebgeneration = $datedebgeneration->modify('+ 1 day');
         //Cherche le numéro du jour de la semaine de cette date 
         $joursemaine = date_format($datedebgeneration, 'w');
-        //Gestion du cas du dimanche
-        if ($joursemaine == 0) {
-                $joursemaine = 1;
+        /*if($joursemaine == '0'){
+        $joursemaine = '1';             
+        }*/
+
+        //Chagement des données de la table planning_type dans un tableau de tableaux
+        $planning_type = $app['dao.planningtype']->findAll();
+        
+        foreach($planning_type as $cle){
+            //boucle de changement du tableau $planning_Type pour créer la date attendue dans la table Planning
+            for($i = $joursemaine ; $i <= 6 ; $i++){
+                foreach($cle as $jour) 
+                $jour['jour'] = date_format($datedebgeneration, 'Y-m-d'). ' ' . $jour['heure'];        
+            } 
+            
         }
         //Chagement des données de la table planningmodel dans un tableau de tableaux
         $planningModel = $app['dao.planningmodel']->findAll();
@@ -220,10 +247,6 @@ class AdminController   {
             
             
         ));        
-
-
     // En attente de modification ....    
-
-
     }
 }

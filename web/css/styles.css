@@ -16,21 +16,20 @@ a .surlignement {
  padding-bottom: 3rem;
 }
 
-#headuser{
- margin-bottom: 0rem;
-}
-#uluser{
- list-style-type: none;
- text-align: center;
+#planningadmin{
+background: rgb(112, 16, 73);
+color: white;
+padding-top: 6rem;
 }
 
-#uluser>li>a{
- margin: 2rem;
- padding: 2rem;
- margin-left: 2rem;
- color: white;
+#bla{
+  border: 0.1rem solid black;
+  padding-bottom: 5rem;
 }
 
+#headadmin{
+  margin-bottom: 0rem;
+}
 .connecté {
   color: red;
   position: absolute;
@@ -39,7 +38,17 @@ a .surlignement {
   font-weight: bold; 
 }
 
+#uladmin{
+  list-style-type: none; 
+  text-align: center;
+}
 
+#uladmin>li>a{
+  margin: 2rem;
+  padding: 2rem;
+  margin-left: 2rem;
+  color: white;
+}
 
 /*MODIF TEAM WF3*/
 /*BACK ADMIN*/
@@ -55,30 +64,32 @@ top: 5px;
   width: 100%;
 }
 
-#navadmin{
-  background: black;
-  color: white;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+.paypal1{
+  height: 37px;
+  position: absolute;
+  top: 360px;
+  left: 195px; 
 }
 
-#upload{
-  background-color: rgb(75, 11, 49);
+.paypal2{
+  height: 37px;
+  position: absolute;
+  top: 443px;
+  left: 195px; 
 }
 
-#headadmin{
-  margin-bottom: 0rem;
-}
-#uladmin{
-  list-style-type: none; 
-  text-align: center;
+.paypal3{
+  height: 37px;
+  position: absolute;
+  top: 469px;
+  left: 195px; 
 }
 
-#uladmin>li>a{
-  margin: 2rem;
-  padding: 2rem;
-  margin-left: 2rem;
-  color: white;
+.paypal4{
+  height: 37px;
+  position: absolute;
+  top: 495px;
+  left: 195px; 
 }
 
 
@@ -90,7 +101,7 @@ top: 5px;
   margin-bottom: 2rem;
 }
 
-#pagination{
+#pagination{ /*admin aussi*/
   text-align: center;
   background: rgb(75, 11, 49);
 }
@@ -391,35 +402,6 @@ video::-webkit-media-controls-start-playback-button {
 }**/
 
 /*__________________________________*/
-
-.paypal1{
-  height: 37px;
-  position: absolute;
-  top: 360px;
-  left: 195px; 
-}
-
-.paypal2{
-  height: 37px;
-  position: absolute;
-  top: 443px;
-  left: 195px; 
-}
-
-.paypal3{
-  height: 37px;
-  position: absolute;
-  top: 469px;
-  left: 195px; 
-}
-
-.paypal4{
-  height: 37px;
-  position: absolute;
-  top: 495px;
-  left: 195px; 
-}
-
 
 #pres {
   margin: 40px 0;
@@ -738,31 +720,9 @@ h1 {
 
 @media screen and (max-width: 1200px) {
   .paypal1 {
-      height: 32px;
-      top: 390px;
-      left: 159px; 
-  }
-
-  .paypal2 {
-      height: 32px;
-      top: 432px;
-      left: 159px; 
-  }
-
-  .paypal3 {
-      height: 32px;
-      top: 514px;
-      left: 159px; 
-  }
-
-  .paypal4 {
-      height: 32px;
-      top: 525px;
-      left: 159px; 
+      height: 97px;
   }
 }
-
-
 
 
 @media screen and (max-width: 992px) {
@@ -894,4 +854,5 @@ h1 {
       left: 235px; 
   }
 }
+
 

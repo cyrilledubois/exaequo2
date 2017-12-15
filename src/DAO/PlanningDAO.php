@@ -11,19 +11,22 @@ class PlanningDAO extends DAO{
 
 	// Select planning de "date à date"
 	// PREVOIR UN LIKE EN FIN DE REQUETE
-	public function selectPeriod($datecours){
-		$result = $this->bdd->prepare('SELECT * FROM planning WHERE datecours = :datecours');
-		$result->bindValue(':datecours', $datecours, \PDO::PARAM_INT);
+	public function selectPeriod($datecours, $coursid){
+		$result = $this->bdd->prepare('SELECT * FROM planning WHERE coursid = :coursid AND datecours LIKE :datecours');
+		$result->bindValue(':coursid', $coursid, \PDO::PARAM_INT);
+		$result->bindValue(':datecours', $datecours . '%', \PDO::PARAM_INT);
 		$result->execute();
-		return $result->fetchALL(\PDO::FETCH_ASSOC);
+		$row = $result->fetch(\PDO::FETCH_ASSOC);
+		return $this->buildObject($row);
 	}
 
-	public function getInfoPlanning($datejour){
-		$result = $this->bdd->prepare ('SELECT * FROM planning INNER JOIN cours ON planning.coursid = cours.id WHERE datecours LIKE :datejour ORDER BY datecours');
-        $result->bindValue(':datejour', '%' . $datejour . '%');
+	public function getInfoPlanning($date_jour){
+		$result = $this->bdd->prepare ('SELECT planning.id, duree, datecours, nom, intensite, placemax FROM planning INNER JOIN cours ON planning.coursid = cours.id WHERE datecours LIKE :datejour ORDER BY datecours');
+        $result->bindValue(':datejour', '%' . $date_jour . '%');
         $result->execute();
         return $result->fetchALL(\PDO::FETCH_ASSOC);
-    }
+	}
+	
 	
 	// Permet de chercher les cours semblable selon l'id dans le planning 
 	public function selectCours($idCours){

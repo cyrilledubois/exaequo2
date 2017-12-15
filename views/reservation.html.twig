@@ -69,21 +69,18 @@
 	<div id="planning" class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-                <div class='ajax'>
-    			{% for cours in planning %}
-				<div class="liste_cours">
-			{# <div  class="col-md-1 bg-primary text-white">{{ cours.datecours|date('d/m/Y') }}</div> #} 
-				<div class="col-md-3 text-white">{{ cours.datecours|date('h:i') }}</div>
-				<div class="col-md-3 text-white">Cours : {{ cours.nom }}</div>
-				<div class="col-md-3 text-white">Intensité du cours: {{ cours.intensite }}</div>
-				<div class="col-md-3 text-white">Durée : {{ cours.duree }} minutes</div>
-			{#<div id="planning" class="col-md-3 text-white"> <a href="{{ path('', {id: cours.id}) }}">réserver</a>reserver</div>#}
-				</div>
-				{% endfor %}
-                </div>	
+			{% for heure in planning %}
+			<div class="liste_cours">
+			<div class="col-md-2">{{ heure.datecours|date('h:i') }}</div>
+			<div class="col-md-2">heure : {{ heure.nom }}</div>
+			<div class="col-md-2">Intensité du cour: {{ heure.intensite }}</div>
+            <div class="col-md-2">Durée : {{ heure.duree }} minutes</div>
+		    <div class="col-md-2"><a href="{{ path('reservation')}}?id={{heure.id}}">réserver</a></div>
+			</div>
+			{% endfor %}	
 		</div>
 	</div>
-</div>
+
 
 </body>	
 {% endblock %}

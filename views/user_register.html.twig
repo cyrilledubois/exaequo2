@@ -94,17 +94,7 @@
         </div>
     </div>
 
-    <div class="form-group"> <!- CODE POSTAL ->
-        {{ form_label(userForm.cp, null, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
-        }}) }}
-        <div class="col-sm-3">
-            {{ form_errors(userForm.cp) }}
-            {{ form_widget(userForm.cp, { 'attr':  {
-                'class': 'form-control'
-            }}) }}
-        </div>
-    </div>
+    {#
 
     <div class="form-group"> <!- VILLE ->
         {{ form_label(userForm.town, null, { 'label_attr':  {
@@ -117,6 +107,7 @@
             }}) }}
         </div>
     </div>
+    #}
 
     <div class="form-group"> <!- PROFESSION ->
         {{ form_label(userForm.profession, null, { 'label_attr':  {
