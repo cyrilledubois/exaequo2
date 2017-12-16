@@ -127,3 +127,9 @@ $app['dao.paypalInvoice'] = function($app){
 $app['dao.sale'] = function($app){
    return new WF3\DAO\SaleDAO($app['db'], 'sale', 'WF3\Domain\Sale');
 };
+
+//UserHasPlanning
+$app['dao.UserHasPlanning'] = function($app){
+    return new WF3\DAO\SaleDAO($app['db'], 'UserHasPlanning', 'WF3\Domain\UserHasPlanning');
+ };
+ 

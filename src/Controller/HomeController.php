@@ -27,7 +27,7 @@ use WF3\Domain\Sale;
 
 class HomeController{
 
-    public function homePageReserv(Application $app){
+    public function homePageReserv(Application $app, Request $request){
         //NE PAS SUPPRIMER : 
         //initialisation de l'affichage du planning de réservation avec la date du jour.
         $dataffich = date("Y"). '-' .date("m") . '-' . date("d");

@@ -61,10 +61,10 @@ class UserDAO extends DAO implements UserProviderInterface
         $datecible->modify('+'.$ecart.' day');
         //Transforme ensuite le format pour qu'il soit compatible SQL
         $dataffich = $datecible->format('Y-m-d');
-        $result = $this->bdd->prepare('SELECT * FROM users INNER JOIN users_has_planning ON users_has_planning.users_id = users.id 
-        INNER JOIN planning ON users_has_planning.Planning_idPlanning = planning.id
-        INNER JOIN cours ON planning.cours_id=cours.id WHERE planning.date_cours = :date_cours');
-        $result->bindValue(':date_cours', $dataffich, \PDO::PARAM_INT);
+        $result = $this->bdd->prepare('SELECT * FROM users INNER JOIN usershasplanning ON usershasplanning.usersid = users.id 
+        INNER JOIN planning ON usershasplanning.PlanningidPlanning = planning.id
+        INNER JOIN cours ON planning.coursid=cours.id WHERE planning.datecours = :datecours');
+        $result->bindValue(':datecours', $dataffich, \PDO::PARAM_INT);
         $result->execute();
 		return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -93,7 +93,7 @@ public function mdpPerdu() {
 
 
     public function reservAction($userId, $planningId){
-        $result = $this->bdd->prepare('INSERT INTO users_has_planning (usersid, PlanningidPlanning) VALUES (:usersid, :PlanningidPlanning)');
+        $result = $this->bdd->prepare('INSERT INTO usershasplanning (usersid, PlanningidPlanning) VALUES (:usersid, :PlanningidPlanning)');
         $result->bindValue(':usersid', $userId);
         $result->bindValue(':PlanningidPlanning', $planningId);
         return $result->execute();

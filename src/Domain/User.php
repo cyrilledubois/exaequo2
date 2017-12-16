@@ -58,8 +58,6 @@ class User implements UserInterface
 
     private $groupeclient;
 
-    private $userid;
-
     private $PlanningidPlanning;
 
     
@@ -240,22 +238,5 @@ class User implements UserInterface
         $this->lastname = $lastname;
     }
     
-    public function getUserId(){
-        return $this->userid;
-    }
-
-    public function setUserId($userid) {
-        $this->groupeclient = $groupeclient;
-        return $this;
-    }
-
-    public function getPlanningIdPlanning(){
-        return $this->PlanningidPlanning;
-    }
-
-    public function setPlanningIdPlanning($PlanningidPlanning) {
-        $this->PlanningidPlanning = $PlanningidPlanning;
-        return $this;
-    }
 
 }

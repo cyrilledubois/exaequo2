@@ -48,7 +48,7 @@ class PlanningDAO extends DAO{
 	}
 
 	public function CountUserByReserv($idreserv){
-		$result = $this->bdd->prepare('SELECT COUNT(usersid) FROM users_has_planning WHERE PlanningidPlanning = :idplanning');
+		$result = $this->bdd->prepare('SELECT COUNT(usersid) FROM usershasplanning WHERE PlanningidPlanning = :idplanning');
 		$result->bindValue(':idplanning', $idreserv, \PDO::PARAM_INT);
 		$result->execute();
 		$count = $result->fetch(\PDO::FETCH_ASSOC);
@@ -56,7 +56,7 @@ class PlanningDAO extends DAO{
 	}
 
 	public function maxReserv($iduser){
-		$result = $this->bdd->prepare('SELECT * FROM users_has_planning WHERE usersid = :idsession');
+		$result = $this->bdd->prepare('SELECT * FROM usershasplanning WHERE usersid = :idsession');
 		$result->bindValue(':idsession', $iduser, \PDO::PARAM_INT);
 		$result->execute();
 		$data = [];
