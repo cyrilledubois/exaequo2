@@ -237,6 +237,5 @@ class User implements UserInterface
     public function setLastname($lastname) {
         $this->lastname = $lastname;
     }
-    
 
 }
