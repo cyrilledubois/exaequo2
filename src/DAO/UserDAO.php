@@ -63,8 +63,8 @@ class UserDAO extends DAO implements UserProviderInterface
 
 // Requête pour utilisateur inscrit / par cours
     public function getInfoReserv($dataffich){ 
-        $result = $this->bdd->prepare('SELECT * FROM users INNER JOIN users_has_planning ON users_has_planning.usersid = users.id 
-        INNER JOIN planning ON users_has_planning.PlanningidPlanning = planning.id
+        $result = $this->bdd->prepare('SELECT * FROM users INNER JOIN usershasplanning ON usershasplanning.usersid = users.id 
+        INNER JOIN planning ON usershasplanning.PlanningidPlanning = planning.id
         INNER JOIN cours ON planning.coursid=cours.id WHERE planning.datecours LIKE :datecours ');
         $result->bindValue(':datecours', $dataffich . '%', \PDO::PARAM_INT);
         $result->execute();
@@ -72,7 +72,7 @@ class UserDAO extends DAO implements UserProviderInterface
     }
 
     public function reservAction($userId, $planningId){
-        $result = $this->bdd->prepare('INSERT INTO users_has_planning (usersid, PlanningidPlanning) VALUES (:usersid, :PlanningidPlanning)');
+        $result = $this->bdd->prepare('INSERT INTO usershasplanning (usersid, PlanningidPlanning) VALUES (:usersid, :PlanningidPlanning)');
         $result->bindValue(':usersid', $userId);
         $result->bindValue(':PlanningidPlanning', $planningId);
         return $result->execute();

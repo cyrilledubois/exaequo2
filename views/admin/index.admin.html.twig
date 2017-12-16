@@ -46,7 +46,7 @@
             <div class="col-md-3">heure: {{ cours.datecours|date('h:i') }}</div>
             <div class="col-md-3">cour: {{ cours.nom }}</div>
             <div class="col-md-3">place: {{ cours.placemax }}</div>
-            <div class="col-md-3"><a  href="{{ path('updatePlanning', {id: cours.id}) }}">modifier</a></div>
+            <div class="col-md-3"><a  href="{{ path('updatePlanning', {id: cours.coursid}) }}">modifier</a></div>
         </div>
           {% endfor %}
       </div>
