@@ -55,7 +55,7 @@ class Sale {
         $this->paymentid = $paymentid;
         return $this;
     }
-}
+
 
 //payerid
     public function getPayerid() {
@@ -66,7 +66,7 @@ class Sale {
         $this->payerid = $payerid;
         return $this;
     }
-}
+
 
 //abonnementid
     public function getAbonnementid() {
@@ -77,7 +77,7 @@ class Sale {
         $this->abonnementid = $abonnementid;
         return $this;
     }
-}
+
 
 //email
     public function getEmail() {
@@ -88,7 +88,7 @@ class Sale {
         $this->email = $email;
         return $this;
     }
-}
+
 
 //createtime
     public function getCreatetime() {
@@ -99,7 +99,7 @@ class Sale {
         $this->createtime = $createtime;
         return $this;
     }
-}
+
 
 //phone
     public function getPhone() {
@@ -110,7 +110,7 @@ class Sale {
         $this->phone = $phone;
         return $this;
     }
-}
+
 
 //adress
     public function getAdress() {
@@ -121,7 +121,7 @@ class Sale {
         $this->adress = $adress;
         return $this;
     }
-}
+
 
 //status
     public function getStatus() {

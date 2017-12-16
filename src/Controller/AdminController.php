@@ -13,35 +13,23 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class AdminController   {
     
+
+    
+
+// MODIF 06/12 14h
     //page d'accueil du back office
-    public function indexAction(Application $app){  
-        $datecible = new \DateTime;
-        $dataffich = $datecible->format('Y-m-d');
-        $planning = $app['dao.planning']->getInfoPlanning($dataffich);
+    public function indexAction(Application $app){   
+        $planning = $app['dao.planning']->getInfoPlanning();
         $reserv = $app['dao.user']->getInfoReserv($dataffich);
-        $users = $app['dao.user']->getAlluser();
-       // PAGINATION COMMENTER  $nombreDePages = $app['dao.user']->paginationUser();
-       // $nombreDePages = ceil($nombreArticles/$nombreParPage);
-       // if(isset($_GET['numero']) AND is_numeric($_GET['numero']) AND $_GET['numero'] <= $nombreDePages AND $_GET['numero'] > 0){
-        //    $page = $_GET['numero'];
-        
-       // else{
-         //   $page = 1;
-       // }
-        //$offset = ($page - 1) * $nombreParPage;
+        $users = $app['dao.user']->getAlluser($dataffich);
         return $app['twig']->render('admin/index.admin.html.twig', array(
                                         'planning'=>$planning,
                                         'users'=>$users,
-                                        'reserv'=>$reserv,
-                                        'dataffich' => $dataffich
-                                        //'page' => $page,
-                                       // 'offset' => $offset,
-                                        //'nombre' => $nombre,
-                                        //'nombrearticles' => $nombreArticles,
-                                        //'nombredepage' => $nombreDePages
+                                        'reserv'=>$reserv
                                     ));
     }
 
+    
     //suppression de cours
     //page de suppression de cours
     public function deleteCoursAction(Application $app, $id){
@@ -52,36 +40,33 @@ class AdminController   {
         return $app->redirect($app['url_generator']->generate('homeAdmin'));
     }
 
-
- 	// Update planning 
-     public function updatePlanning(Application $app, Request $request, $id){
+ 	// Update periode du planning 
+     public function updatePeriodPlanning(Application $app, Request $request, $id){
 		//on récupère les infos de la periode 
-                ////$period = $app['dao.planning']->findAll($id);
-        $period = $app['dao.planning']->selectPeriod(date('Y-m-d'), $id);
-        $cours = $app['dao.cours']->find($id);
-        $period->setCoursid($cours->getNom());
-            var_dump($period);  
-            
+				$period = $app['dao.planning']->find($id);
+				
 		//on crée le planning et on lui passe la periode en paramètre
         //il va utiliser $planning pour pré remplir les champs
-        $planningForm = $app['form.factory']->create(PlanningType::class, $period);	
-        	
-        $planningForm->handleRequest($request);
-		if($planningForm->isSubmitted() && $planningForm->isValid()){
+		$planning = $app['form.factory']->create(PlanningType::class, $period);		
+		
+		$planning->handleRequest($request);
+
+		if($planning->isSubmitted() && $planning->isValid()){
             //si le formulaire a été soumis
             //on update avec les données envoyées par l'utilisateur
-           //// $app['dao.planning']->update($id, $period);
-           $app['dao.planning']->update($period->getId(),$period);
-           
+            $app['dao.planning']->update($id, array(
+                'cours'=>$planning->getCours(),
+                'duree_cours'=>$planning->getContent(),
+                'author'=>$planning->getAuthor()->getId()
+            ));
         }
 	
-        return $app['twig']->render('admin/update.planning.html.twig', array(
+        return $app['twig']->render('admin/index.admin.html.twig', array(
                 'planningForm' => $planningForm->createView(),
-
+                'title' => 'modif'
         ));
+
     }
-
-
 
     public function addCoursAction(Application $app, Request $request){
         $cours = new Cours();
@@ -93,11 +78,12 @@ class AdminController   {
         if($coursForm->isSubmitted() AND $coursForm->isValid()){
             $app['dao.cours']->insert(array(
                 'title'=>$cours->getTitle(),
-                'content'=>$cours->getContent()
+                'content'=>$cours->getContent(),
+                'author'=>$app['user']->getId()
             ));
         }
 
-        return $app['twig']->render('admin/index.admin.html.twig', array(
+        return $app['twig']->render('admin/admin.ajout.cours.html.twig', array(
                 'coursForm' => $coursForm->createView(),
                 'title' => 'ajout'
         ));
@@ -178,74 +164,80 @@ class AdminController   {
         ));
 
     }
-    //Génération du planning sur un mois 
+    //Génération du planning sur un mois, génération du planning à partir de la route : web/planninggenere (à mettre dans l'adresse et entrer ...)
     public function generationPlanning (Application $app){
-        //trouve la dernière date générée dans le planning et la retourne sous forme de tableau à une entrée
-        $datedeb = $app['dao.planning']->lastDate();
-        //Génère un objet DateTime contenant la date la plus lointaine générée
-        $datedebgeneration = new \DateTime($datedeb['MAX(datecours)']);
-        //Ajoute 1 pour obtenir la nouvelle date, début de la période de génération ()
-        $datedebgeneration = $datedebgeneration->modify('+ 1 day');
-        //Cherche le numéro du jour de la semaine de cette date 
-        $joursemaine = date_format($datedebgeneration, 'w');
-        /*if($joursemaine == '0'){
-        $joursemaine = '1';             
-        }*/
+        //nombre de semaines à générer 
+        $nb = 1;
+        for($k=1;$k<=$nb;$k++){
+            //trouve la dernière date générée dans le planning et la retourne sous forme de tableau à une entrée
+            $datedeb = $app['dao.planning']->lastDate();
+            //Génère un objet DateTime contenant la date la plus lointaine générée
+            $datedebgeneration = new \DateTime($datedeb['MAX(datecours)']);
+            // Pour générer le planning à partir d'une date commençant par un dimanche, puisqu'on ajoute ensuite +1 ......(commenter la ligne au dessus) : $datedebgeneration = new \DateTime('2017-11-05');
 
-        //Chagement des données de la table planning_type dans un tableau de tableaux
-        $planning_type = $app['dao.planningtype']->findAll();
-        
-        foreach($planning_type as $cle){
-            //boucle de changement du tableau $planning_Type pour créer la date attendue dans la table Planning
-            for($i = $joursemaine ; $i <= 6 ; $i++){
-                foreach($cle as $jour) 
-                $jour['jour'] = date_format($datedebgeneration, 'Y-m-d'). ' ' . $jour['heure'];        
-            } 
-            
-        }
-        //Chagement des données de la table planningmodel dans un tableau de tableaux
-        $planningModel = $app['dao.planningmodel']->findAll();
+            //Ajoute 1 pour obtenir la nouvelle date, début de la période de génération ()
+            $datedebgeneration = $datedebgeneration->modify('+ 1 day');
+            //Cherche le numéro du jour de la semaine de cette date 
+            $joursemaine = date_format($datedebgeneration, 'w');
+            //Gestion du cas du dimanche, on décale tout au lundi : on cale le planningmodel sur le lundi ($joursemaine = 1) et on cale la date à insérer dans le planning au jour après le dimanche
+                if ($joursemaine == 0) {
+                    $joursemaine = 1;
+                    $datedebgeneration = $datedebgeneration->modify('+ 1 day');
+                }
+            //Chagement des données de la table planningmodel dans un tableau de tableaux
+            $planningModel = $app['dao.planningmodel']->findAll();
+            //iitialisation du tableau de données
+            $i = 1;
+            $objetCtrl = array();
+            //Boucle sur la semaine à générer
+            foreach($planningModel as $jour){
+                //Gestion de la date de début de génération du planning dans le cas du Dimanche 
+                if($joursemaine <= $jour->getJour()){                 
+                //calcul de la différence de jours     
+                $diff = $jour->getJour() - $joursemaine;
+                $dataaentrer = $datedebgeneration->modify('+'. $diff . ' day');
+                //récupération des données du tableau
+                $numerodujour= $jour->getJour();
+                $heure = $jour->getHeure();
+                $duree = $jour->getDuree();
+                $placemax = $jour->getPlacemax();
+                $coursid = $jour->getCoursid();
 
-        foreach($planningModel as $jour){
-            //Gestion de la date de début de génération du planning dans le cas du Dimanche 
-            if($joursemaine <= $jour->getJour()){                 
-            //calcul de la différence de jours     
-            $diff = $jour->getJour() - $joursemaine;
-            $dataaentrer = $datedebgeneration->modify('+'. $diff . ' day');
-            //récupération des données du tableau
-            $numerodujour= $jour->getJour();
-            $heure = $jour->getHeure();
-            $duree = $jour->getDuree();
-            $placemax = $jour->getPlacemax();
-            $coursid = $jour->getCoursid();
+                //Création de l'objet planning à insérer en base
+                $planninginsert = new planning();   
+                
+                //modification du jour pour insérer la date et l'heure
+                $planninginsert -> setDatecours(date_format($dataaentrer, 'Y-m-d').' '. $heure);
+                $planninginsert -> setDuree($duree);
+                $planninginsert -> setPlacemax($placemax);
+                $planninginsert -> setCoursid($coursid);
 
-            //Création de l'objet planning à insérer en base
-            $planninginsert = new planning();   
-            
-            //modification du jour pour insérer la date et l'heure
-            $planninginsert -> setDatecours(date_format($dataaentrer, 'Y-m-d').' '. $heure);
-            $planninginsert -> setDuree($duree);
-            $planninginsert -> setPlacemax($placemax);
-            $planninginsert -> setCoursid($coursid);
+                $objetCtrl[$i] = $planninginsert;
+                $i+=1;
+                //trace du jour de traitement pour comparaison si même journée planningmodel traitée
+                //$gjour = $jour->getJour();
+                $dataaentrer = $datedebgeneration->modify('-'. $diff . ' day');
+                
+                //insertion dans la base de l'objet planninginsert
+                $app['dao.planning']->insert($planninginsert);
+                }//Fin boucle if
+            }//fin boucle foreach
+        }//fin boucle des semaines à générer
+        $app['session']->getFlashBag()->add('success', 'Le planning de la période demandée a été généré avec succès.');
 
-            
-
-            //insertion dans la base de l'objet planninginsert
-            $app['dao.planning']->insert($planninginsert);
-            }
-        }
              
         return $app['twig']->render('planninggenere.html.twig', array(
             'datedeb' => $datedeb,
             'dategen' => $datedebgeneration,
-            'joursemaine' => $joursemaine,
             //'dateinsert' => $dateinsert,
-            'planningModel' => $planningModel
-
-        
-            
-            
+            'planningModel' => $planningModel,
+            'planninginsert' => $planninginsert,
+            'objetCtrl' => $objetCtrl
         ));        
+
+
     // En attente de modification ....    
+
+
     }
 }

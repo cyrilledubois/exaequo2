@@ -8,6 +8,8 @@ class Planning{
     private $duree;
     private $placemax;
     private $coursid;
+    private $userid;
+    private $PlanningidPlanning;
     
     public function getId(){
         return $this->id;
@@ -32,7 +34,7 @@ class Planning{
     //setters
 
     public function setId($id){
-        if(!empty($id) && is_numeric($id)){
+        if(!empty($id) && is_nuemric($id)){
             $this->id = $id; 
         }
     }
@@ -55,10 +57,30 @@ class Planning{
         }         
     }
 
-
     public function setCoursid($coursid){   
-        if(!empty($coursid)){        
+        if(!empty($coursid) AND is_numeric($coursid)){        
         $this->coursid = $coursid;         
         }
     }
+    public function getUserId(){
+       return $this->userid;
+   }
+
+   public function setUserId($userid) {
+       $this->userid = $userid;
+       return $this;
+   }
+
+   public function getPlanningIdPlanning(){
+       return $this->PlanningidPlanning;
+   }
+
+   public function setPlanningIdPlanning($PlanningidPlanning) {
+       $this->PlanningidPlanning = $PlanningidPlanning;
+       return $this;
+   }
+
+
+
+
 }

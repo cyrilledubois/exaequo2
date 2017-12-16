@@ -53,14 +53,6 @@ class UserDAO extends DAO implements UserProviderInterface
 		return $users->fetchALL(\PDO::FETCH_ASSOC);
     }
 
-    //PAGINATION A METTRE EN ROUTE public function paginationUser(){
-       // $nombreParPage = 10;
-         //   $resultat = $this->bdd->query('SELECT COUNT(id) FROM users');
-           // $nombre = $resultat->fetch(\PDO::FETCH_ASSOC);
-          // return $nombre['COUNT(id)'];
-           // }
-
-
 // Requête pour utilisateur inscrit / par cours
     public function getInfoReserv($dataffich){ 
         $result = $this->bdd->prepare('SELECT * FROM users INNER JOIN usershasplanning ON usershasplanning.usersid = users.id 
@@ -71,6 +63,29 @@ class UserDAO extends DAO implements UserProviderInterface
 		return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    //pour récupérer les cours par utilisateur
+    public function getCoursByUser($id){
+       $result = $this->bdd->prepare('SELECT * FROM usershasplanning
+       INNER JOIN planning ON usershasplanning.PlanningidPlanning = planning.id
+       INNER JOIN cours ON cours.id = planning.coursid
+       INNER JOIN users ON usershasplanning.usersid = users.id
+       WHERE usershasplanning.usersid = :id');
+       $result->bindValue(':id', $id, \PDO::PARAM_INT);
+       $result->execute();
+       return $result->fetchAll(\PDO::FETCH_ASSOC);
+   }
+
+
+
+//mot de passe perdu:
+public function mdpPerdu() {
+    //on vérifie s'il y a une entrée dans la base qui correspond à l'email envoyé dans le formulaire
+        $resultat = $bdd->prepare('SELECT password FROM users WHERE email = :email');
+        $resultat->bindValue(':email', trim($_POST['email']));
+        $resultat->execute();
+}
+
+
     public function reservAction($userId, $planningId){
         $result = $this->bdd->prepare('INSERT INTO usershasplanning (usersid, PlanningidPlanning) VALUES (:usersid, :PlanningidPlanning)');
         $result->bindValue(':usersid', $userId);
@@ -78,5 +93,5 @@ class UserDAO extends DAO implements UserProviderInterface
         return $result->execute();
         //\PDO::PARAM_INT);
     }
-       
+
 }

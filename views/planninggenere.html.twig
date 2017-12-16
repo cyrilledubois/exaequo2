@@ -1,6 +1,37 @@
 
+{#//View permettant le controle des jours générés dans le planning.
+Possibilité de tests en commentant la ligne 220
+$app['dao.planning']->insert($planninginsert);
+pour ne pas générer dans la base
+
+
 DATE DEBUT -----------{{ dump (datedeb) }}
 DATE de GENERATION ---------{{ dump (dategen) }}
-JOURS SEMAINE---------------- {{ dump (joursemaine) }}
 
------------PLANNING------------ {{ dump (planningModel) }}
+
+planning model
+<ul>
+    {% for cours in planningModel %}
+        <li>{{ cours.jour}} --- {{ cours.heure }}</li>
+    {% endfor %}
+</ul>
+
+
+ObjetCtrl (planning aà insérer)
+<ul>
+    {% for cours in objetCtrl %}
+        <li>{{ cours.Datecours }}</li>
+    {% endfor %}
+</ul>
+#}
+
+{% extends "layout.html.twig" %}
+
+{% block content %}
+	<h2 class="text-center">GENERATION PLANNING</h2>
+	{% for flashMessage in app.session.flashbag.get('success') %}
+	<div class="alert alert-success">
+	    {{ flashMessage }}
+	</div>
+	{% endfor %}
+{% endblock %}

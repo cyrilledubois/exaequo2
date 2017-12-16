@@ -40,6 +40,8 @@ class User implements UserInterface
 
     private $role;
 
+    private $lastname;
+
     private $firstname;
 
     private $sex;
@@ -56,11 +58,6 @@ class User implements UserInterface
 
     private $groupeclient;
 
-    private $userid;
-
-    private $PlanningidPlanning;
-
-    
     public function getId() {
         return $this->id;
     }
@@ -228,22 +225,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getUserId(){
-        return $this->userid;
+
+    //pseudo
+     public function getLastname() {
+        return $this->lastname;
     }
 
-    public function setUserId($userid) {
-        $this->groupeclient = $groupeclient;
-        return $this;
-    }
-
-    public function getPlanningIdPlanning(){
-        return $this->PlanningidPlanning;
-    }
-
-    public function setPlanningIdPlanning($PlanningidPlanning) {
-        $this->PlanningidPlanning = $PlanningidPlanning;
-        return $this;
+    public function setLastname($lastname) {
+        $this->lastname = $lastname;
     }
 
 }

@@ -113,3 +113,17 @@ $app['dao.planningmodel'] = function($app){
 $app['dao.abonnement'] = function($app){
     return new WF3\DAO\AbonnementDAO($app['db'], 'abonnement', 'WF3\Domain\abonnement');
 };
+
+$app['dao.abo'] = function($app){
+  return new WF3\DAO\AboDAO($app['db'], 'abo', 'WF3\Domain\abo');
+};
+
+//PaypalInvoiceDAO
+$app['dao.paypalInvoice'] = function($app){
+   return new WF3\DAO\PaypalInvoiceDAO($app['db'], 'paypalInvoice', 'WF3\Domain\PaypalInvoice');
+};
+
+//SaleDAO
+$app['dao.sale'] = function($app){
+   return new WF3\DAO\SaleDAO($app['db'], 'sale', 'WF3\Domain\Sale');
+};

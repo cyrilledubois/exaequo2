@@ -1,7 +1,7 @@
 <?php
 
-namespace WF3\DAO;
+namespace WF3\DAO ;
 
-class SaleDAO{
+class SaleDAO extends DAO{
     
 }

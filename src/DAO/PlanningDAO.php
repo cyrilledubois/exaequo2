@@ -11,13 +11,11 @@ class PlanningDAO extends DAO{
 
 	// Select planning de "date à date"
 	// PREVOIR UN LIKE EN FIN DE REQUETE
-	public function selectPeriod($datecours, $coursid){
-		$result = $this->bdd->prepare('SELECT * FROM planning WHERE coursid = :coursid AND datecours LIKE :datecours');
-		$result->bindValue(':coursid', $coursid, \PDO::PARAM_INT);
-		$result->bindValue(':datecours', $datecours . '%', \PDO::PARAM_INT);
+	public function selectPeriod($datecours){
+		$result = $this->bdd->prepare('SELECT * FROM planning WHERE datecours = :datecours');
+		$result->bindValue(':datecours', $datecours, \PDO::PARAM_INT);
 		$result->execute();
-		$row = $result->fetch(\PDO::FETCH_ASSOC);
-		return $this->buildObject($row);
+		return $result->fetchALL(\PDO::FETCH_ASSOC);
 	}
 
 	public function getInfoPlanning($date_jour){
@@ -25,8 +23,7 @@ class PlanningDAO extends DAO{
         $result->bindValue(':datejour', '%' . $date_jour . '%');
         $result->execute();
         return $result->fetchALL(\PDO::FETCH_ASSOC);
-	}
-	
+    }
 	
 	// Permet de chercher les cours semblable selon l'id dans le planning 
 	public function selectCours($idCours){

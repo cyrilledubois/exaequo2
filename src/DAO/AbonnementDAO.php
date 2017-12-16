@@ -10,5 +10,4 @@ class AbonnementDAO extends DAO {
         $result = $this->bdd->query('SELECT prix FROM abonnement');
         return $result;
     }
-
 }
