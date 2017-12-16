@@ -58,11 +58,7 @@ class User implements UserInterface
 
     private $groupeclient;
 
-    private $userid;
 
-    private $PlanningidPlanning;
-
-    
     public function getId() {
         return $this->id;
     }

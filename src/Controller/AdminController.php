@@ -8,7 +8,6 @@ use WF3\Domain\PlanningModel;
 use WF3\Form\Type\UserType;
 use WF3\Domain\User;
 use WF3\Domain\Cours;
-use WF3\Form\Type\PlanningType;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class AdminController   {

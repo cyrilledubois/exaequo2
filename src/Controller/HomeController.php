@@ -35,48 +35,8 @@ class HomeController{
         //$dataffich = '2017-12-18';   
         $planning = $app['dao.planning']->getInfoPlanning($dataffich);
 
-       // $fullreserv = $app['dao.planning']->fullReserv($userhasreserv);
-
-        $user = $app['user'];        
-
-        $idplanning = $request->query->get('id');
-
-        $planningfindid = $app['dao.planning']->find($idplanning);
-
-        $userbyreserv = $app['dao.planning']->CountUserByReserv($idplanning);
-
-        //if($fullreserv == $userhasreserv)
-
-        if($request->query->get('id')){
-            $idplanning = $request->query->get('id');
-            $reservation = $app['dao.user']->reservAction($user->getId(), $request->query->get('id'));
-        }
-        $listReservations = $app['dao.planning']->maxReserv($user->getId());
-        $listeR = [];
-        foreach($listReservations as $idPlanningUser =>$reservation){
-              $listeR[] =  $idPlanningUser;                   
-        }
-        $planning2 = [];
-        foreach($planning as $cours){
-            $reserved = false;
-            if(in_array($cours['id'] . '--' . $user->getId(), $listeR)){
-                $reserved = true;
-            }
-            $cours['reserved'] = $reserved;
-            $planning2[$cours['id']] = $cours;
-        } 
-
         return $app['twig']->render('reservation.html.twig', array(
-            'planning'=> $planning2,
-            'user' => $user->getId(),
-            'planningfindid'=> $planningfindid,
-            'idplanning' => $idplanning,
-            'userbyreserv' => $userbyreserv,
-            'listReservations' => $listReservations
-            //'fullreserv' => $fullreserv
-
-
-            //'reservation' => $reservation
+            'planning'=>$planning,
         ));
     }
 public function updateUserAction(Application $app, Request $request ){

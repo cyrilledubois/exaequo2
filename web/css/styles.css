@@ -725,14 +725,15 @@ footer a {
     font-size: 30px;
   }
 }
-
-h1,h2,h3 {
+h1,
+h2,
+h3 {
   font-family: 'Montserrat', sans-serif;
 }
-
 h1 {
   font-size: 45px;
 }
+
 
 @media screen and (max-width: 1200px) {
   .paypal1 {

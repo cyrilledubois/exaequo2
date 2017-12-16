@@ -65,30 +65,24 @@
 		</div>
 	</div>
 
-	<!--PLANNING-->
-	<div id="planning" class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
+<!--PLANNING-->
+    <div id="planning" class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" id='list'>
+                {% for cours in planning %}
+                <div class="liste_cours">
+                <div  class="col-md-1 bg-primary text-white">{{ cours.datecours|date('d/m/Y') }}</div> 
+                <div class="col-md-3 text-white">{{ cours.datecours|date('H:i') }}</div>
+                <div class="col-md-3 text-white">Cours : {{ cours.nom }}</div>
+                <div class="col-md-3 text-white">Intensité du cours: {{ cours.intensite }}</div>
+                <div class="col-md-3 text-white">Durée : {{ cours.duree }} minutes</div>
+            {#<div id="planning" class="col-md-3 text-white"> <a href="{{ path('', {id: cours.id}) }}">réserver</a>reserver</div>#}
+                </div>
+                {% endfor %}    
+            </div>
             
-			{% for heure in planning %}
-			<div class="liste_cours">
-			<div class="col-md-2">{{ heure.datecours|date('H:i') }}</div>
-			<div class="col-md-2">{{ heure.nom }}</div>
-			<div class="col-md-2">Intensité: {{ heure.intensite }}</div>
-            <div class="col-md-2">Durée : {{ heure.duree }} minutes</div>
-            {#{% if listReservations.PlanningidPlanning == heure.id %}#}
-            {% if heure.reserved %}
-		    <div class="col-md-2">Vous êtes inscrit</div>
-            {% elseif userbyreserv == heure.placemax %}
-            <div class="col-md-2">complet</div>
-            {% else %}
-		    <div class="col-md-2"><a href="{{ path('reservation')}}?id={{heure.id}}">réserver</a></div>
-            {% endif %}
-			</div>
-			{% endfor %}	
-		</div>
-	</div>
-
+        </div>
+    </div>
 
 </body>	
 {% endblock %}
