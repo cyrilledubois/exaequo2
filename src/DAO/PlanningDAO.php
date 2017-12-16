@@ -18,9 +18,9 @@ class PlanningDAO extends DAO{
 		return $result->fetchALL(\PDO::FETCH_ASSOC);
 	}
 
-	public function getInfoPlanning($datejour){
-		$result = $this->bdd->prepare ('SELECT * FROM planning INNER JOIN cours ON planning.coursid = cours.id WHERE datecours LIKE :datejour ORDER BY datecours');
-        $result->bindValue(':datejour', '%' . $datejour . '%');
+	public function getInfoPlanning($date_jour){
+		$result = $this->bdd->prepare ('SELECT planning.id, coursid, duree, datecours, nom, intensite, placemax FROM planning INNER JOIN cours ON planning.coursid = cours.id WHERE datecours LIKE :datejour ORDER BY datecours');
+        $result->bindValue(':datejour', '%' . $date_jour . '%');
         $result->execute();
         return $result->fetchALL(\PDO::FETCH_ASSOC);
     }
@@ -47,4 +47,34 @@ class PlanningDAO extends DAO{
 		return $result->fetch(\PDO::FETCH_ASSOC);
 	}
 
+	public function CountUserByReserv($idreserv){
+		$result = $this->bdd->prepare('SELECT COUNT(usersid) FROM users_has_planning WHERE PlanningidPlanning = :idplanning');
+		$result->bindValue(':idplanning', $idreserv, \PDO::PARAM_INT);
+		$result->execute();
+		$count = $result->fetch(\PDO::FETCH_ASSOC);
+		return $count['COUNT(usersid)'];
+	}
+
+	public function maxReserv($iduser){
+		$result = $this->bdd->prepare('SELECT * FROM users_has_planning WHERE usersid = :idsession');
+		$result->bindValue(':idsession', $iduser, \PDO::PARAM_INT);
+		$result->execute();
+		$data = [];
+		$rows = $result->fetchAll(\PDO::FETCH_ASSOC);
+		
+		foreach($rows as $row){
+			$data[$row['PlanningidPlanning'] . '--' . $row['usersid']] = $row;
+		}
+		return $data;
+
+	}
+
+	//FUNCTION POUR PAS FAIRE PLUSIEURS RESERV
+	//public function fullReserv($userhasreserv){
+		//$result = $this->bdd->prepare('SELECT * FROM users_has_planning WHERE usersid, PlanningidPlanning = :usersid, :PlanningidPlanning ');
+		//$result->bindValue(':usersid', $userhasreserv, \PDO::PARAM_INT);
+		//$result->bindValue(':PlanningidPlanning', $userhasreserv, \PDO::PARAM_INT);
+		//$result->execute();
+		//return $result->fetch(\PDO::FETCH_ASSOC);
+	//}
 }
