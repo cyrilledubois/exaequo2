@@ -235,23 +235,5 @@ class User implements UserInterface
     public function setLastname($lastname) {
         $this->lastname = $lastname;
     }
-    
-    public function getUserId(){
-        return $this->userid;
-    }
-
-    public function setUserId($userid) {
-        $this->groupeclient = $groupeclient;
-        return $this;
-    }
-
-    public function getPlanningIdPlanning(){
-        return $this->PlanningidPlanning;
-    }
-
-    public function setPlanningIdPlanning($PlanningidPlanning) {
-        $this->PlanningidPlanning = $PlanningidPlanning;
-        return $this;
-    }
 
 }
